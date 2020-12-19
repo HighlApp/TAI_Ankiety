@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="wrapped-div">
+    <div class="tab-header">
+      <h2>System ankietowy</h2>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+      <div class="col-md-10 offset-md-1">
+        <form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="form-group">
+            <label>Nazwa użytkownika</label>
+            <input class="form-control" #UserName='ngModel' name="UserName" [(ngModel)]="formModel.UserName" required>
+          </div>
+
+          <div class="form-group">
+            <label>Hasło</label>
+            <input class="form-control" #UserName='ngModel' name="Password" [(ngModel)]="formModel.Password"
+              type="password" required>
+          </div>
+
+          <div class="form-row" style="margin-top: 30px;">
+            <div class="form-group col-md-8 offset-md-2">
+              <button type="submit" class="btn btn-lg btn-block btn-green" [disabled]="form.invalid">Zaloguj
+                się</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
