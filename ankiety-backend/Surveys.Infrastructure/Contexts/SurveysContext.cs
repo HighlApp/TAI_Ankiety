@@ -16,5 +16,7 @@ namespace Surveys.Infrastructure.Contexts
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

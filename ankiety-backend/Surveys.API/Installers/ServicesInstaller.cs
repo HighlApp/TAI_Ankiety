@@ -18,6 +18,7 @@ namespace Surveys.API.Installers
 
             services.AddScoped<IDataSeeder, DataSeeder>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
         }
     }
 }
