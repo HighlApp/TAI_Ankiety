@@ -1,12 +1,14 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Surveys.Infrastructure.DTO;
+using Surveys.Infrastructure.Common;
 using Surveys.Infrastructure.Services.Interfaces;
 
 namespace Surveys.Infrastructure.Requests.Identity.ChangePassword
 {
     public class ChangePasswordRequestHandler :
-        IRequestHandler<ChangePasswordRequest>
+        IRequestHandler<ChangePasswordRequest, Response<StatusResponseDTO>>
     {
         private readonly IIdentityService _identityService;
 
@@ -15,12 +17,9 @@ namespace Surveys.Infrastructure.Requests.Identity.ChangePassword
             _identityService = identityService;
         }
 
-        public async Task<Unit> Handle(ChangePasswordRequest request, 
-            CancellationToken cancellationToken)
-        {
-            await _identityService.ChangePasswordAsync(request.Password, 
-                request.NewPassword);
-            return Unit.Value;
-        }
+        public async Task<Response<StatusResponseDTO>> Handle(
+            ChangePasswordRequest request, CancellationToken cancellationToken)
+            => await _identityService.ChangePasswordAsync(
+                request.Password, request.NewPassword);
     }
 }

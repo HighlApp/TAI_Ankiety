@@ -9,6 +9,7 @@ namespace Surveys.Infrastructure.EntitiesConfiguration
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
             builder.HasKey(k => k.Token);
+            builder.ToTable("RefreshTokens", "dbo");
         }
     }
 }

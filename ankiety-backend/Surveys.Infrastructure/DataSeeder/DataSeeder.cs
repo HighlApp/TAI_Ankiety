@@ -21,11 +21,12 @@ namespace Surveys.Infrastructure.DataSeeder
 
         public void SeedDatabase()
         {
-            SeedUserRoles();
+            SeedRoles();
             SeedUsers();
+            SeedUserRoles();
         }
 
-        private void SeedUserRoles()
+        private void SeedRoles()
         {
             if (!_context.Roles.Any())
             {
@@ -84,6 +85,33 @@ namespace Surveys.Infrastructure.DataSeeder
                     .HashPassword(user, password);
                 
                 _context.Users.AddRange(administrator, user);
+                _context.SaveChanges();
+            }
+        }
+
+        private void SeedUserRoles()
+        {
+            IdentityRole userRole = _context.Roles.First(r => r.Name == UserRoles.Administrator);
+            IdentityRole administratorRole = _context.Roles.First(r => r.Name == UserRoles.Administrator);
+
+            User user = _context.Users.First(u => u.Email == "user@gmail.com");
+            User administrator = _context.Users.First(u => u.Email == "administrator@gmail.com");
+
+            if (!_context.UserRoles.Any())
+            {
+                IdentityUserRole<string> userUserRole = new IdentityUserRole<string>()
+                {
+                    UserId = user.Id,
+                    RoleId = userRole.Id
+                };
+
+                IdentityUserRole<string> administratorUserRole = new IdentityUserRole<string>()
+                {
+                    UserId = administrator.Id,
+                    RoleId = administratorRole.Id
+                };
+
+                _context.AddRange(userUserRole, administratorUserRole);
                 _context.SaveChanges();
             }
         }

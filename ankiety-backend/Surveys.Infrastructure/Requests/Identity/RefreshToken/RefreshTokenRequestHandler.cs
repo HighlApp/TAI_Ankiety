@@ -2,22 +2,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Surveys.Infrastructure.DTO;
+using Surveys.Infrastructure.Common;
 using Surveys.Infrastructure.Services.Interfaces;
 
 namespace Surveys.Infrastructure.Requests.Identity.RefreshToken
 {
     public class RefreshTokenRequestHandler :
-        IRequestHandler<RefreshTokenRequest, AuthResponseDTO>
+        IRequestHandler<RefreshTokenRequest, Response<AuthResponseDTO>>
     {
-        private readonly IIdentityService _identityService;
+        private readonly IJwtTokenService _jwtTokenService;
 
-        public RefreshTokenRequestHandler(IIdentityService identityService)
+        public RefreshTokenRequestHandler(IJwtTokenService jwtTokenService)
         {
-            _identityService = identityService;
+            _jwtTokenService = jwtTokenService;
         }
 
-        public Task<AuthResponseDTO> Handle(RefreshTokenRequest request,
-            CancellationToken cancellationToken)
-            => _identityService.RefreshTokenAsync(request.Token, request.RefreshToken);
+        public async Task<Response<AuthResponseDTO>> Handle(
+            RefreshTokenRequest request, CancellationToken cancellationToken)
+            => await _jwtTokenService.RefreshTokenAsync(
+                request.Token, request.RefreshToken);
     }
 }
