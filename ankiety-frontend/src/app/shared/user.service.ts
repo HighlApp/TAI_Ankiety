@@ -59,7 +59,11 @@ export class UserService {
   }
 
   login(formData: any) {
-    return this.http.post(this.BaseURI + "/ApplicationUser/Login", formData);
+    const reqData = {
+      email: formData.UserName,
+      password: formData.Password
+    }
+    return this.http.post(this.BaseURI + "/identity/sign-in", reqData);
   }
 
   getUsers() {
