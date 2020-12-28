@@ -21,6 +21,8 @@ namespace Surveys.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
+            //Add CORS
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +36,10 @@ namespace Surveys.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Surveys.API v1"));
             }
-
+            app.UseCors(builder =>
+                builder.WithOrigins(Configuration["ApplicationSettings:ClientUrl"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
