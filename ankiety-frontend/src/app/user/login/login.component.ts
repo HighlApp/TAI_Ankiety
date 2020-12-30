@@ -39,18 +39,16 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         localStorage.setItem("token", res.data.token);
 
-        this.authService.getUserProfile().subscribe((res: UserDetails) => {
-          this.authService.user = res;
-
-          if (this.authService.user.role == "Admin") {
-            this.router.navigateByUrl("/admin");
-          } else {
-            this.router.navigateByUrl("/user");
-          }
-        });
+        if (res.data.role == "Administrator") {
+          this.router.navigateByUrl("/admin");
+        } else {
+          this.router.navigateByUrl("/user");
+        }
       },
       err => {
         if (err.status == 400)
+          console.log(err);
+        //TODO wyświetlić komunikat o błędzie toastrem albo czymś innym
           // this.toastr.error(
           //   "Niepoprawna nazwa użytkownika lub hasło. Spróbuj ponownie.",
           //   "Logowanie"
