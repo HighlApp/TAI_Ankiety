@@ -8,9 +8,9 @@ namespace Surveys.Infrastructure.Repositories.Interfaces
 {
     public interface IRepositoryBase<T> where T : class
     {
-        T GetById(int id);
+        T GetById(Guid id);
 
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(Guid id);
 
         IEnumerable<T> GetAll();
 

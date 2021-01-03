@@ -1,0 +1,55 @@
+<div style="position: relative;">
+  <button class="close-button" (click)="onCloseClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+  <h1 class="text-center" mat-dialog-title>Edytuj pytanie</h1>
+
+  <div *ngIf="!loading">
+    <form [formGroup]="questionForm">
+      <p>Treść:</p>
+      <mat-form-field appearance="outline">
+        <textarea matInput placeholder="Pytanie" formControlName="text" cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize" [errorStateMatcher]="matcher" maxlength="250"></textarea>
+        <mat-hint align="end">{{questionForm.controls.text.value.length}} / 250</mat-hint>
+      </mat-form-field>
+
+      <div *ngIf="options" formArrayName="options">
+        <div *ngFor="let item of options.controls; let i=index" [formGroupName]="i">
+          <p>Opcja {{i+1}}:</p>
+
+          <div class="row">
+            <div class="col-sm">
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="Tekst" formControlName="optionText" maxlength="100">
+                <button *ngIf="survey.type=='Normal' && question.options.length > 2" mat-button matSuffix
+                  (click)="deleteOption(i,item)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-hint align="end">{{item.value.optionText.length}} / 100</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="survey.type!='Normal'" class="col-sm">
+              <mat-form-field appearance="outline">
+                <input matInput placeholder="Wartość" formControlName="value" (keydown)="onKeyPress($event)"
+                  maxlength="5">
+                <button *ngIf="survey.type!='Normal' && question.options.length > 2" mat-button matSuffix
+                  (click)="deleteOption(i,item)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-hint align="end">{{item.value.value.length}} / 5 </mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-success" (click)="onUpdateClick()"
+          [disabled]="!optionChanged() || !questionForm.valid">Edytuj
+          pytanie</button>
+      </div>
+    </form>
+  </div>
+</div>

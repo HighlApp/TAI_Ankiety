@@ -1,0 +1,9 @@
+.plus{
+    position: relative;
+    top: 6px;
+}
+
+.btn-add{
+    text-align: right;
+    padding-top: 10px;
+}

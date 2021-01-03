@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SurveyDetailsComponent } from './surveys/survey-details/survey-details.component';
+import { SurveyListComponent } from './surveys/survey-list/survey-list.component';
 import { LoginComponent } from "./user/login/login.component";
 
 const routes: Routes = [
@@ -11,6 +13,14 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "admin/survey/:id",
+    component: SurveyDetailsComponent
+  },
+  {
+    path: "admin/surveys",
+    component: SurveyListComponent
   },
   {
     path: '**',

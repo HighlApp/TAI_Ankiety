@@ -42,6 +42,14 @@ namespace Surveys.Infrastructure.Middleware
                     statusCode = HttpStatusCode.Unauthorized;
                     messages.Add(exceptionMessage);
                     break;
+                case { } e when exceptionType == typeof(NotFoundException):
+                    statusCode = HttpStatusCode.NotFound;
+                    messages.Add(exceptionMessage);
+                    break;
+                case { } e when exceptionType == typeof(BadRequestException):
+                    statusCode = HttpStatusCode.BadRequest;
+                    messages.Add(exceptionMessage);
+                    break;
                 default:
                     statusCode = HttpStatusCode.InternalServerError;
                     break;

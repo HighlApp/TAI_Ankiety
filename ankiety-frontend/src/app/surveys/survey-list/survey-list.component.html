@@ -1,0 +1,21 @@
+<div class="container">
+  <div *ngIf="!loading">
+    <div class="row btn-add">
+      <div class="col-sm">
+        <button class="btn btn-success" (click)="openDialog()">
+            <mat-icon class="plus">add_circle_outline</mat-icon>
+            Dodaj ankietę
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="surveys == null || surveys?.length == 0">
+      <app-survey [survey]="noSurveys"></app-survey>
+    </div>
+
+    <div class="row">
+      <div *ngFor="let survey of surveys" class="col-sm-6">
+        <app-survey [survey]="survey"></app-survey>
+      </div>
+    </div>
+  </div>

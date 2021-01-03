@@ -13,11 +13,30 @@ import { MaterialModule } from "./material/material.module";
 // import { SidebarComponent } from "./sidebar/sidebar.component";
 import { AppComponent } from "./app.component";
 import { AuthService } from "./shared/auth.service";
+import { SurveyListComponent } from './surveys/survey-list/survey-list.component';
+import { SurveyComponent } from './surveys/survey/survey.component';
+import { NewSurveyComponent } from './surveys/new-survey/new-survey.component';
+import { MatRadioModule } from "@angular/material/radio";
+import { SurveyDetailsComponent } from './surveys/survey-details/survey-details.component';
+import { ConfirmationDialogComponent } from './shared/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { NewQuestionComponent } from './questions/new-question/new-question.component';
+import { EditSurveyComponent } from './surveys/edit-survey/edit-survey/edit-survey.component';
+import { EditTextComponent } from './questions/edit-text/edit-text.component';
+import { EditChoiceComponent } from './questions/edit-choice/edit-choice.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    SurveyListComponent,
+    SurveyComponent,
+    NewSurveyComponent,
+    SurveyDetailsComponent,
+    ConfirmationDialogComponent,
+    NewQuestionComponent,
+    EditSurveyComponent,
+    EditTextComponent,
+    EditChoiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +46,7 @@ import { AuthService } from "./shared/auth.service";
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatRadioModule,
     // ToastrModule.forRoot({
     //   progressBar: true
     // })

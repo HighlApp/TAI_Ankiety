@@ -1,0 +1,14 @@
+<div style="position: relative;">
+    <button class="close-button" (click)="onCloseClick()">
+      <mat-icon class="close-icon">close</mat-icon>
+    </button>
+  
+    <div class="text-center">
+      {{data.dialogText}}
+    </div>
+  
+    <div class="text-center">
+      <button class="btn btn-success" (click)="onClick(true)">Tak</button>
+      <button class="btn btn-danger" (click)="onClick(false)">Nie</button>
+    </div>
+  </div>  

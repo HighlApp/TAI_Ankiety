@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem("token") != null) {
       if (JSON.parse(atob(localStorage.getItem("token").split(".")[1])).role == Role.Admin)
-        this.router.navigateByUrl("/admin");
+        this.router.navigateByUrl("/admin/surveys");
       else
         this.router.navigateByUrl("/user");
     }
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("token", res.data.token);
 
         if (res.data.role == "Administrator") {
-          this.router.navigateByUrl("/admin");
+          this.router.navigateByUrl("/admin/surveys");
         } else {
           this.router.navigateByUrl("/user");
         }

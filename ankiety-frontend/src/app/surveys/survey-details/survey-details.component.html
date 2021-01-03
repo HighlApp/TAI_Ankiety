@@ -1,0 +1,55 @@
+<div *ngIf="!loading" class="container">
+
+  <div class="row" style="margin: 5px;">
+    <h1 style="margin-right: 10px;"> {{survey?.name}} </h1>
+    <button style="margin: 5px 10px;" mat-icon-button class="delete_btn" (click)="onEditSurveyClick()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button *ngIf="!survey?.sent" style="margin: 5px 10px;" mat-icon-button class="delete_btn"
+      (click)="onDeleteSurveyClick()">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
+
+  <p>{{survey?.description}}</p>
+  <p>Liczba wysłanych zaproszeń: {{survey?.sentInvitations}}</p>
+  <p *ngIf="survey?.sentInvitations != 0">Liczba wypełnionych ankiet: {{survey?.filledInvitations}}</p>
+
+  <div class="row">
+    <div class="col">
+      <button *ngIf="!survey?.sent" class="btn btn-success" type="submit" (click)="openAddQuestionDialog()">Dodaj
+        pytanie</button>
+      <button class="btn btn-primary" *ngIf="survey?.questions.length != 0" (click)="openInvitationDialog()">Wyślij
+        zaproszenie</button>
+    </div>
+  </div>
+
+  <mat-card *ngIf="survey?.questions.length == 0" class="question-card">
+    <mat-card-content class="text-center">
+      Brak pytań w ankiecie.
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngFor="let question of survey?.questions" class="question-card">
+    <mat-card-header>
+      <mat-card-title>
+        {{question?.text}}
+        <div *ngIf="!survey?.sent" class="buttons">
+          <button mat-icon-button class="delete_btn" (click)="onDeleteQuestionClick(question)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+          <button mat-icon-button class="delete_btn" (click)="onEditQuestionClick(question)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-card-title>
+      <mat-card-subtitle>{{question?.questionType}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ol>
+        <li *ngFor="let option of question?.options">{{option?.optionText}} <span
+            *ngIf="option?.value">({{option.value}} pkt)</span></li>
+      </ol>
+    </mat-card-content>
+  </mat-card>
+</div>

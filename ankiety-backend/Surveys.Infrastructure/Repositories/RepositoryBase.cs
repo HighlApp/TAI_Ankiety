@@ -19,10 +19,10 @@ namespace Surveys.Infrastructure.Repositories
             _context = context;
         }
 
-        public T GetById(int id)
+        public T GetById(Guid id)
             => _context.Set<T>().Find(id);
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
             => await _context.Set<T>().FindAsync(id);
 
         public IEnumerable<T> GetAll()
@@ -45,7 +45,7 @@ namespace Surveys.Infrastructure.Repositories
             => await _context.Set<T>().AddAsync(entity);
 
         public void Delete(T entity)
-            => _context.Update(entity);
+            => _context.Remove(entity);
 
         public async Task SaveAsync()
             => await _context.SaveChangesAsync();

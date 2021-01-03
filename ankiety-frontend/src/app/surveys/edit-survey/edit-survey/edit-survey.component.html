@@ -1,0 +1,28 @@
+<div style="position: relative;">
+  <button class="close-button" (click)="onCloseClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+  <h1 class="text-center" mat-dialog-title>Edytuj ankietę</h1>
+  <div mat-dialog-content>
+
+    <p>Tytuł:</p>
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="title" autocomplete="off" maxlength="50" (keydown)="onKeyPress($event, title)">
+      <mat-hint align="end">{{title.length}} / 50</mat-hint>
+    </mat-form-field>
+
+    <p>Opis:</p>
+    <mat-form-field appearance="outline">
+      <textarea matInput [(ngModel)]="description" autocomplete="off" maxlength="150"
+        (keydown)="onKeyPress($event, description)"></textarea>
+      <mat-hint align="end">{{description.length}} / 150</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions align="center">
+    <button class="btn btn-success" type="submit"
+      [disabled]="(data.survey.name == title && data.survey.description == description) || title == '' || description == ''"
+      (click)="onEditClick()">Edytuj</button>
+  </div>
+</div>

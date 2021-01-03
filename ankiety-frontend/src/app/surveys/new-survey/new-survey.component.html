@@ -1,0 +1,36 @@
+<div style="position: relative;">
+  <button class="close-button" (click)="onCloseClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+  <h1 class="text-center" mat-dialog-title>Dodaj ankietę</h1>
+  <div mat-dialog-content>
+
+    <p>Tytuł:</p>
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="survey.name" maxlength="50" autocomplete="off"
+        (keydown)="onKeyPress($event, survey.name)">
+      <mat-hint align="end">{{survey.name.length}} / 50</mat-hint>
+    </mat-form-field>
+
+    <p>Opis:</p>
+    <mat-form-field appearance="outline">
+      <textarea matInput [(ngModel)]="survey.description" maxlength="150" autocomplete="off"
+        (keydown)="onKeyPress($event, survey.description)"></textarea>
+      <mat-hint align="end">{{survey.description.length}} / 150</mat-hint>
+    </mat-form-field>
+
+    <p>Ankieta z ukrytymi wartościami:</p>
+    <div class="text-center">
+      <mat-radio-group [(ngModel)]="survey.type">
+        <mat-radio-button value="HiddenValues" class="space">Tak</mat-radio-button>
+        <mat-radio-button value="Normal" class="space">Nie</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div mat-dialog-actions align="center">
+    <button class="btn btn-success" type="submit" (click)="onSubmit()"
+      [disabled]="survey.name == '' || survey.type == ''">Dodaj ankietę</button>
+  </div>
+</div>

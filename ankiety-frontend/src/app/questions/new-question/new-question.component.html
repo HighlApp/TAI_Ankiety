@@ -1,0 +1,30 @@
+<div style="position: relative;">
+  <button class="close-button" (click)="onCloseClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+  <h1 class="text-center" style="margin-top: 10px;" mat-dialog-title>Dodaj pytanie</h1>
+
+  <mat-form-field>
+    <mat-label>Typ pytania:</mat-label>
+    <mat-select style="color: black;" [(value)]="selectedOption">
+      <mat-option *ngFor="let type of questionTypes" [value]="type.value">
+        {{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <div *ngIf="selectedOption == 'OneChoice'">
+    <app-add-choice [survey]="data.survey" [questionType]="selectedOption" [dialogRef]="dialogRef">
+    </app-add-choice>
+  </div>
+
+  <div *ngIf="selectedOption == 'MultipleChoice'">
+    <app-add-choice [survey]="data.survey" [questionType]="selectedOption" [dialogRef]="dialogRef"></app-add-choice>
+  </div>
+
+  <div *ngIf="selectedOption == 'Text'">
+    <app-add-text [survey]="data.survey" [dialogRef]="dialogRef"></app-add-text>
+  </div>
+</div>

@@ -14,6 +14,7 @@ namespace Surveys.API.Installers
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<ISurveysRepository, SurveysRepository>();
         }
     }
 }
