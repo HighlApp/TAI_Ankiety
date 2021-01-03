@@ -23,6 +23,8 @@ import { NewQuestionComponent } from './questions/new-question/new-question.comp
 import { EditSurveyComponent } from './surveys/edit-survey/edit-survey/edit-survey.component';
 import { EditTextComponent } from './questions/edit-text/edit-text.component';
 import { EditChoiceComponent } from './questions/edit-choice/edit-choice.component';
+import { AddChoiceComponent } from './questions/add-choice/add-choice.component';
+import { AddTextComponent } from './questions/add-text/add-text.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { EditChoiceComponent } from './questions/edit-choice/edit-choice.compone
     EditSurveyComponent,
     EditTextComponent,
     EditChoiceComponent,
+    AddChoiceComponent,
+    AddTextComponent,
   ],
   imports: [
     BrowserModule,

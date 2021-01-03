@@ -1,0 +1,50 @@
+<div *ngIf="!isLoading">
+  <form [formGroup]="questionForm">
+
+    <p>Treść:</p>
+    <mat-form-field appearance="outline">
+      <textarea matInput placeholder="Pytanie" formControlName="text" cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize" [errorStateMatcher]="matcher" maxlength="500"
+        (keydown)="onQuestionTextInput($event,questionForm.controls.text.value)"></textarea>
+      <mat-hint align="end">{{questionForm.controls.text.value.length}} / 500</mat-hint>
+    </mat-form-field>
+
+    <div *ngIf="options" formArrayName="options">
+      <div *ngFor="let item of options.controls; let i=index" [formGroupName]="i">
+        <p>Opcja {{i+1}}:</p>
+
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Tekst" formControlName="optionText" [errorStateMatcher]="matcher"
+                maxlength="100" (keydown)="onQuestionTextInput($event,item.value.optionText)">
+              <mat-hint align="end">{{item.value.optionText.length}} / 100</mat-hint>
+              <button *ngIf="options.length > 2 && survey.type=='Normal'" mat-button matSuffix
+                (click)="deleteOption(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="survey.type!='Normal'" class="col-sm">
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Wartość" formControlName="value" [errorStateMatcher]="matcher"
+                (keydown)="onKeyPress($event)" maxlength="5">
+              <mat-hint align="end">{{item.value.value.length}} / 5</mat-hint>
+              <button *ngIf="options.length > 2" matSuffix mat-button (click)="deleteOption(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-primary" (click)="addOption()">Dodaj opcję</button>
+      <button class="btn btn-success" (click)="submitForm()" [disabled]="!questionForm.valid">Dodaj
+        pytanie</button>
+    </div>
+
+  </form>
+</div>

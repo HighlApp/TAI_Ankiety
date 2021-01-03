@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Surveys.Infrastructure.Repositories.Interfaces
 {
-    public interface ISurveysRepository : IRepositoryBase<Survey>
+    public interface IQuestionsRepository : IRepositoryBase<Question>
     {
-        Task<Survey> GetByIdWithQuestionsAndAnwerOptionsAsync(Guid id);
+        Task<Question> GetByIdWithOptions(Guid id);
     }
 }

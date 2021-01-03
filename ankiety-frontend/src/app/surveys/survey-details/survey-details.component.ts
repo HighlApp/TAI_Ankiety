@@ -40,8 +40,7 @@ export class SurveyDetailsComponent implements OnInit {
       this.surveyId = params["id"];
       this.surveyService.getSurvey(this.surveyId).subscribe(res => {
         this.survey = res.data;
-        // this.survey.questions.forEach(x => x.questionType = this.mapTypes(x.questionType));
-        this.survey.questions = [{questionId: 1, questionType: "type", text:"Question1"}] //TODO
+        this.survey.questions.forEach(x => x.questionType = this.mapTypes(x.questionType));
         this.loading = false;
       });
     });
@@ -56,8 +55,8 @@ export class SurveyDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        result.questionType = this.mapTypes(result.questionType);
-        this.survey.questions.push(result);
+        result.data.questionType = this.mapTypes(result.data.questionType)
+        this.survey.questions.push(result.data);
       }
     });
   }
@@ -99,10 +98,10 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   private mapTypes(type: any) {
-    if (type == "Text")
+    if (type == "Text" || type == 3)
       return "Tekstowe";
     else {
-      if (type == "MultipleChoice")
+      if (type == "MultipleChoice" || type == 2)
         return "Wielokrotnego wyboru";
       else
         return "Jednokrotnego wyboru";
@@ -118,7 +117,7 @@ export class SurveyDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((deleteQuestion: boolean) => {
       if (deleteQuestion) {
-        this.questionService.deleteQuestion(question.questionId).subscribe((res) => {
+        this.questionService.deleteQuestion(question.id).subscribe((res) => {
           this.survey.questions.splice(this.survey.questions.indexOf(question), 1);
           // this.toastr.success("Pomyślnie usunięto pytanie z ankiety.", "Usunięto pytanie");
         },

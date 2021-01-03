@@ -7,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace Surveys.Infrastructure.Repositories
 {
-    public class SurveysRepository : RepositoryBase<Survey>, ISurveysRepository
+    public class QuestionsRepository : RepositoryBase<Question>, IQuestionsRepository
     {
         private readonly SurveysContext _context;
-        public SurveysRepository(SurveysContext context) : base(context)
+        public QuestionsRepository(SurveysContext context) : base(context)
         {
             _context = context;
         }
 
-        public async Task<Survey> GetByIdWithQuestionsAndAnwerOptionsAsync(Guid id)
-            => await _context.Set<Survey>()
-            .Include(x => x.Questions)
-                .ThenInclude(x => x.Options)
+        public Task<Question> GetByIdWithOptions(Guid id) =>
+            _context.Set<Question>()
+            .Include(x => x.Options)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 }

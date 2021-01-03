@@ -24,7 +24,6 @@ export class EditChoiceComponent implements OnInit {
     // private toastr: ToastrService,
     public dialog: MatDialog
   ) { }
-
   ngOnInit(): void {
     this.question = this.data.question;
     this.survey = this.data.survey;
@@ -137,5 +136,4 @@ export class EditChoiceComponent implements OnInit {
   onCloseClick() {
     this.dialogRef.close();
   }
-
 }

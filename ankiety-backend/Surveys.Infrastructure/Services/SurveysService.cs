@@ -45,7 +45,7 @@ namespace Surveys.Infrastructure.Services
 
         public async Task<Response<SurveyDTO>> GetByIdAsync(Guid id)
         {
-            var survey = await _surveysRepository.GetByIdAsync(id);
+            var survey = await _surveysRepository.GetByIdWithQuestionsAndAnwerOptionsAsync(id);
             if (survey == null)
                 throw new NotFoundException("Survey not found");
             SurveyDTO surveyDto = MapToSurveyDTO(survey);
@@ -60,7 +60,7 @@ namespace Surveys.Infrastructure.Services
                 Description = request.Description,
                 SurveyType = request.SurveyType,
                 QuestionsOnPage = request.QuestionsOnPage,
-                //Questions = request.Questions
+                Questions = MapToQuestion(request.Questions)
             };
             await _surveysRepository.AddAsync(survey);
             await _surveysRepository.SaveAsync();
@@ -94,8 +94,47 @@ namespace Surveys.Infrastructure.Services
                 Name = survey.Name,
                 SurveyType = survey.SurveyType,
                 QuestionsOnPage = survey.QuestionsOnPage,
-                //Questions = survey.Questions
+                Questions = MapToQuestionDTO(survey.Questions)
             };
         }
+
+        private IEnumerable<QuestionDTO> MapToQuestionDTO(ICollection<Question> questions)
+        {
+            QuestionDTO questionDto;
+            var questionDtos = new List<QuestionDTO>();
+            if (questions == null)
+                return questionDtos;
+            foreach (var question in questions)
+            {
+                questionDto = new QuestionDTO
+                {
+                    Text = question.Text,
+                    Id = question.Id,
+                    QuestionType = question.QuestionType,
+                    Options = question.Options
+                };
+                questionDtos.Add(questionDto);
+            }
+            return questionDtos;
+        }
+
+        private ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> questionDtos)
+        {
+            Question question;
+            var questions = new List<Question>();
+            foreach (var questionDto in questionDtos)
+            {
+                question = new Question
+                {
+                    Text = questionDto.Text,
+                    Id = questionDto.Id,
+                    QuestionType = questionDto.QuestionType,
+                    Options = questionDto.Options
+                };
+                questions.Add(question);
+            }
+            return questions;
+        }
+
     }
 }

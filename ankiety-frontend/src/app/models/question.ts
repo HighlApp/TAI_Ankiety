@@ -1,8 +1,8 @@
-// import { Option } from "./option";
+import { Option } from "./option";
 
 export class Question {
-  questionId: number;
+  id: number;
   text: string;
   questionType: string;
-  // options: Option[];
+  options: Option[];
 }

@@ -12,6 +12,6 @@ namespace Surveys.Core.Entities
         public Guid SurveyId { get; set; }
         public DateTime Created { get; set; }
         public virtual Survey Survey { get; set; }
-        public virtual ICollection<AnswerOption> AnswerOptions { get; set; }
+        public virtual ICollection<Option> Options { get; set; }
     }
 }

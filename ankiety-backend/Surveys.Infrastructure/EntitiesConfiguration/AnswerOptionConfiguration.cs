@@ -4,15 +4,15 @@ using Surveys.Core.Entities;
 
 namespace Surveys.Infrastructure.EntitiesConfiguration
 {
-    public class AnswerOptionConfiguration : IEntityTypeConfiguration<AnswerOption>
+    public class OptionConfiguration : IEntityTypeConfiguration<Option>
     {
-        public void Configure(EntityTypeBuilder<AnswerOption> builder)
+        public void Configure(EntityTypeBuilder<Option> builder)
         {
-            builder.Property(x => x.Text)
+            builder.Property(x => x.OptionText)
                 .IsRequired();
 
             builder.HasOne(x => x.Question)
-                .WithMany(x => x.AnswerOptions);
+                .WithMany(x => x.Options);
         }
     }
 }
