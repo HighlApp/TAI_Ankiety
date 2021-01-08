@@ -1,0 +1,65 @@
+<div style="margin: 25px;">
+    <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+
+        <div class="row">
+            <div class="col-sm">
+                <p>Email *:</p>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="Email" autocomplete="off">
+                </mat-form-field>
+                <label class="custom-text"
+                       *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.pattern">Niepoprawny
+                    adres email.</label>
+            </div>
+        </div>
+
+        <div formGroupName="Passwords">
+            <div class="row">
+                <div class="col-sm">
+                    <p>Hasło *:</p>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="password" formControlName="Password" (keydown)="onDataInput($event)"
+                               maxlength="20">
+                        <mat-hint align="end">
+                            {{service.formModel.get('Passwords.Password').value?.length == null ? 0 : service.formModel.get('Passwords.Password').value.length}}/20
+                        </mat-hint>
+                    </mat-form-field>
+                    <label class="text"
+                           *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.required">Pole
+                        jest wymagane.</label>
+                    <label class="text"
+                           *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Hasło
+                        musi mieć co najmniej 8 znaków.</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <p>Potwierdź hasło *:</p>
+                    <mat-form-field appearance="outline">
+                        <input matInput type="password" formControlName="ConfirmPassword" (keydown)="onDataInput($event)"
+                               maxlength="20">
+                        <mat-hint align="end">
+                            {{service.formModel.get('Passwords.ConfirmPassword').value?.length == null ? 0 : service.formModel.get('Passwords.ConfirmPassword').value.length}}/20
+                        </mat-hint>
+                    </mat-form-field>
+                    <label class="text"
+                           *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.required">Pole
+                        jest wymagane.</label>
+                    <label class="text"
+                           *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.minlength">Hasło
+                        musi mieć co najmniej 8 znaków.</label>
+                    <label class="text"
+                           *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Wprowadzone
+                        hasła muszą być takie same.</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 20px;">
+            <div class="form-group col-md-8 offset-md-2">
+                <button class="btn btn-lg btn-block btn-green" [disabled]="!service.formModel.valid">Dodaj
+                    użytkownika</button>
+            </div>
+        </div>
+    </form>
+</div>

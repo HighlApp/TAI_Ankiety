@@ -25,6 +25,7 @@ import { EditTextComponent } from './questions/edit-text/edit-text.component';
 import { EditChoiceComponent } from './questions/edit-choice/edit-choice.component';
 import { AddChoiceComponent } from './questions/add-choice/add-choice.component';
 import { AddTextComponent } from './questions/add-text/add-text.component';
+import { RegistrationComponent } from './user/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AddTextComponent } from './questions/add-text/add-text.component';
     EditChoiceComponent,
     AddChoiceComponent,
     AddTextComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

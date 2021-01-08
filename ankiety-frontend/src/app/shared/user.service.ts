@@ -16,11 +16,7 @@ export class UserService {
 
 
   formModel = this.fb.group({
-    UserName: ["", [Validators.required, Validators.minLength(5)]],
     Email: ["", [Validators.pattern(this.emailPattern), Validators.required]],
-    Name: ["", Validators.required],
-    Surname: ["", Validators.required],
-    PhoneNumber: [""],
     Passwords: this.fb.group(
       {
         Password: ["", [Validators.required, Validators.minLength(8)]],
@@ -28,7 +24,6 @@ export class UserService {
       },
       { validator: this.comparePasswords }
     ),
-    UserType: ["", Validators.required]
   });
 
   comparePasswords(fb: FormGroup) {
@@ -46,16 +41,11 @@ export class UserService {
 
   register() {
     var body = {
-      UserName: this.formModel.value.UserName,
       Email: this.formModel.value.Email,
-      Name: this.formModel.value.Name,
-      Surname: this.formModel.value.Surname,
       Password: this.formModel.value.Passwords.Password,
-      UserType: this.formModel.value.UserType,
-      PhoneNumber: this.formModel.value.PhoneNumber
     };
 
-    return this.http.post(this.BaseURI + "/ApplicationUser/Register", body);
+    return this.http.post(this.BaseURI + "/identity/sign-up", body);
   }
 
   login(formData: any) {

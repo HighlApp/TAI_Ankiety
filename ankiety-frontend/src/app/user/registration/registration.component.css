@@ -1,0 +1,16 @@
+input {
+    color: black;
+}
+
+.form-margin {
+    margin-top: 50px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.text {
+    color: #9e9e9e !important;
+    font-size: 20px;
+}
