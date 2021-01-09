@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
         dialogRef.afterClosed().subscribe((logout: boolean) => {
             if (logout) {
                 localStorage.removeItem("token");
+                localStorage.removeItem("user");
                 this.router.navigate(["/login"]);
             }
         });
@@ -37,5 +38,9 @@ export class NavbarComponent implements OnInit {
 
     onChangePassword() {
         console.log('onChangePassword() called!');
+    }
+
+    getUserEmail() {
+        return localStorage.getItem('user');
     }
 }

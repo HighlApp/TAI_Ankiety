@@ -2,7 +2,7 @@
 <nav class="navbar custom-navbar" id="navbar">
     <a class="navbar-brand text-white">Ankiety Online</a>
     <div class="row">
-        <span class="username">Nazwa użytkownika: {{authService.user?.username}}</span>
+        <span class="username">Użytkownik: {{getUserEmail()}}</span>
         <button class="nav_btn" (click)="onChangePassword()" title="Zmień hasło">
             <mat-icon class="icon">vpn_key</mat-icon>
         </button>

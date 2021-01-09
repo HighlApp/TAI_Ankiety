@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(form.value).subscribe(
       (res: any) => {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", form.value.UserName);
 
         if (res.data.role == "Administrator") {
           this.router.navigateByUrl("/admin");
