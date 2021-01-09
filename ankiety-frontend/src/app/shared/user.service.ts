@@ -56,6 +56,10 @@ export class UserService {
     return this.http.post(this.BaseURI + "/identity/sign-in", reqData);
   }
 
+  changePassword(changePasswordModel: any) {
+    return this.http.post(this.BaseURI + "/identity/change-password", changePasswordModel);
+  }
+
   getUsers() {
     return this.http.get(this.BaseURI + "/UserProfile/Users");
   }

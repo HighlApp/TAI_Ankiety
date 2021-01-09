@@ -29,6 +29,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { AdminComponent } from './user/dashboard/admin/admin.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     AdminComponent,
     SidebarComponent,
     NavbarComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

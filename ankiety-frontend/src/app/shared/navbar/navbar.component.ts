@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AuthService } from "src/app/shared/auth.service";
-
+import {ChangePasswordComponent} from "../../user/change-password/change-password.component";
 
 @Component({
     selector: 'app-navbar',
@@ -37,7 +37,10 @@ export class NavbarComponent implements OnInit {
     }
 
     onChangePassword() {
-        console.log('onChangePassword() called!');
+        const dialogRef = this.dialog.open(ChangePasswordComponent, {
+            maxHeight: "700px",
+            width: "600px"
+        });
     }
 
     getUserEmail() {
