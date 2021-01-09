@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("token", res.data.token);
 
         if (res.data.role == "Administrator") {
-          this.router.navigateByUrl("/admin/surveys");
+          this.router.navigateByUrl("/admin");
         } else {
           this.router.navigateByUrl("/user");
         }

@@ -1,0 +1,28 @@
+a {
+    color: white;
+}
+
+.nav_btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin: 0px 8px;
+}
+
+.custom-navbar {
+    background-color: #0e4dac;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.username {
+    margin: auto;
+    color: white;
+}
+
+.constant-margin {
+    margin-bottom: 50px;
+}

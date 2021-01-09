@@ -26,6 +26,9 @@ import { EditChoiceComponent } from './questions/edit-choice/edit-choice.compone
 import { AddChoiceComponent } from './questions/add-choice/add-choice.component';
 import { AddTextComponent } from './questions/add-text/add-text.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { AdminComponent } from './user/dashboard/admin/admin.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { RegistrationComponent } from './user/registration/registration.componen
     AddChoiceComponent,
     AddTextComponent,
     RegistrationComponent,
+    AdminComponent,
+    SidebarComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

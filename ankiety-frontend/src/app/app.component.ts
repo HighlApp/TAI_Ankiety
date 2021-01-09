@@ -13,10 +13,10 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    if (localStorage.getItem("token") != null) {
-      this.authService.getUserProfile().subscribe((res: UserDetails) => {
-        this.authService.user = res;
-      });
-    }
+    // if (localStorage.getItem("token") != null) {
+    //   this.authService.getUserProfile().subscribe((res: UserDetails) => {
+    //     this.authService.user = res;
+    //   });
+    // }
   }
 }
