@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Surveys.Infrastructure.Contexts;
+using Surveys.Infrastructure.Repositories.Interfaces;
 
-namespace Surveys.Infrastructure.Repositories.Interfaces
+namespace Surveys.Infrastructure.Repositories
 {
     public class RefreshTokenRepository : 
         RepositoryBase<RefreshToken>, IRefreshTokenRepository

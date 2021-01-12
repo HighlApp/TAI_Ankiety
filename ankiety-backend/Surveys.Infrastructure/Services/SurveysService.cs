@@ -1,20 +1,22 @@
-﻿using Surveys.Core.Entities;
+﻿using System;
+using System.Linq;
+using Surveys.Core.Entities;
+using System.Threading.Tasks;
 using Surveys.Core.Exceptions;
-using Surveys.Infrastructure.Common;
+using System.Collections.Generic;
 using Surveys.Infrastructure.DTO;
+using Surveys.Infrastructure.Common;
+using Surveys.Infrastructure.Services.Interfaces;
 using Surveys.Infrastructure.Repositories.Interfaces;
 using Surveys.Infrastructure.Requests.Surveys.PostSurvey;
 using Surveys.Infrastructure.Requests.Surveys.UpdateSurvey;
-using Surveys.Infrastructure.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Surveys.Infrastructure.Services
 {
     public class SurveysService : ISurveysService
     {
         public readonly ISurveysRepository _surveysRepository;
+
         public SurveysService(ISurveysRepository surveysRepository)
         {
             _surveysRepository = surveysRepository;
@@ -22,39 +24,38 @@ namespace Surveys.Infrastructure.Services
 
         public async Task<Response<SurveyDTO>> DeleteAsync(Guid id)
         {
-            var survey = await _surveysRepository.GetByIdAsync(id);
+            Survey survey = await _surveysRepository.GetByIdAsync(id);
+
             if (survey == null)
                 throw new NotFoundException("Survey not found.");
+
             _surveysRepository.Delete(survey);
             await _surveysRepository.SaveAsync();
-            var surveyDto = MapToSurveyDTO(survey);
-            return new Response<SurveyDTO>(surveyDto);
+
+            return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
         public async Task<Response<IEnumerable<SurveyDTO>>> GetAllAsync()
         {
-            var surveys = await _surveysRepository.GetAllAsync();
-            var surveyDtos = new List<SurveyDTO>();
-            foreach (var survey in surveys)
-            {
-                var surveyDto = MapToSurveyDTO(survey);
-                surveyDtos.Add(surveyDto);
-            }
-            return new Response<IEnumerable<SurveyDTO>>(surveyDtos);
+            IEnumerable<Survey> surveys = await _surveysRepository.GetAllAsync();
+            IEnumerable<SurveyDTO> surveysDTO = surveys.Select(s => MapToSurveyDTO(s));
+
+            return new Response<IEnumerable<SurveyDTO>>(surveysDTO);
         }
 
         public async Task<Response<SurveyDTO>> GetByIdAsync(Guid id)
         {
-            var survey = await _surveysRepository.GetByIdWithQuestionsAndAnwerOptionsAsync(id);
+            Survey survey = await _surveysRepository.GetByIdWithQuestionsAndAnswerOptionsAsync(id);
+
             if (survey == null)
                 throw new NotFoundException("Survey not found");
-            SurveyDTO surveyDto = MapToSurveyDTO(survey);
-            return new Response<SurveyDTO>(surveyDto);
+
+            return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
         public async Task<Response<SurveyDTO>> PostAsync(PostSurveyRequest request)
         {
-            var survey = new Survey
+            Survey survey = new Survey
             {
                 Name = request.Name,
                 Description = request.Description,
@@ -62,30 +63,33 @@ namespace Surveys.Infrastructure.Services
                 QuestionsOnPage = request.QuestionsOnPage,
                 Questions = MapToQuestion(request.Questions)
             };
+
             await _surveysRepository.AddAsync(survey);
             await _surveysRepository.SaveAsync();
 
-            survey = await _surveysRepository.GetByIdAsync(survey.Id);
-            var surveyDto = MapToSurveyDTO(survey);
-            return new Response<SurveyDTO>(surveyDto);
+            survey = await _surveysRepository.GetByIdAsync(survey.Id); //TODO: Check that
+            return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
         public async Task<Response<SurveyDTO>> UpdateAsync(UpdateSurveyRequest request)
         {
             if (request.Id == Guid.Empty)
                 throw new BadRequestException();
+
             Survey survey = await _surveysRepository.GetByIdAsync(request.Id);
+
             if (survey == null)
                 throw new NotFoundException("Survey not found");
+
             survey.Name = request.Name ?? survey.Name;
             survey.Description = request.Description ?? survey.Description;
             _surveysRepository.Update(survey);
+
             await _surveysRepository.SaveAsync();
-            var surveyDto = MapToSurveyDTO(survey);
-            return new Response<SurveyDTO>(surveyDto);
+            return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
-        private SurveyDTO MapToSurveyDTO(Survey survey)
+        private static SurveyDTO MapToSurveyDTO(Survey survey)
         {
             return new SurveyDTO
             {
@@ -98,7 +102,7 @@ namespace Surveys.Infrastructure.Services
             };
         }
 
-        private IEnumerable<QuestionDTO> MapToQuestionDTO(ICollection<Question> questions)
+        private static IEnumerable<QuestionDTO> MapToQuestionDTO(ICollection<Question> questions)
         {
             QuestionDTO questionDto;
             var questionDtos = new List<QuestionDTO>();
@@ -118,7 +122,7 @@ namespace Surveys.Infrastructure.Services
             return questionDtos;
         }
 
-        private ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> questionDtos)
+        private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> questionDtos)
         {
             Question question;
             var questions = new List<Question>();
@@ -135,6 +139,5 @@ namespace Surveys.Infrastructure.Services
             }
             return questions;
         }
-
     }
 }

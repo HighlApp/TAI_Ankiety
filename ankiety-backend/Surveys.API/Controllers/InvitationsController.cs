@@ -43,8 +43,8 @@ namespace Surveys.API.Controllers
         [HttpGet]
         [Route("user/{userId}")]
         //GET: api/invitations/user/{surveyId}
-        public async Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitations(Guid userId)
-            => await _mediator.Send(new GetUserInvitationsRequest(userId));
+        public async Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitations()
+            => await _mediator.Send(new GetUserInvitationsRequest());
 
         [HttpDelete]
         //DELETE: api/invitations/{invitationId}

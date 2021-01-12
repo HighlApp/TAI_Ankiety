@@ -20,10 +20,11 @@ namespace Surveys.API.Installers
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IDataSeeder, DataSeeder>();
+            services.AddScoped<ISurveysService, SurveysService>();
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
-            services.AddScoped<ISurveysService, SurveysService>();
             services.AddScoped<IQuestionsService, QuestionsService>();
+            services.AddScoped<IInvitationsService, InvitationsService>();
         }
     }
 }

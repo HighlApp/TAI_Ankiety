@@ -1,5 +1,5 @@
-﻿using Surveys.Core.Entities;
-using System;
+﻿using System;
+using Surveys.Core.Entities;
 using System.Threading.Tasks;
 
 namespace Surveys.Infrastructure.Repositories.Interfaces
