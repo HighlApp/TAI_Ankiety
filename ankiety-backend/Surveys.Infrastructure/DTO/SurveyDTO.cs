@@ -1,5 +1,5 @@
-﻿using Surveys.Core.Enums;
-using System;
+﻿using System;
+using Surveys.Core.Enums;
 using System.Collections.Generic;
 
 namespace Surveys.Infrastructure.DTO

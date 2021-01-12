@@ -18,11 +18,15 @@ namespace Surveys.Infrastructure.Contexts
         }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Survey> Surveys { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Option> Options { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<Invitation> Invitations { get; set; }
 
+        public DbSet<Survey> Surveys { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+
+        public DbSet<Option> Options { get; set; }
+
+        public DbSet<Answer> Answers { get; set; }
+
+        public DbSet<Invitation> Invitations { get; set; }
     }
 }
