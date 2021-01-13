@@ -13,14 +13,15 @@ export class QuestionService {
     this.BaseURI = environment.apiUrl + '/questions';
   }
 
-  postSurveyQuestion(surveyId: string, question: Question) {
+  postSurveyQuestion(question: Question) {
+    console.log(question);
     return this.http.post<Question>(
-      this.BaseURI + "/" + surveyId,
+      this.BaseURI,
       question
     );
   }
 
-  deleteQuestion(id: number) {
+  deleteQuestion(id: string) {
     return this.http.delete(this.BaseURI + "/" + id);
   }
 

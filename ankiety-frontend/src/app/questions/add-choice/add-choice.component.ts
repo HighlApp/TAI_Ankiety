@@ -87,8 +87,10 @@ export class AddChoiceComponent{
   submitForm() {
     this.removeEmptySpaces();
 
+    console.log(this.questionForm.value);
+    this.questionForm.value.surveyId = this.survey.id
     this.questionService
-      .postSurveyQuestion(this.survey.id, this.questionForm.value)
+      .postSurveyQuestion(this.questionForm.value)
       .subscribe(res => {
         res.questionType = this.questionType;
         this.toastr.success("Pomyślnie dodano pytanie do ankiety.", "Dodano pytanie");

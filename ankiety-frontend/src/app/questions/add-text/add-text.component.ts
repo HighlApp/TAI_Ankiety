@@ -24,7 +24,7 @@ export class AddTextComponent {
     question.options = [];
     question.questionType = "Text";
     this.questionService
-      .postSurveyQuestion(this.survey.id, question)
+      .postSurveyQuestion(question)
       .subscribe(res => {
         this.toastr.success("Pomyślnie dodano pytanie do ankiety.", "Dodano pytanie");
         this.dialogRef.close(res);

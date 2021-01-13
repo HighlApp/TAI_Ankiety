@@ -9,8 +9,6 @@ import { ToastrModule } from "ngx-toastr";
 import { LoginComponent } from "./user/login/login.component";
 import { AuthInterceptor } from "./auth/auth.interceptor";
 import { MaterialModule } from "./material/material.module";
-// import { NavbarComponent } from "./navbar/navbar.component";
-// import { SidebarComponent } from "./sidebar/sidebar.component";
 import { AppComponent } from "./app.component";
 import { AuthService } from "./shared/auth.service";
 import { SurveyListComponent } from './surveys/survey-list/survey-list.component';
