@@ -1,0 +1,11 @@
+<mat-card (click)="onInvitationClick()" class="card">
+    <mat-card-title>{{invitation.name}}</mat-card-title>
+    <mat-card-content>
+        <p>
+            Data wysłania: {{ sendDate }}
+        </p>
+        <p *ngIf="invitation.expirationDate">
+            Data wygaśnięcia: {{ expirationDate }}
+        </p>
+    </mat-card-content>
+</mat-card>

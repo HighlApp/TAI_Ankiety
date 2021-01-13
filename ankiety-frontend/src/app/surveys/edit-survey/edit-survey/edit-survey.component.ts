@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SurveyService } from 'src/app/shared/survey.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-edit-survey',
@@ -15,7 +16,7 @@ export class EditSurveyComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
   public dialogRef: MatDialogRef<EditSurveyComponent>, 
   private surveyService: SurveyService, 
-  // private toastr: ToastrService
+  private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -29,11 +30,11 @@ export class EditSurveyComponent implements OnInit {
     this.surveyService.updateSurveyDetails(details, this.surveyId).subscribe((res) => {
       this.data.survey.description = details.description;
       this.data.survey.name = details.name;
-      // this.toastr.success("Pomyślnie zaktualizowano dane ankiety", "Pomyślnie zaktualizowano");
+      this.toastr.success("Pomyślnie zaktualizowano dane ankiety", "Pomyślnie zaktualizowano");
       this.dialogRef.close();
     },
       (err) => {
-        // this.toastr.error("Nie można zmienić nazwy, ponieważ ankieta z taką nazwą już istnieje", "Wystąpił błąd");
+        this.toastr.error("Nie można zmienić nazwy, ponieważ ankieta z taką nazwą już istnieje", "Wystąpił błąd");
         this.title = this.data.survey.name;
         this.description = this.data.survey.description;
       });

@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Survey } from "src/app/models/survey";
 import { SurveyService } from 'src/app/shared/survey.service';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-new-survey',
@@ -14,7 +15,7 @@ export class NewSurveyComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<NewSurveyComponent>,
     private surveyService: SurveyService,
-    // private toastr: ToastrService, 
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
@@ -37,10 +38,10 @@ export class NewSurveyComponent implements OnInit {
     this.surveyService.postSurvey(this.survey).subscribe(res => {
       this.survey.id = res.id;
       this.data.surveys.push(this.survey);
-      // this.toastr.success("Pomyślnie dodano ankietę", "Dodano ankietę");
+      this.toastr.success("Pomyślnie dodano ankietę", "Dodano ankietę");
       this.dialogRef.close();
     }, (err) => {
-      // this.toastr.error("Ankieta o takiej nazwie już istnieje. Spróbuj ponownie.", "Błąd podczas dodawania ankiety");
+      this.toastr.error("Ankieta o takiej nazwie już istnieje. Spróbuj ponownie.", "Błąd podczas dodawania ankiety");
     });
   }
 

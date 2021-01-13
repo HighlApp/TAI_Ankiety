@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { QuestionService } from 'src/app/shared/question.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-edit-choice',
@@ -21,7 +22,7 @@ export class EditChoiceComponent implements OnInit {
     public dialogRef: MatDialogRef<EditChoiceComponent>,
     private fb: FormBuilder,
     private questionService: QuestionService,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     public dialog: MatDialog
   ) { }
   ngOnInit(): void {
@@ -86,10 +87,10 @@ export class EditChoiceComponent implements OnInit {
     this.questionService.updateQuestion(questionCopy).subscribe((res) => {
       this.updateData();
       this.dialogRef.close(this.question);
-      // this.toastr.success("Pomyślnie zaktualizowano pytanie.", "Pomyślnie zaktualizowano");
+      this.toastr.success("Pomyślnie zaktualizowano pytanie.", "Pomyślnie zaktualizowano");
     },
       (err) => {
-        // this.toastr.error("Nie można zaktualizować danych, ponieważ ankieta z tym pytaniem została już wysłana", "Wystąpił błąd");
+        this.toastr.error("Nie można zaktualizować danych, ponieważ ankieta z tym pytaniem została już wysłana", "Wystąpił błąd");
       });
   }
 
@@ -105,10 +106,10 @@ export class EditChoiceComponent implements OnInit {
         this.questionService.deleteOption(this.question.options[index].optionId).subscribe((res) => {
           this.question.options = this.question.options.filter(x => x.optionId != this.question.options[index].optionId);
           this.options.removeAt(index);
-          // this.toastr.success("Pomyślnie usunięto opcję z ankiety.", "Pomyślnie usunięto");
+          this.toastr.success("Pomyślnie usunięto opcję z ankiety.", "Pomyślnie usunięto");
         },
           (err) => {
-            // this.toastr.error("Nie można usunąć opcji z ankiety, ponieważ ankieta została już wysłana", "Wystąpił błąd");
+            this.toastr.error("Nie można usunąć opcji z ankiety, ponieważ ankieta została już wysłana", "Wystąpił błąd");
           })
       }
     });

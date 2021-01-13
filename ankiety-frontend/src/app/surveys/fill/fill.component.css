@@ -1,0 +1,22 @@
+.question {
+    font-size: 24px;
+}
+
+.custom-btn {
+    margin: 10px !important;
+}
+
+.delete_btn {
+    border: none;
+    outline: none;
+}
+
+.progress-bar {
+    background-color: #0e4dac;
+}
+
+#timer {
+    position: absolute;
+    top: 75px;
+    right: 25px;
+}

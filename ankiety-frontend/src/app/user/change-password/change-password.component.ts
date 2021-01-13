@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/shared/user.service';
 import { MatDialogRef } from "@angular/material/dialog";
-
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-change-password',
@@ -16,7 +16,7 @@ export class ChangePasswordComponent implements OnInit {
       private fb: FormBuilder,
       private userService: UserService,
       public dialogRef: MatDialogRef<ChangePasswordComponent>,
-      // private toastr: ToastrService
+      private toastr: ToastrService
   ) {
   }
 
@@ -58,11 +58,11 @@ export class ChangePasswordComponent implements OnInit {
     this.userService.changePassword(changePasswordModel).subscribe((res) => {
           this.dialogRef.close();
           console.log('Pomyślnie zmieniono hasło.')
-          // this.toastr.success("Pomyślnie zmieniono hasło.", "Zmiana hasła");
+          this.toastr.success("Pomyślnie zmieniono hasło.", "Zmiana hasła");
         },
         (err) => {
           console.log('Wystąpił błąd podczas zmiany hasła. Spróbuj ponownie.')
-          // this.toastr.error("Wystąpił błąd podczas zmiany hasła. Spróbuj ponownie.", "Zmiana hasła");
+          this.toastr.error("Wystąpił błąd podczas zmiany hasła. Spróbuj ponownie.", "Zmiana hasła");
         });
   }
 

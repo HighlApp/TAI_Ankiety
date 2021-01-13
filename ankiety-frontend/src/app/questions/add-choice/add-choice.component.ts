@@ -4,6 +4,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Survey } from 'src/app/models/survey';
 import { MyErrorStateMatcher } from 'src/app/shared/ErrorStateMatcher';
 import { QuestionService } from 'src/app/shared/question.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-add-choice',
@@ -22,7 +23,7 @@ export class AddChoiceComponent{
   constructor(
     private fb: FormBuilder,
     private questionService: QuestionService,
-    // private toastr: ToastrService
+    private toastr: ToastrService
   ) { }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -90,10 +91,10 @@ export class AddChoiceComponent{
       .postSurveyQuestion(this.survey.id, this.questionForm.value)
       .subscribe(res => {
         res.questionType = this.questionType;
-        // this.toastr.success("Pomyślnie dodano pytanie do ankiety.", "Dodano pytanie");
+        this.toastr.success("Pomyślnie dodano pytanie do ankiety.", "Dodano pytanie");
         this.dialogRef.close(res);
       }, err => {
-        // this.toastr.error("Nie można dodać pytania do ankiety, która była wysłana.");
+        this.toastr.error("Nie można dodać pytania do ankiety, która była wysłana.");
       }
       );
   }

@@ -12,6 +12,7 @@ import { ConfirmationDialogComponent } from 'src/app/shared/dialogs/confirmation
 import { QuestionService } from 'src/app/shared/question.service';
 import { SurveyService } from 'src/app/shared/survey.service';
 import { EditSurveyComponent } from '../edit-survey/edit-survey/edit-survey.component';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-survey-details',
@@ -30,7 +31,7 @@ export class SurveyDetailsComponent implements OnInit {
     private questionService: QuestionService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
     private http: HttpClient
   ) { }
@@ -86,12 +87,12 @@ export class SurveyDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((deleteSurvey: boolean) => {
       if (deleteSurvey) {
         this.surveyService.deleteSurvey(this.surveyId).subscribe(res => {
-          // this.toastr.success("Pomyślnie usunięto ankietę.", "Usuwanie ankiety");
+          this.toastr.success("Pomyślnie usunięto ankietę.", "Usuwanie ankiety");
 
           this.router.navigate(['admin/surveys']);
         },
           err => {
-            // this.toastr.error("Nie można usunąć tej ankiety, ponieważ została już wysłana.", "Usuwanie ankiety");
+            this.toastr.error("Nie można usunąć tej ankiety, ponieważ została już wysłana.", "Usuwanie ankiety");
           })
       }
     });
@@ -119,10 +120,10 @@ export class SurveyDetailsComponent implements OnInit {
       if (deleteQuestion) {
         this.questionService.deleteQuestion(question.id).subscribe((res) => {
           this.survey.questions.splice(this.survey.questions.indexOf(question), 1);
-          // this.toastr.success("Pomyślnie usunięto pytanie z ankiety.", "Usunięto pytanie");
+          this.toastr.success("Pomyślnie usunięto pytanie z ankiety.", "Usunięto pytanie");
         },
           (err) => {
-            // this.toastr.error("Nie można usunąć pytania z ankiety, która została już opublikowana.", "Wystąpił błąd");
+            this.toastr.error("Nie można usunąć pytania z ankiety, która została już opublikowana.", "Wystąpił błąd");
           });
       }
     });

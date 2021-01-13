@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { UserService } from "./shared/user.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-// import { ToastrModule } from "ngx-toastr";
+import { ToastrModule } from "ngx-toastr";
 import { LoginComponent } from "./user/login/login.component";
 import { AuthInterceptor } from "./auth/auth.interceptor";
 import { MaterialModule } from "./material/material.module";
@@ -30,6 +30,9 @@ import { AdminComponent } from './user/dashboard/admin/admin.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ChangePasswordComponent } from './user/change-password/change-password.component';
+import { SurveyToFillComponent } from './surveys/survey-to-fill/survey-to-fill.component';
+import { InvitationComponent } from './surveys/survey-to-fill/invitation/invitation.component';
+import { FillComponent } from './surveys/fill/fill.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
     SidebarComponent,
     NavbarComponent,
     ChangePasswordComponent,
+    SurveyToFillComponent,
+    InvitationComponent,
+    FillComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,9 +67,9 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
     BrowserAnimationsModule,
     FormsModule,
     MatRadioModule,
-    // ToastrModule.forRoot({
-    //   progressBar: true
-    // })
+    ToastrModule.forRoot({
+      progressBar: true
+    })
   ],
   providers: [
     AuthService,
