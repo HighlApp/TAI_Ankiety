@@ -14,7 +14,6 @@ export class QuestionService {
   }
 
   postSurveyQuestion(question: Question) {
-    console.log(question);
     return this.http.post<Question>(
       this.BaseURI,
       question

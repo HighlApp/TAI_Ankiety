@@ -87,7 +87,6 @@ export class AddChoiceComponent{
   submitForm() {
     this.removeEmptySpaces();
 
-    console.log(this.questionForm.value);
     this.questionForm.value.surveyId = this.survey.id
     this.questionService
       .postSurveyQuestion(this.questionForm.value)

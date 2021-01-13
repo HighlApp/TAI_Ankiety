@@ -23,6 +23,7 @@ export class AddTextComponent {
     question.text = this.textQuestion;
     question.options = [];
     question.questionType = "Text";
+    question.surveyId = this.survey.id
     this.questionService
       .postSurveyQuestion(question)
       .subscribe(res => {
