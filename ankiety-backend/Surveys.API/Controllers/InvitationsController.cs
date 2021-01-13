@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using Surveys.Infrastructure.Common;
 using Surveys.Infrastructure.Requests.Invitations.InviteUsers;
 using Surveys.Infrastructure.Requests.Invitations.GetInvitations;
+using Surveys.Infrastructure.Requests.Invitations.DeleteInvitation;
 using Surveys.Infrastructure.Requests.Invitations.GetUserInvitations;
 using Surveys.Infrastructure.Requests.Invitations.GetUsersForInvitation;
-using Surveys.Infrastructure.Requests.Invitations.DeleteInvitation;
 
 namespace Surveys.API.Controllers
 {
@@ -37,18 +37,19 @@ namespace Surveys.API.Controllers
         [HttpGet]
         [Route("users/{surveyId}")]
         //GET: api/invitations/users/{surveyId}
-        public async Task<Response<IEnumerable<UserDTO>>> GetUsersForInvitation(int surveyId)
+        public async Task<Response<IEnumerable<UserDTO>>> GetUsersForInvitation(Guid surveyId)
             => await _mediator.Send(new GetUsersForInvitationRequest(surveyId));
 
         [HttpGet]
-        [Route("user/{userId}")]
-        //GET: api/invitations/user/{surveyId}
+        [Route("user")]
+        //GET: api/invitations/user
         public async Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitations()
             => await _mediator.Send(new GetUserInvitationsRequest());
 
         [HttpDelete]
+        [Route("{invitationId}")]
         //DELETE: api/invitations/{invitationId}
-        public async Task<Response<StatusResponseDTO>> DeleteInvitation(int invitationId)
-            => await _mediator.Send(new DeleteInvitationRequest(invitationId));
+        public async Task<Response<StatusResponseDTO>> DeleteInvitation(DeleteInvitationRequest request)
+            => await _mediator.Send(request);
     }
 }

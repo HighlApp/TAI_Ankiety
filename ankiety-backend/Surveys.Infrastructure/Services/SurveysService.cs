@@ -104,22 +104,16 @@ namespace Surveys.Infrastructure.Services
 
         private static IEnumerable<QuestionDTO> MapToQuestionDTO(ICollection<Question> questions)
         {
-            QuestionDTO questionDto;
-            var questionDtos = new List<QuestionDTO>();
             if (questions == null)
-                return questionDtos;
-            foreach (var question in questions)
+                return null;
+
+            return questions.Select(x => new QuestionDTO()
             {
-                questionDto = new QuestionDTO
-                {
-                    Text = question.Text,
-                    Id = question.Id,
-                    QuestionType = question.QuestionType,
-                    Options = question.Options
-                };
-                questionDtos.Add(questionDto);
-            }
-            return questionDtos;
+                Text = x.Text,
+                Id = x.Id,
+                QuestionType = x.QuestionType,
+                Options = x.Options
+            });
         }
 
         private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> questionDtos)

@@ -1,13 +1,13 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Surveys.Infrastructure.Common;
 using Surveys.Infrastructure.DTO;
-using Surveys.Infrastructure.Requests.Questions.DeleteQuestion;
+using Surveys.Infrastructure.Common;
 using Surveys.Infrastructure.Requests.Questions.GetQuestion;
 using Surveys.Infrastructure.Requests.Questions.PostQuestion;
 using Surveys.Infrastructure.Requests.Questions.UpdateQuestion;
-using System;
-using System.Threading.Tasks;
+using Surveys.Infrastructure.Requests.Questions.DeleteQuestion;
 
 namespace Surveys.API.Controllers
 {
@@ -24,26 +24,19 @@ namespace Surveys.API.Controllers
 
         [HttpGet("{id}")]
         public async Task<Response<QuestionDTO>> GetQuestion(Guid id)
-             => await _mediator.Send(new GetQuestionRequest { Id = id });
+             => await _mediator.Send(new GetQuestionRequest(id));
 
-        [HttpPost("{surveyId}")]
-        public async Task<Response<QuestionDTO>> PostQuestion(PostQuestionRequest request, Guid surveyId)
-        {
-            request.SurveyId = surveyId;
-            return await _mediator.Send(request);
-        } 
+        [HttpPost]
+        public async Task<Response<QuestionDTO>> PostQuestion(PostQuestionRequest request)
+            => await _mediator.Send(request);
 
 
         [HttpDelete("{id}")]
         public async Task<Response<QuestionDTO>> DeleteQuestion(Guid id)
-             => await _mediator.Send(new DeleteQuestionRequest { Id = id });
+             => await _mediator.Send(new DeleteQuestionRequest(id));
 
         [HttpPut]
         public async Task<Response<QuestionDTO>> UpdateQuestion(UpdateQuestionRequest request)
              => await _mediator.Send(request);
-
-        //[HttpDelete]
-        //[Route("option/{id}")]
-        //public async Task<Response> DeleteOption(Guid id)
     }
 }

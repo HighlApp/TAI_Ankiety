@@ -4,16 +4,22 @@ using System.Threading.Tasks;
 using Surveys.Infrastructure.DTO;
 using System.Collections.Generic;
 using Surveys.Infrastructure.Common;
+using Surveys.Infrastructure.Services.Interfaces;
 
 namespace Surveys.Infrastructure.Requests.Invitations.GetInvitations
 {
     public class GetInvitationsRequestHandler :
         IRequestHandler<GetInvitationsRequest, Response<IEnumerable<AdministratorInvitationDTO>>>
     {
-        public Task<Response<IEnumerable<AdministratorInvitationDTO>>> Handle(
-            GetInvitationsRequest request, CancellationToken cancellationToken)
+        private readonly IInvitationsService _invitationsService;
+
+        public GetInvitationsRequestHandler(IInvitationsService invitationsService)
         {
-            throw new System.NotImplementedException();
+            _invitationsService = invitationsService;
         }
+
+        public async Task<Response<IEnumerable<AdministratorInvitationDTO>>> Handle(
+            GetInvitationsRequest request, CancellationToken cancellationToken)
+            => await _invitationsService.GetAllInvitationsAsync();
     }
 }

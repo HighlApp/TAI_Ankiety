@@ -4,7 +4,7 @@ namespace Surveys.Infrastructure.DTO
 {
     public class AdministratorInvitationDTO
     {
-        public int? Id { get; set; }
+        public Guid Id { get; set; }
 
         public string UserId { get; set; }
 
@@ -23,7 +23,5 @@ namespace Surveys.Infrastructure.DTO
         public string SurveyName { get; set; }
 
         public bool FilledSurvey { get; set; }
-
-        public int? QuestionsOnPage { get; set; }
     }
 }

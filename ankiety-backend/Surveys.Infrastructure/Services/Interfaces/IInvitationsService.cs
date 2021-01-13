@@ -10,12 +10,12 @@ namespace Surveys.Infrastructure.Services.Interfaces
     {
         Task<Response<IEnumerable<AdministratorInvitationDTO>>> GetAllInvitationsAsync();
 
-        Task<Response<StatusResponseDTO>> InviteUsersAsync(IEnumerable<Guid> UsersId);
+        Task<Response<StatusResponseDTO>> InviteUsersAsync(IEnumerable<Guid> usersId, InvitationDetailsDTO details);
 
-        Task<Response<IEnumerable<UserDTO>>> GetUsersForInvitationAsync(int surveyId);
+        Task<Response<IEnumerable<UserDTO>>> GetUsersForInvitationAsync(Guid surveyId);
 
-        Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitationsAsync(Guid userId);
+        Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitationsAsync();
 
-        Task<Response<StatusResponseDTO>> DeleteInvitationAsync(int invitationId);
+        Task<Response<StatusResponseDTO>> DeleteInvitationAsync(Guid invitationId);
     }
 }

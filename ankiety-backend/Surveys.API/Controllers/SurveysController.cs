@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Surveys.Infrastructure.DTO;
@@ -30,24 +31,24 @@ namespace Surveys.API.Controllers
             => await _mediator.Send(new GetSurveysRequest());
 
         [HttpGet("{id}")]
-        public async Task<Response<SurveyDTO>> GetSurvey(GetSurveyRequest request)
-            => await _mediator.Send(request);
+        public async Task<Response<SurveyDTO>> GetSurvey(Guid id)
+            => await _mediator.Send(new GetSurveyRequest(id));
 
         [HttpPost]
         public async Task<Response<SurveyDTO>> PostSurvey(PostSurveyRequest request)
             => await _mediator.Send(request);
 
         [HttpDelete("{id}")]
-        public async Task<Response<SurveyDTO>> DeleteSurvey(DeleteSurveyRequest request)
-             => await _mediator.Send(request);
+        public async Task<Response<SurveyDTO>> DeleteSurvey(Guid id)
+             => await _mediator.Send(new DeleteSurveyRequest(id));
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<Response<SurveyDTO>> UpdateSurvey(UpdateSurveyRequest request)
             => await _mediator.Send(request);
 
         [HttpGet]
         [Route("fill/{id}")]
-        public async Task<Response<SurveyToFillDTO>> GetSurveyToFill(int surveyId)
+        public async Task<Response<SurveyToFillDTO>> GetSurveyToFill(Guid surveyId)
             => await _mediator.Send(new GetSurveyToFillRequest(surveyId));
 
         [HttpPost]

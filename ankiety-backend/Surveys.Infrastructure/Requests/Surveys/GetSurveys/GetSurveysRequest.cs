@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Surveys.Infrastructure.Common;
-using Surveys.Infrastructure.DTO;
 using System.Collections.Generic;
+using Surveys.Infrastructure.DTO;
+using Surveys.Infrastructure.Common;
 
 namespace Surveys.Infrastructure.Requests.Surveys.GetSurveys
 {
