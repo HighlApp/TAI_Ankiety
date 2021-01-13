@@ -7,6 +7,9 @@ import { RegistrationComponent } from "./user/registration/registration.componen
 import {AdminComponent} from "./user/dashboard/admin/admin.component";
 import {SurveyToFillComponent} from "./surveys/survey-to-fill/survey-to-fill.component";
 import {FillComponent} from "./surveys/fill/fill.component";
+import {AuthGuard} from "./auth/auth.guard";
+import {RoleGuard} from "./auth/role.guard";
+import {Role} from "./models/role";
 
 const routes: Routes = [
   {
@@ -21,50 +24,48 @@ const routes: Routes = [
   {
     path: "admin",
     component: AdminComponent,
-    // canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: [Role.Admin] },
     children: [
       {
         path: "",
         redirectTo: "surveys",
         pathMatch: "full",
-        // data: { roles: [Role.Admin] }
       },
       {
         path: "surveys",
         component: SurveyListComponent,
-        // data: { roles: [Role.Admin] }
       },
       {
         path: "registration",
         component: RegistrationComponent,
-        // data: { roles: [Role.Admin] }
       },
       {
         path: "survey/:id",
         component: SurveyDetailsComponent,
-        // data: { roles: [Role.Admin] }
       },
     ]
   },
   {
     path: "user",
-    // canActivate: [AuthGuard, RoleGuard],
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: [Role.User] },
     children: [
       {
         path: "",
         redirectTo: "surveys",
         pathMatch: "full",
-        // data: { roles: [Role.User] }
+        data: { roles: [Role.User] }
       },
       {
         path: "surveys",
         component: SurveyToFillComponent,
-        // data: { roles: [Role.User] }
+        data: { roles: [Role.User] }
       },
       {
         path: "surveys/fill/:id",
         component: FillComponent,
-        // data: { roles: [Role.User] }
+        data: { roles: [Role.User] }
       }
     ]
   },
