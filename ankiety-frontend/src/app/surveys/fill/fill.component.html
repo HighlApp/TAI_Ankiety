@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<div class="spinner" *ngIf="loading">
+    <mat-spinner>
+    </mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+    <button mat-icon-button (click)="onBackClick()" style="margin-top: 65px; margin-left: 10px;" class="delete_btn">
+        <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+
+    <div class="text-center">
+        <span id="timer" style="font-style: oblique;">{{timerText}}</span>
+    </div>
+
+    <div class="container">
+        <div class="progress" style="height: 40px;">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progressBarWidth }">
+                Strona {{actualPageNumber}}/{{numberOfPages}}</div>
+        </div>
+
+        <div *ngFor="let question of actualPageQuestions">
+            <div class="container" style="margin-top: 25px;">
+
+                <p class="question">Pytanie {{question.id + 1}}: {{question.question.text}}</p>
+
+                <app-text *ngIf="question.question.questionType == 'Text'" [answers]="answers" [index]="question.id"
+                          [questionId]="question.question.questionId">
+                </app-text>
+
+                <app-multiple *ngIf="question.question.questionType == 'MultipleChoice'" [question]="question.question"
+                              [answers]="answers" [index]="question.id">
+                </app-multiple>
+
+                <app-one *ngIf="question.question.questionType == 'OneChoice'" [question]="question.question"
+                         [answers]="answers" [index]="question.id">
+                </app-one>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button *ngIf="actualPageNumber != 1" class="btn btn-blue" (click)="onPreviousClick()">Poprzednia
+                strona</button>
+            <button *ngIf="!(actualPageNumber == numberOfPages)" class="btn btn-blue" (click)="onNextClick()">Następna
+                strona</button>
+            <button *ngIf="actualPageNumber == numberOfPages" class="btn btn-green" [disabled]="!isValid()"
+                    (click)="onSubmitClick()">Zakończ ankietę</button>
+        </div>
+    </div>
+</div>

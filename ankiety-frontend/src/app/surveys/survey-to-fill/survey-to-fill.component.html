@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+<div *ngIf="!isLoading">
+    <div *ngIf="invitations?.length == 0" class="text-center" style="margin-top: 35vh">
+        <h1 class="text-center">Nie masz ankiet do wypełnienia.</h1>
+    </div>
+    <div *ngIf="invitations?.length> 0">
+        <h1 class="text-center" style="margin-top: 75px;">Dostępne ankiety:</h1>
+        <div *ngFor="let invitation of invitations" class="custom-container">
+            <app-invitation [invitation]="invitation"></app-invitation>
+        </div>
+    </div>
+</div>
