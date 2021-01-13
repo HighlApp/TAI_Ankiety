@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Invitation } from "src/app/models/invitation";
 import { InvitationService } from "src/app/shared/invitation.service";
 import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-survey-to-fill',
@@ -15,7 +16,7 @@ export class SurveyToFillComponent implements OnInit {
   constructor(
       private invitationService: InvitationService,
       private router: Router,
-      // private toastr: ToastrService
+      private toastr: ToastrService
   ) { }
 
   ngOnInit() {

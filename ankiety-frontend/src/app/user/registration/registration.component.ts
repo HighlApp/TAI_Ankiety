@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/app/shared/user.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-registration',
@@ -9,8 +10,7 @@ import { UserService } from "src/app/shared/user.service";
 export class RegistrationComponent implements OnInit {
   private usernamePattern = /[A-Za-z0-9ąĄćĆęĘłŁńŃóÓśŚżŻźŹ]/
 
-  //FIXME zastąpić albo naprawić toastr
-  constructor(public service: UserService /*, private toastr: ToastrService */) { }
+  constructor(public service: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.service.formModel.reset();
@@ -22,20 +22,18 @@ export class RegistrationComponent implements OnInit {
           console.log(res);
           if (res.data.isSuccess) {
             this.service.formModel.reset();
-            //FIXME zastąpić albo naprawić toastr
             console.log("Zarejestrowano użytkownika pomyślnie.");
-            // this.toastr.success(
-            //   "Zarejestrowano użytkownika pomyślnie.",
-            //   "Rejestracja użytkownika"
-            // );
+            this.toastr.success(
+              "Zarejestrowano użytkownika pomyślnie.",
+              "Rejestracja użytkownika"
+            );
           } else {
             console.log(res.errorMessages);
           }
         },
         err => {
-          //FIXME zastąpić albo naprawić toastr
           console.log("Wystąpił błąd. Spróbuj ponownie.");
-          // this.toastr.error("Wystąpił błąd. Spróbuj ponownie.", "Wystąpił błąd.");
+          this.toastr.error("Wystąpił błąd. Spróbuj ponownie.", "Wystąpił błąd.");
         }
     );
   }

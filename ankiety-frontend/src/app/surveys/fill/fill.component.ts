@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { SurveyToFill } from 'src/app/models/surveyToFill';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SurveyService } from 'src/app/shared/survey.service';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { TextAnswer } from 'src/app/models/textAnswer';
 import { MatDialog } from '@angular/material/dialog';
 import {ConfirmationDialogComponent} from "../../shared/dialogs/confirmation-dialog/confirmation-dialog.component";
@@ -31,7 +31,7 @@ export class FillComponent implements OnInit, OnDestroy {
   constructor(
       private route: ActivatedRoute,
       private surveyService: SurveyService,
-      // private toastr: ToastrService,
+      private toastr: ToastrService,
       private router: Router,
       public dialog: MatDialog) { }
 
@@ -42,8 +42,7 @@ export class FillComponent implements OnInit, OnDestroy {
           .getSurveyToFill(this.invitationId)
           .subscribe((res: any) => {
             this.initVariables(res);
-            //TODO naprawić toastr żeby móc wywolać tą metodę
-            // this.initializeTimer(this.survey, this.toastr, this.router);
+            this.initializeTimer(this.survey, this.toastr, this.router);
             this.initTimerText(this.survey.expirationDate);
             this.loading = false;
           });
@@ -119,7 +118,7 @@ export class FillComponent implements OnInit, OnDestroy {
         });
 
         this.surveyService.postFilledSurvey(result).subscribe(res => {
-          // this.toastr.success("Pomyślnie wysłano ankietę.", "Wysłano ankietę");
+          this.toastr.success("Pomyślnie wysłano ankietę.", "Wysłano ankietę");
           console.log("Pomyślnie wysłano ankietę.");
           this.router.navigateByUrl("user");
         });

@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { UserService } from "./shared/user.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-// import { ToastrModule } from "ngx-toastr";
+import { ToastrModule } from "ngx-toastr";
 import { LoginComponent } from "./user/login/login.component";
 import { AuthInterceptor } from "./auth/auth.interceptor";
 import { MaterialModule } from "./material/material.module";
@@ -67,9 +67,9 @@ import { FillComponent } from './surveys/fill/fill.component';
     BrowserAnimationsModule,
     FormsModule,
     MatRadioModule,
-    // ToastrModule.forRoot({
-    //   progressBar: true
-    // })
+    ToastrModule.forRoot({
+      progressBar: true
+    })
   ],
   providers: [
     AuthService,

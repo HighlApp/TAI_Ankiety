@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QuestionService } from 'src/app/shared/question.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-edit-text',
@@ -13,7 +14,7 @@ export class EditTextComponent implements OnInit {
   questionText: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
-  // private toastr: ToastrService, 
+  private toastr: ToastrService,
   public dialogRef: MatDialogRef<EditTextComponent>, 
   private questionService: QuestionService) { }
 
@@ -29,11 +30,11 @@ export class EditTextComponent implements OnInit {
 
     this.questionService.updateQuestion(questionCopy).subscribe(res => {
       this.question.text = this.questionText;
-      // this.toastr.success("Pomyślnie zmieniono treść pytania", "Pomyślnie");
+      this.toastr.success("Pomyślnie zmieniono treść pytania", "Pomyślnie");
       this.dialogRef.close();
     },
       err => {
-        // this.toastr.error("Nie można zaktualizować pytania, ponieważ ankieta już została wysłana", "Wystąpił błąd");
+        this.toastr.error("Nie można zaktualizować pytania, ponieważ ankieta już została wysłana", "Wystąpił błąd");
         this.questionText = this.data.question.text;
       });
   }

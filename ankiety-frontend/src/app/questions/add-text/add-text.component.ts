@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Question } from 'src/app/models/question';
 import { Survey } from 'src/app/models/survey';
 import { QuestionService } from 'src/app/shared/question.service';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-add-text',
@@ -11,7 +12,7 @@ import { QuestionService } from 'src/app/shared/question.service';
 export class AddTextComponent {
 
   constructor(private questionService: QuestionService, 
-    // private toastr: ToastrService
+    private toastr: ToastrService
     ) { }
   @Input() survey: Survey;
   @Input() dialogRef: any;
@@ -25,10 +26,10 @@ export class AddTextComponent {
     this.questionService
       .postSurveyQuestion(this.survey.id, question)
       .subscribe(res => {
-        // this.toastr.success("Pomyślnie dodano pytanie do ankiety.", "Dodano pytanie");
+        this.toastr.success("Pomyślnie dodano pytanie do ankiety.", "Dodano pytanie");
         this.dialogRef.close(res);
       }, err => {
-        // this.toastr.error("Nie można dodać pytania do ankiety, która była wysłana.", "Błąd podczas dodawania pytania");
+        this.toastr.error("Nie można dodać pytania do ankiety, która była wysłana.", "Błąd podczas dodawania pytania");
       }
       );
   }
