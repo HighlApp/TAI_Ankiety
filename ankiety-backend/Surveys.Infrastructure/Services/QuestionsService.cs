@@ -57,7 +57,7 @@ namespace Surveys.Infrastructure.Services
             await _questionsRepository.AddAsync(question);
             await _questionsRepository.SaveAsync();
 
-            question = await _questionsRepository.GetByIdAsync(question.Id); //TODO: Check that
+            question = await _questionsRepository.GetByIdAsync(question.Id);
             return new Response<QuestionDTO>(MapToQuestionDTO(question));
         }
 
@@ -97,7 +97,12 @@ namespace Surveys.Infrastructure.Services
                 Id = question.Id,
                 QuestionType = question.QuestionType,
                 Text = question.Text,
-                Options = question.Options //TODO: Change to OptionDTO ?
+                Options = question.Options.Select(x => new OptionDTO()
+                {
+                    Id = x.Id,
+                    OptionText = x.OptionText,
+                    Value = x.Value
+                }).ToList()
             };
         }
     }

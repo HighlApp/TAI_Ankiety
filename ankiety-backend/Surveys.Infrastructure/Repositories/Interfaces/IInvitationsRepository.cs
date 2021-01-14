@@ -7,6 +7,8 @@ namespace Surveys.Infrastructure.Repositories.Interfaces
 {
     public interface IInvitationsRepository : IRepositoryBase<Invitation>
     {
+        Task<Invitation> GetInvitationWithUser(Guid invitationId);
+
         Task<IEnumerable<Invitation>> GetInvitationWithUsers();
 
         Task<IEnumerable<Invitation>> GetUserInvitations(Guid userId);

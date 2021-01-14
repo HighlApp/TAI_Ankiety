@@ -35,5 +35,10 @@ namespace Surveys.Infrastructure.Repositories
                         || (x.SurveyId == surveyId && x.FilledDate == null && x.ExpirationDate > DateTime.Now))
                     .Select(x => x.UserId)
                     .ToListAsync();
+
+        public async Task<Invitation> GetInvitationWithUser(Guid invitationId)
+            => await _context.Invitations
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.Id == invitationId);
     }
 }

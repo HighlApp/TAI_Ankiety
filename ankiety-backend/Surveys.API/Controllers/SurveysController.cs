@@ -11,6 +11,7 @@ using Surveys.Infrastructure.Requests.Surveys.PostSurvey;
 using Surveys.Infrastructure.Requests.Surveys.UpdateSurvey;
 using Surveys.Infrastructure.Requests.Surveys.DeleteSurvey;
 using Surveys.Infrastructure.Requests.Surveys.GetSurveyToFill;
+using Surveys.Infrastructure.Requests.Surveys.GetFilledSurvey;
 using Surveys.Infrastructure.Requests.Surveys.PostFilledSurvey;
 
 namespace Surveys.API.Controllers
@@ -30,26 +31,31 @@ namespace Surveys.API.Controllers
         public async Task<Response<IEnumerable<SurveyDTO>>> GetSurveys()
             => await _mediator.Send(new GetSurveysRequest());
 
-        [HttpGet("{id}")]
-        public async Task<Response<SurveyDTO>> GetSurvey(Guid id)
-            => await _mediator.Send(new GetSurveyRequest(id));
+        [HttpGet("{surveyId}")]
+        public async Task<Response<SurveyDTO>> GetSurvey(Guid surveyId)
+            => await _mediator.Send(new GetSurveyRequest(surveyId));
 
         [HttpPost]
         public async Task<Response<SurveyDTO>> PostSurvey(PostSurveyRequest request)
             => await _mediator.Send(request);
 
-        [HttpDelete("{id}")]
-        public async Task<Response<SurveyDTO>> DeleteSurvey(Guid id)
-             => await _mediator.Send(new DeleteSurveyRequest(id));
+        [HttpDelete("{surveyId}")]
+        public async Task<Response<SurveyDTO>> DeleteSurvey(Guid surveyId)
+             => await _mediator.Send(new DeleteSurveyRequest(surveyId));
 
         [HttpPut]
         public async Task<Response<SurveyDTO>> UpdateSurvey(UpdateSurveyRequest request)
             => await _mediator.Send(request);
 
         [HttpGet]
-        [Route("fill/{id}")]
-        public async Task<Response<SurveyToFillDTO>> GetSurveyToFill(Guid surveyId)
-            => await _mediator.Send(new GetSurveyToFillRequest(surveyId));
+        [Route("filled/{invitationId}")]
+        public async Task<Response<FilledSurveyDTO>> GetFilledSurvey(int invitationId)
+            => await _mediator.Send(new GetFilledSurveyRequest(invitationId));
+
+        [HttpGet]
+        [Route("fill/{invitationId}")]
+        public async Task<Response<SurveyToFillDTO>> GetSurveyToFill(int invitationId)
+            => await _mediator.Send(new GetSurveyToFillRequest(invitationId));
 
         [HttpPost]
         [Route("fill")]

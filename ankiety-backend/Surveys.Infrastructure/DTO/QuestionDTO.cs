@@ -1,6 +1,5 @@
 ﻿using System;
 using Surveys.Core.Enums;
-using Surveys.Core.Entities;
 using System.Collections.Generic;
 
 namespace Surveys.Infrastructure.DTO
@@ -13,6 +12,6 @@ namespace Surveys.Infrastructure.DTO
 
         public QuestionType QuestionType { get; set; }
 
-        public ICollection<Option> Options { get; set; }
+        public ICollection<OptionDTO> Options { get; set; }
     }
 }

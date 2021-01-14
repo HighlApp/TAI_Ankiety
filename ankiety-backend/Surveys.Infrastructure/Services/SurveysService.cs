@@ -3,9 +3,11 @@ using System.Linq;
 using Surveys.Core.Entities;
 using System.Threading.Tasks;
 using Surveys.Core.Exceptions;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Surveys.Infrastructure.DTO;
 using Surveys.Infrastructure.Common;
+using Surveys.Infrastructure.Extensions;
 using Surveys.Infrastructure.Services.Interfaces;
 using Surveys.Infrastructure.Repositories.Interfaces;
 using Surveys.Infrastructure.Requests.Surveys.PostSurvey;
@@ -15,11 +17,20 @@ namespace Surveys.Infrastructure.Services
 {
     public class SurveysService : ISurveysService
     {
+        public readonly IUserRepository _userRepository;
         public readonly ISurveysRepository _surveysRepository;
+        public readonly IHttpContextAccessor _httpContextAccessor;
+        public readonly IInvitationsRepository _invitationsRepository;
 
-        public SurveysService(ISurveysRepository surveysRepository)
+        public SurveysService(ISurveysRepository surveysRepository, 
+            IHttpContextAccessor httpContextAccessor, 
+            IInvitationsRepository invitationsRepository, 
+            IUserRepository userRepository)
         {
+            _userRepository = userRepository;
             _surveysRepository = surveysRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _invitationsRepository = invitationsRepository;
         }
 
         public async Task<Response<SurveyDTO>> DeleteAsync(Guid id)
@@ -67,7 +78,7 @@ namespace Surveys.Infrastructure.Services
             await _surveysRepository.AddAsync(survey);
             await _surveysRepository.SaveAsync();
 
-            survey = await _surveysRepository.GetByIdAsync(survey.Id); //TODO: Check that
+            survey = await _surveysRepository.GetByIdAsync(survey.Id); 
             return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
@@ -87,6 +98,47 @@ namespace Surveys.Infrastructure.Services
 
             await _surveysRepository.SaveAsync();
             return new Response<SurveyDTO>(MapToSurveyDTO(survey));
+        }
+
+        public Task<Response<FilledSurveyDTO>> GetFilledSurvey(int invitationId)
+        {
+            throw new NotImplementedException();
+
+            //TODO TODO TODO 
+        }
+
+        public Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey)
+        {
+            throw new NotImplementedException();
+
+            //TODO TODO TODO
+        }
+
+        public async Task<Response<SurveyToFillDTO>> GetSurveyToFillAsync(Guid invitationId)
+        {
+            Invitation invitation = 
+                await _invitationsRepository.GetInvitationWithUser(invitationId);
+
+            if (invitation == null)
+                return new Response<SurveyToFillDTO>("Invitation does not exist");
+
+            string userId = _httpContextAccessor.GetUserId();
+
+            if (invitation.User.Id != userId)
+                return new Response<SurveyToFillDTO>("Invitation does not exist");
+
+            Survey survey = 
+                await _surveysRepository.GetByIdWithQuestionsAndAnswerOptionsAsync(invitation.SurveyId);
+
+            SurveyToFillDTO response = new SurveyToFillDTO()
+            {
+                Id = survey.Id,
+                QuestionsOnPage = survey.QuestionsOnPage ?? survey.Questions.Count,
+                ExpirationDate = invitation.ExpirationDate,
+                Questions = MapToQuestionDTO(survey.Questions)
+            };
+
+            return new Response<SurveyToFillDTO>(response);
         }
 
         private static SurveyDTO MapToSurveyDTO(Survey survey)
@@ -112,26 +164,29 @@ namespace Surveys.Infrastructure.Services
                 Text = x.Text,
                 Id = x.Id,
                 QuestionType = x.QuestionType,
-                Options = x.Options
-            });
+                Options = x.Options.Select(x => new OptionDTO()
+                {
+                    Id = x.Id,
+                    OptionText = x.OptionText,
+                    Value = x.Value
+                }).ToList()
+            }); 
         }
 
-        private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> questionDtos)
+        private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> question)
         {
-            Question question;
-            var questions = new List<Question>();
-            foreach (var questionDto in questionDtos)
+            return (ICollection<Question>)question.Select(x => new Question()
             {
-                question = new Question
-                {
-                    Text = questionDto.Text,
-                    Id = questionDto.Id,
-                    QuestionType = questionDto.QuestionType,
-                    Options = questionDto.Options
-                };
-                questions.Add(question);
-            }
-            return questions;
+                Text = x.Text,
+                Id = x.Id,
+                QuestionType = x.QuestionType,
+                Options = x.Options.Select(x => new Option() 
+                { 
+                    Id = x.Id,
+                    OptionText = x.OptionText,
+                    Value = x.Value
+                }).ToList()
+            });
         }
     }
 }

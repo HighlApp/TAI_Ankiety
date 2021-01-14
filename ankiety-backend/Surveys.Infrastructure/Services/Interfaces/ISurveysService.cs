@@ -19,5 +19,11 @@ namespace Surveys.Infrastructure.Services.Interfaces
         Task<Response<SurveyDTO>> UpdateAsync(UpdateSurveyRequest request);
 
         Task<Response<SurveyDTO>> PostAsync(PostSurveyRequest request);
+
+        Task<Response<SurveyToFillDTO>> GetSurveyToFillAsync(Guid invitationId);
+
+        Task<Response<FilledSurveyDTO>> GetFilledSurvey(int invitationId);
+
+        Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey);
     }
 }

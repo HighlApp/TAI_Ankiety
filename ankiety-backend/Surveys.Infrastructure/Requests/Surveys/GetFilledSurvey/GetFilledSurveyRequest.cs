@@ -2,11 +2,11 @@
 using Surveys.Infrastructure.DTO;
 using Surveys.Infrastructure.Common;
 
-namespace Surveys.Infrastructure.Requests.Surveys.GetSurveyToFill
+namespace Surveys.Infrastructure.Requests.Surveys.GetFilledSurvey
 {
-    public class GetSurveyToFillRequest : IRequest<Response<SurveyToFillDTO>>
+    public class GetFilledSurveyRequest : IRequest<Response<FilledSurveyDTO>>
     {
-        public GetSurveyToFillRequest(int invitationId)
+        public GetFilledSurveyRequest(int invitationId)
         {
             InvitationId = invitationId;
         }

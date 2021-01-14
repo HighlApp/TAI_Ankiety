@@ -6,5 +6,6 @@ namespace Surveys.Infrastructure.Requests.Surveys.PostFilledSurvey
 {
     public class PostFilledSurveyRequest : IRequest<Response<StatusResponseDTO>>
     {
+        public FilledSurveyDTO FilledSurvey { get; set; }
     }
 }
