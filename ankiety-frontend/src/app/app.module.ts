@@ -31,6 +31,7 @@ import { ChangePasswordComponent } from './user/change-password/change-password.
 import { SurveyToFillComponent } from './surveys/survey-to-fill/survey-to-fill.component';
 import { InvitationComponent } from './surveys/survey-to-fill/invitation/invitation.component';
 import { FillComponent } from './surveys/fill/fill.component';
+import { SendInvitationsComponent } from './surveys/survey-details/send-invitations/send-invitations.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { FillComponent } from './surveys/fill/fill.component';
     SurveyToFillComponent,
     InvitationComponent,
     FillComponent,
+    SendInvitationsComponent,
   ],
   imports: [
     BrowserModule,

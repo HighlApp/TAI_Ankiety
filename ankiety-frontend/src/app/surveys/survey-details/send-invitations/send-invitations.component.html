@@ -1,0 +1,112 @@
+<div style="position: relative;">
+    <button class="close-button" (click)="onCloseClick()">
+        <mat-icon class="close-icon">close</mat-icon>
+    </button>
+
+    <h1 class="text-center" mat-dialog-title>Wyślij zaproszenie</h1>
+
+    <div *ngIf="dataSource?.data?.length != 0">
+        <div class="search-div">
+            <mat-form-field class="search-form-field" floatLabel="never">
+                <input matInput placeholder="Szukaj użytkownika" autocomplete="off" (keyup)="filterData($event.target.value)">
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="mat-elevation-z8 table-margin" style="margin-top: 25px;">
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Imię </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+                <mat-header-cell *matHeaderCellDef> Nazwisko </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="no-data">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    Brak użytkowników którym można wysłać zaproszenie.
+                </mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="search-no-data">
+                <mat-footer-cell *matFooterCellDef colspan="6">
+                    Brak użytkowników spełniających filtr wyszukiwania.
+                </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns:displayedColumns;" (click)="selection.toggle(row)"></mat-row>
+            <mat-footer-row *matFooterRowDef="['no-data']"
+                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0 && selectedValue == 'list')}">
+            </mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['search-no-data']"
+                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length!=0 && dataSource.filter!='' && dataSource.filteredData.length==0)}">
+            </mat-footer-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+    <div *ngIf="dataSource?.data?.length != 0">
+        <div style="margin-top: 25px;">
+            <mat-form-field>
+                <input matInput placeholder="{{placeholder}}" type="number" [(ngModel)]="questionsOnPageForm.value"
+                       (keydown)="onKeyPress($event)" [disabled]="numberOfQuestions == 1">
+            </mat-form-field>
+        </div>
+
+        <div class="container text-center">
+            <p *ngIf="!isValueValid()">
+                Wartość musi być
+                nie mniejsza od 1 i nie większa niż {{this.numberOfQuestions}}</p>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="container text-center">
+                    <p style="color: gray;">Data rozpoczęcia: </p>
+                    <p-calendar [(ngModel)]="startDate" [showTime]="true" [minDate]="minDate" dateFormat="dd/mm/yy" [locale]="pl"
+                                [readonlyInput]="true" [showIcon]="true">
+                    </p-calendar>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="container text-center">
+                    <p style="color: gray;">Data zakończenia: </p>
+                    <p-calendar [(ngModel)]="endDate" [showTime]="true" [minDate]="minDate" dateFormat="dd/mm/yy" [locale]="pl"
+                                [readonlyInput]="true" [showIcon]="true">
+                    </p-calendar>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size: 12px; color: gray; margin-top: 15px;">W przypadku pozostawienia pustej wartości w polu data
+            rozpoczęcia, ankieta
+            będzie aktywna od momentu wysłania, natomiast pozostawienie pustej wartości w polu daty zakończenia oznacza, że
+            ankieta będzie dostępna bezterminowo. Minimalny czas trwania ankiety wynosi 10 minut.</p>
+
+        <div class="text-center">
+            <button class="btn btn-success text-center" (click)="sendInvitation()"
+                    [disabled]="!(selection.selected.length > 0) || !isValueValid()" style="margin-top: 5px;">Wyślij
+                zaproszenie</button>
+        </div>
+    </div>
+</div>

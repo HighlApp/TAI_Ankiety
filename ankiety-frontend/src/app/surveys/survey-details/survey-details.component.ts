@@ -13,6 +13,7 @@ import { QuestionService } from 'src/app/shared/question.service';
 import { SurveyService } from 'src/app/shared/survey.service';
 import { EditSurveyComponent } from '../edit-survey/edit-survey/edit-survey.component';
 import { ToastrService } from "ngx-toastr";
+import {SendInvitationsComponent} from "./send-invitations/send-invitations.component";
 
 @Component({
   selector: 'app-survey-details',
@@ -63,14 +64,14 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   openInvitationDialog() {
-    // const dialogRef = this.dialog.open(SendInvitationsComponent, {
-    //   width: "1000px",
-    //   maxHeight: "800px",
-    //   data: {
-    //     survey: this.survey,
-    //     numberOfQuestions: this.survey.questions.length
-    //   }
-    // });
+    const dialogRef = this.dialog.open(SendInvitationsComponent, {
+      width: "1000px",
+      maxHeight: "800px",
+      data: {
+        survey: this.survey,
+        numberOfQuestions: this.survey.questions.length
+      }
+    });
   }
 
   ngOnDestroy() {
