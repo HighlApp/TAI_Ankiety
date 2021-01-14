@@ -1,6 +1,8 @@
 ﻿using Surveys.Core.Entities;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace Surveys.Infrastructure.Repositories.Interfaces
 {
@@ -18,5 +20,9 @@ namespace Surveys.Infrastructure.Repositories.Interfaces
             User user, string currentPassword, string newPassword);
 
         Task<SignInResult> SignInAsync(string email, string password);
+
+        Task<IEnumerable<User>> GetAllUsers();
+
+        Task<IEnumerable<string>> GetUserIdByRoleId(string role);
     }
 }

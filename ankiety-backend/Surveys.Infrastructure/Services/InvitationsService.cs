@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Surveys.Infrastructure.DTO;
 using Surveys.Infrastructure.Common;
+using Microsoft.AspNetCore.Identity;
 using Surveys.Infrastructure.Extensions;
 using Surveys.Infrastructure.Services.Interfaces;
 using Surveys.Infrastructure.Repositories.Interfaces;
@@ -14,14 +15,19 @@ namespace Surveys.Infrastructure.Services
 {
     public class InvitationsService : IInvitationsService
     {
+        private readonly IUserRepository _userRepository;
         private readonly ISurveysRepository _surveysRepository;
+        private readonly IUserRoleRepository _userRoleRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IInvitationsRepository _invitationsRepository;
 
         public InvitationsService(IInvitationsRepository invitationsRepository, 
-            ISurveysRepository surveysRepository, IHttpContextAccessor httpContextAccessor)
+            ISurveysRepository surveysRepository, IHttpContextAccessor httpContextAccessor, 
+            IUserRoleRepository userRoleRepository, IUserRepository userRepository)
         {
+            _userRepository = userRepository;
             _surveysRepository = surveysRepository;
+            _userRoleRepository = userRoleRepository;
             _httpContextAccessor = httpContextAccessor;
             _invitationsRepository = invitationsRepository;
         }
@@ -78,9 +84,24 @@ namespace Surveys.Infrastructure.Services
             if (survey == null)
                 return new Response<IEnumerable<UserDTO>>("Survey does not exist");
 
-            //TODO: FILL
+            IEnumerable<string> usersIdWithInvitation = 
+                await _invitationsRepository.GetIdUsersWithSurveyInvitation(surveyId);
 
-            return null;
+            IdentityRole administratorRole = await _userRoleRepository.GetRoleByNameAsync(UserRoles.Administrator);
+            IEnumerable<string> administratorsId = await _userRepository.GetUserIdByRoleId(administratorRole.Id);
+            IEnumerable<User> allUsers = await _userRepository.GetAllUsers();
+
+            IEnumerable<UserDTO> response = allUsers
+                .Where(x => !administratorsId.Contains(x.Id) && !usersIdWithInvitation.Contains(x.Id))
+                .Select(x => new UserDTO()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Surname = x.Surname,
+                    Email = x.Email
+                }).ToList();
+
+            return new Response<IEnumerable<UserDTO>>(response);
         }
 
         public async Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitationsAsync()
