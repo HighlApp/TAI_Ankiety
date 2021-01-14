@@ -34,21 +34,23 @@ namespace Surveys.Infrastructure.Services
 
         public async Task<Response<IEnumerable<AdministratorInvitationDTO>>> GetAllInvitationsAsync()
         {
-            IEnumerable<Invitation> invitations = await _invitationsRepository.GetInvitationWithUsers();
+            IEnumerable<Invitation> invitations = 
+                await _invitationsRepository.GetInvitation();
 
-            IEnumerable<AdministratorInvitationDTO> invitationsDTO = invitations.Select(x => new AdministratorInvitationDTO()
-            {
-                Id = x.Id,
-                ExpirationDate = x.ExpirationDate,
-                SendDate = x.SendDate,
-                StartDate = x.StartDate,
-                SurveyId = x.SurveyId,
-                UserId = x.UserId,
-                FilledSurvey = x.FilledDate != null,
-                SurveyName = x.Survey.Name,
-                Username = x.User.UserName,
-                Expired = x.ExpirationDate != null && x.ExpirationDate < DateTime.Now
-            });
+            IEnumerable<AdministratorInvitationDTO> invitationsDTO = 
+                invitations.Select(x => new AdministratorInvitationDTO()
+                {
+                    Id = x.Id,
+                    ExpirationDate = x.ExpirationDate,
+                    SendDate = x.SendDate,
+                    StartDate = x.StartDate,
+                    SurveyId = x.SurveyId,
+                    UserId = x.UserId,
+                    FilledSurvey = x.FilledDate != null,
+                    SurveyName = x.Survey.Name,
+                    Username = x.User.UserName,
+                    Expired = x.ExpirationDate != null && x.ExpirationDate < DateTime.Now
+                });
 
             return new Response<IEnumerable<AdministratorInvitationDTO>>(invitationsDTO);
         }

@@ -18,9 +18,10 @@ namespace Surveys.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Invitation>> GetInvitationWithUsers()
+        public async Task<IEnumerable<Invitation>> GetInvitation()
             => await _context.Invitations
                 .Include(x => x.User)
+                .Include(x => x.Survey)
                 .ToListAsync();
 
         public async Task<IEnumerable<Invitation>> GetUserInvitations(Guid userId)
