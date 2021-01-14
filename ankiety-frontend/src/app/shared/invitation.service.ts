@@ -22,15 +22,16 @@ export class InvitationService {
   }
 
   sendInvitations(invitations: Invitation[]) {
-    return this.http.post(this.BaseURI, invitations);
+    const invReq = {
+      invitationDetails: invitations[0],
+      usersId: invitations.map(inv => inv.userId)
+    };
+
+    return this.http.post(this.BaseURI, invReq);
   }
 
   getUserInvitations() {
     return this.http.get(this.BaseURI);
-  }
-
-  inviteGroup(id: string[], invitation: Invitation) {
-    return this.http.post(this.BaseURI + "/group/" + id, invitation);
   }
 
   deleteInvitation(id: number) {

@@ -51,17 +51,10 @@ export class SendInvitationsComponent implements OnInit {
         .getUsersForInvitation(this.data.survey.id)
         .subscribe((res: any) => {
           console.log(res);
-          this.dataSource = new MatTableDataSource(res);
+          this.dataSource = new MatTableDataSource(res.data);
           this.dataSource.paginator = this.paginator;
           this.placeholder = this.setPlaceholder();
         });
-
-    this.invitationService
-          .getUsersForInvitation(this.data.survey.id)
-          .subscribe((res: User[]) => {
-            this.initTable(res);
-            this.displayedColumns = ["select", "name", "surname"];
-          });
   }
 
   filterData(filterValue: string) {
@@ -105,7 +98,6 @@ export class SendInvitationsComponent implements OnInit {
               this.startDate,
               this.endDate,
               this.questionsOnPageForm.value,
-              null
           );
           this.invitations.push(invitation);
         });
