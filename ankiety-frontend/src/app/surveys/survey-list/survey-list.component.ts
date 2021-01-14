@@ -28,7 +28,7 @@ export class SurveyListComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(NewSurveyComponent, {
-      height: "520px",
+      height: "600px",
       width: "600px",
       data: { surveys: this.surveys }
     });

@@ -6,3 +6,9 @@ a {
 a:hover {
     font-size: 18px;
 }
+
+.icon{
+    position: relative;
+    top: 6px;
+    margin: 1px;
+}

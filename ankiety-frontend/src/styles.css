@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+mat-card {
+    color: #000 !important;
+    background-color: white !important;
+    border-top: rgb(112, 112, 112) 1px solid;
+    border-left: rgb(112, 112, 112) 1px solid;
+    border-right: #255255 3px solid;
+    border-bottom: #255255 3px solid;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+mat-card:hover {
+    background-color: rgba(105, 130, 133, 0.808) !important;
+}
+
+
+.mat-form-field input{
+    border-radius: 1%;
+    border-right: rgb(112, 112, 112) 1px solid;
+    border-bottom: rgb(112, 112, 112) 1px solid;
+}
