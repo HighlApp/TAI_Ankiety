@@ -13,6 +13,32 @@
             </div>
         </div>
 
+
+        <div class="row">
+            <div class="col-sm">
+                <p>Imię *:</p>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="Name" autocomplete="off" (keydown)="onDataInput($event)">
+                </mat-form-field>
+                <label class="text"
+                       *ngIf="service.formModel.get('Name').touched && service.formModel.get('Name').errors?.required">Pole
+                    jest wymagane.</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm">
+                <p>Nazwisko *:</p>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="Surname" autocomplete="off" (keydown)="onDataInput($event)">
+                </mat-form-field>
+                <label class="text"
+                       *ngIf="service.formModel.get('Surname').touched && service.formModel.get('Surname').errors?.required">Pole
+                    jest wymagane.</label>
+            </div>
+        </div>
+
         <div formGroupName="Passwords">
             <div class="row">
                 <div class="col-sm">

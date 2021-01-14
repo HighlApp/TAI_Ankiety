@@ -17,6 +17,8 @@ export class UserService {
 
   formModel = this.fb.group({
     Email: ["", [Validators.pattern(this.emailPattern), Validators.required]],
+    Name: ["", Validators.required],
+    Surname: ["", Validators.required],
     Passwords: this.fb.group(
       {
         Password: ["", [Validators.required, Validators.minLength(8)]],
@@ -43,6 +45,8 @@ export class UserService {
     var body = {
       Email: this.formModel.value.Email,
       Password: this.formModel.value.Passwords.Password,
+      Name: this.formModel.value.Name,
+      Surname: this.formModel.value.Surname,
     };
 
     return this.http.post(this.BaseURI + "/identity/sign-up", body);
