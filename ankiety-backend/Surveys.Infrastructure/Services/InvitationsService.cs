@@ -15,16 +15,18 @@ namespace Surveys.Infrastructure.Services
 {
     public class InvitationsService : IInvitationsService
     {
+        private readonly IEmailSender _emailSender;
         private readonly IUserRepository _userRepository;
         private readonly ISurveysRepository _surveysRepository;
         private readonly IUserRoleRepository _userRoleRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IInvitationsRepository _invitationsRepository;
 
-        public InvitationsService(IInvitationsRepository invitationsRepository, 
+        public InvitationsService(IEmailSender emailSender, IInvitationsRepository invitationsRepository, 
             ISurveysRepository surveysRepository, IHttpContextAccessor httpContextAccessor, 
             IUserRoleRepository userRoleRepository, IUserRepository userRepository)
         {
+            _emailSender = emailSender;
             _userRepository = userRepository;
             _surveysRepository = surveysRepository;
             _userRoleRepository = userRoleRepository;
@@ -71,7 +73,10 @@ namespace Surveys.Infrastructure.Services
                     UserId = userId.ToString()
                 };
 
+                var user = await _userRepository.FindByIdAsync(userId.ToString());
+
                 await _invitationsRepository.AddAsync(invitation);
+                await _emailSender.SendInvitationEmailAsync(user.Email, invitation.StartDate, invitation.ExpirationDate);
             }
 
             await _invitationsRepository.SaveAsync();

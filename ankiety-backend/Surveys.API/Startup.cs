@@ -5,6 +5,9 @@ using Surveys.API.Installers.Extension;
 using Surveys.Infrastructure.DataSeeder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Surveys.Infrastructure.Services.Interfaces;
+using Surveys.Infrastructure.Services;
+using Surveys.Infrastructure.Settings;
 
 namespace Surveys.API
 {
@@ -23,6 +26,17 @@ namespace Surveys.API
             services.InstallServicesInAssembly(Configuration);
             //Add CORS
             services.AddCors();
+            //Inject appsettings
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            //Add EmailSender
+            services.AddTransient<IEmailSender, EmailSender>();
+            //Inject EmailServiceOptions
+            services.Configure<EmailServiceOptions>(options =>
+            {
+                options.ApiKey = Configuration["ExternalProviders:SendGrid:ApiKey"];
+                options.SenderEmail = Configuration["ExternalProviders:SendGrid:SenderEmail"];
+                options.SenderName = Configuration["ExternalProviders:SendGrid:SenderName"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
