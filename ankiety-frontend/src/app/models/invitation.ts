@@ -6,6 +6,5 @@ export class Invitation {
     public startDate: string,
     public expirationDate: string,
     public questionsOnPage: number,
-    public groupId: any[]
   ) { }
 }
