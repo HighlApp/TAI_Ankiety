@@ -27,11 +27,11 @@ export class SurveyService {
   }
 
   getSurveyToFill(id: number) {
-    return this.http.get(this.BaseURI + "survey/fill/" + id);
+    return this.http.get(this.BaseURI + "surveys/fill/" + id);
   }
 
   postFilledSurvey(filledSurvey: any) {
-    return this.http.post(this.BaseURI + "survey/fill", filledSurvey);
+    return this.http.post(this.BaseURI + "surveys/fill", filledSurvey);
   }
 
   deleteSurvey(id: number) {

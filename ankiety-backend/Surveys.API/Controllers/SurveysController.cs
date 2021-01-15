@@ -49,12 +49,12 @@ namespace Surveys.API.Controllers
 
         [HttpGet]
         [Route("filled/{invitationId}")]
-        public async Task<Response<FilledSurveyDTO>> GetFilledSurvey(int invitationId)
+        public async Task<Response<FilledSurveyDTO>> GetFilledSurvey(Guid invitationId)
             => await _mediator.Send(new GetFilledSurveyRequest(invitationId));
 
         [HttpGet]
         [Route("fill/{invitationId}")]
-        public async Task<Response<SurveyToFillDTO>> GetSurveyToFill(int invitationId)
+        public async Task<Response<SurveyToFillDTO>> GetSurveyToFill(Guid invitationId)
             => await _mediator.Send(new GetSurveyToFillRequest(invitationId));
 
         [HttpPost]
