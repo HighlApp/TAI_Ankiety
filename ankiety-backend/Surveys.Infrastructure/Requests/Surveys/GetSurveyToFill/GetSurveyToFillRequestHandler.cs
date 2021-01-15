@@ -17,12 +17,8 @@ namespace Surveys.Infrastructure.Requests.Surveys.GetSurveyToFill
             _surveysService = surveysService;
         }
 
-        public Task<Response<SurveyToFillDTO>> Handle(
+        public async Task<Response<SurveyToFillDTO>> Handle(
             GetSurveyToFillRequest request, CancellationToken cancellationToken)
-        {
-            throw new System.NotImplementedException();
-
-            //TODO
-        }
+            => await _surveysService.GetSurveyToFillAsync(request.InvitationId);
     }
 }
