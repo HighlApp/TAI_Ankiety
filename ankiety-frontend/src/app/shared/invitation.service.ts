@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Invitation } from "../models/invitation";
 import { environment } from '../../environments/environment';
+import {InvitationRequest} from "../models/invitationRequest";
 
 @Injectable({
   providedIn: "root"
@@ -21,7 +22,7 @@ export class InvitationService {
     return this.http.get(this.BaseURI + "/users/" + surveyId);
   }
 
-  sendInvitations(invitations: Invitation[]) {
+  sendInvitations(invitations: InvitationRequest[]) {
     const invReq = {
       invitationDetails: invitations[0],
       usersId: invitations.map(inv => inv.userId)

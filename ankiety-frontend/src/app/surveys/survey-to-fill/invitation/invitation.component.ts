@@ -20,7 +20,7 @@ export class InvitationComponent implements OnInit {
   }
 
   onInvitationClick() {
-    this.router.navigate(["user/surveys/fill/", this.invitation.invitationId]);
+    this.router.navigate(["user/surveys/fill/", this.invitation.id]);
   }
 
   transformDate(invitationDate: any) {

@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { Invitation } from 'src/app/models/invitation';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import {InvitationRequest} from "../../../models/invitationRequest";
 
 
 @Component({
@@ -26,7 +27,7 @@ export class SendInvitationsComponent implements OnInit {
   surveyId: string;
   startDate: any;
   endDate: any;
-  invitations = new Array<Invitation>();
+  invitations = new Array<InvitationRequest>();
   value: Date;
   placeholder: string;
   minDate: Date;
@@ -91,7 +92,7 @@ export class SendInvitationsComponent implements OnInit {
     this.selection.selected
         .map(x => x.id)
         .forEach(x => {
-          var invitation = new Invitation(
+          var invitation = new InvitationRequest(
               x,
               this.surveyId,
               new Date().toISOString(),
