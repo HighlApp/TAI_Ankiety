@@ -26,15 +26,15 @@ export class EditSurveyComponent implements OnInit {
   }
 
   onEditClick() {
-    var details = { name: this.title.trim().replace(/  +/g, ' '), description: this.description.trim().replace(/  +/g, ' ') };
-    this.surveyService.updateSurveyDetails(details, this.surveyId).subscribe((res) => {
+    var details = { id:this.surveyId, name: this.title.trim().replace(/  +/g, ' '), description: this.description.trim().replace(/  +/g, ' ') };
+    this.surveyService.updateSurveyDetails(details).subscribe((res) => {
       this.data.survey.description = details.description;
       this.data.survey.name = details.name;
       this.toastr.success("Pomyślnie zaktualizowano dane ankiety", "Pomyślnie zaktualizowano");
       this.dialogRef.close();
     },
       (err) => {
-        this.toastr.error("Nie można zmienić nazwy, ponieważ ankieta z taką nazwą już istnieje", "Wystąpił błąd");
+        this.toastr.error("Nie można zmienić nazwy", "Wystąpił błąd");
         this.title = this.data.survey.name;
         this.description = this.data.survey.description;
       });

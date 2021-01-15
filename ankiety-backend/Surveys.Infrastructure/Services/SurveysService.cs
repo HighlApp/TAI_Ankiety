@@ -71,8 +71,8 @@ namespace Surveys.Infrastructure.Services
                 Name = request.Name,
                 Description = request.Description,
                 SurveyType = request.SurveyType,
-                QuestionsOnPage = request.QuestionsOnPage,
-                Questions = MapToQuestion(request.Questions)
+                QuestionsOnPage = request.QuestionsOnPage ?? 1,
+                //Questions = MapToQuestion(request.Questions)
             };
 
             await _surveysRepository.AddAsync(survey);
@@ -173,20 +173,20 @@ namespace Surveys.Infrastructure.Services
             }); 
         }
 
-        private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> question)
-        {
-            return (ICollection<Question>)question.Select(x => new Question()
-            {
-                Text = x.Text,
-                Id = x.Id,
-                QuestionType = x.QuestionType,
-                Options = x.Options.Select(x => new Option() 
-                { 
-                    Id = x.Id,
-                    OptionText = x.OptionText,
-                    Value = x.Value
-                }).ToList()
-            });
-        }
+        //private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> question)
+        //{
+        //    return (ICollection<Question>)question.Select(x => new Question()
+        //    {
+        //        Text = x.Text,
+        //        Id = x.Id,
+        //        QuestionType = x.QuestionType,
+        //        Options = x.Options.Select(x => new Option()
+        //        {
+        //            Id = x.Id,
+        //            OptionText = x.OptionText,
+        //            Value = x.Value
+        //        }).ToList()
+        //    });
+        //}
     }
 }

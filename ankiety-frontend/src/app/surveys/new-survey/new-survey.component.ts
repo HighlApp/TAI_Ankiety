@@ -41,7 +41,7 @@ export class NewSurveyComponent implements OnInit {
       this.toastr.success("Pomyślnie dodano ankietę", "Dodano ankietę");
       this.dialogRef.close();
     }, (err) => {
-      this.toastr.error("Ankieta o takiej nazwie już istnieje. Spróbuj ponownie.", "Błąd podczas dodawania ankiety");
+      this.toastr.error("Spróbuj ponownie.", "Błąd podczas dodawania ankiety");
     });
   }
 

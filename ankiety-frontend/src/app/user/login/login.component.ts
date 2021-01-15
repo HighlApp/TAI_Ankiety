@@ -5,12 +5,11 @@ import { NgForm } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { AuthService } from "src/app/shared/auth.service";
 import { Role } from 'src/app/models/role';
-import { UserDetails } from 'src/app/models/userDetails';
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styles: []
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   formModel = {
@@ -49,12 +48,10 @@ export class LoginComponent implements OnInit {
       err => {
         if (err.status == 400)
           console.log(err);
-        //wyświetlić komunikat o błędzie toastrem albo czymś innym
           this.toastr.error(
             "Niepoprawna nazwa użytkownika lub hasło. Spróbuj ponownie.",
             "Logowanie"
           );
-
         this.formModel.Password = "";
       }
     );

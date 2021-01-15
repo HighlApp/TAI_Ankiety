@@ -42,7 +42,7 @@ export class SurveyService {
     return this.http.get(this.BaseURI + "filledsurveys/" + invitationId)
   }
 
-  updateSurveyDetails(details: any, id: string) {
-    return this.http.put(this.BaseURI + "surveys/" + id, details);
+  updateSurveyDetails(details: any) {
+    return this.http.put(this.BaseURI + "surveys/", details);
   }
 }

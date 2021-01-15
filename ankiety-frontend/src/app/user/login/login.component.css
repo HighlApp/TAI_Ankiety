@@ -1,0 +1,23 @@
+.wrapper {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, #104549e1,  #fdfffff6);
+}
+.wrapped-div{
+    position: fixed;
+    top: 25%;
+    left: 35%;
+    margin-top: -50px;
+    margin-left: -100px;
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    border-top: rgb(112, 112, 112) 1px solid;
+    border-left: rgb(112, 112, 112) 1px solid;
+    border-right: #255255 3px solid;
+    border-bottom: #255255 3px solid;
+    border-radius: 1%;
+}
+
+.title{
+    padding-top: 3%;
+}
