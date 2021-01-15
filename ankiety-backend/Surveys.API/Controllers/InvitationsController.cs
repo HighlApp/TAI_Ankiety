@@ -41,8 +41,8 @@ namespace Surveys.API.Controllers
             => await _mediator.Send(new GetUsersForInvitationRequest(surveyId));
 
         [HttpGet]
-        [Route("user")]
-        //GET: api/invitations/user
+        [Route("my")]
+        //GET: api/invitations/my
         public async Task<Response<IEnumerable<UserInvitationDTO>>> GetUserInvitations()
             => await _mediator.Send(new GetUserInvitationsRequest());
 
