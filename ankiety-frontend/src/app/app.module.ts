@@ -32,6 +32,9 @@ import { SurveyToFillComponent } from './surveys/survey-to-fill/survey-to-fill.c
 import { InvitationComponent } from './surveys/survey-to-fill/invitation/invitation.component';
 import { FillComponent } from './surveys/fill/fill.component';
 import { SendInvitationsComponent } from './surveys/survey-details/send-invitations/send-invitations.component';
+import { MultipleComponent } from './surveys/fill/multiple/multiple.component';
+import { OneComponent } from './surveys/fill/one/one.component';
+import { TextComponent } from './surveys/fill/text/text.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { SendInvitationsComponent } from './surveys/survey-details/send-invitati
     InvitationComponent,
     FillComponent,
     SendInvitationsComponent,
+    MultipleComponent,
+    OneComponent,
+    TextComponent,
   ],
   imports: [
     BrowserModule,
