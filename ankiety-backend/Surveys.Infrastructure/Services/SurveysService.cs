@@ -18,16 +18,19 @@ namespace Surveys.Infrastructure.Services
     public class SurveysService : ISurveysService
     {
         public readonly IUserRepository _userRepository;
+        public readonly IAnswersRepository _answersRepository;
         public readonly ISurveysRepository _surveysRepository;
         public readonly IHttpContextAccessor _httpContextAccessor;
         public readonly IInvitationsRepository _invitationsRepository;
 
-        public SurveysService(ISurveysRepository surveysRepository, 
+        public SurveysService(ISurveysRepository surveysRepository,
+            IUserRepository userRepository,
+            IAnswersRepository answersRepository,
             IHttpContextAccessor httpContextAccessor, 
-            IInvitationsRepository invitationsRepository, 
-            IUserRepository userRepository)
+            IInvitationsRepository invitationsRepository)
         {
             _userRepository = userRepository;
+            _answersRepository = answersRepository;
             _surveysRepository = surveysRepository;
             _httpContextAccessor = httpContextAccessor;
             _invitationsRepository = invitationsRepository;
@@ -107,11 +110,34 @@ namespace Surveys.Infrastructure.Services
             //TODO TODO TODO 
         }
 
-        public Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey)
+        public async Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey)
         {
-            throw new NotImplementedException();
+            Invitation invitation = await _invitationsRepository.GetByIdAsync(
+                filledSurvey.InvitationId);
 
-            //TODO TODO TODO
+            if (invitation == null)
+                return new Response<StatusResponseDTO>("Invitation does not exist");
+
+            if (invitation.FilledDate != null)
+                return new Response<StatusResponseDTO>("Invitation has already been filled");
+
+            foreach (QuestionAnswerDTO item in filledSurvey.Answers)
+            {
+                Answer answer = new Answer
+                {
+                    OptionId = item.OptionId,
+                    QuestionId = item.QuestionId,
+                    InvitationId = filledSurvey.InvitationId,
+                    AnswerText = item.AnswerText
+                };
+
+                await _answersRepository.AddAsync(answer);
+            }
+
+            invitation.FilledDate = DateTime.Now;
+            await _invitationsRepository.SaveAsync();
+
+            return new Response<StatusResponseDTO>(new StatusResponseDTO(true));
         }
 
         public async Task<Response<SurveyToFillDTO>> GetSurveyToFillAsync(Guid invitationId)

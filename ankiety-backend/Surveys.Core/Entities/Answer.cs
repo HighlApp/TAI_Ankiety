@@ -8,6 +8,8 @@ namespace Surveys.Core.Entities
 
         public Guid QuestionId { get; set; }
 
+        public Guid InvitationId { get; set; }
+
         public Guid? OptionId { get; set; }
 
         public string AnswerText { get; set; }

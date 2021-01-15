@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Surveys.Infrastructure.Services.Interfaces;
-using Surveys.Infrastructure.Settings;
-using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using Surveys.Infrastructure.Settings;
+using Surveys.Infrastructure.Services.Interfaces;
 
 namespace Surveys.Infrastructure.Services
 {
@@ -21,8 +21,7 @@ namespace Surveys.Infrastructure.Services
 
         public Task SendInvitationEmailAsync(string emailAddress, DateTime? startDate, DateTime? expirationDate)
         {
-            //var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-            var message = new SendGridMessage()
+            SendGridMessage message = new SendGridMessage()
             {
                 From = new EmailAddress(_emailOptions.SenderEmail, _emailOptions.SenderName),
                 Subject = "Ankieta do wypełnienia",
@@ -32,6 +31,7 @@ namespace Surveys.Infrastructure.Services
 
             return Execute(_emailOptions.ApiKey, message, emailAddress);
         }
+
         public Task Execute(string apiKey, SendGridMessage message, string email)
         {
             var client = new SendGridClient(apiKey);            
@@ -43,12 +43,12 @@ namespace Surveys.Infrastructure.Services
 
         private string GetMessageBody(DateTime? startDate, DateTime? expirationDate)
         {
-            var body = "Zostałeś zaproszony do wypełnienia ankiety. ";
+            string body = "Zostałeś zaproszony do wypełnienia ankiety. ";
 
-            body += $"Ankietę możesz wypełnić od {getDate(startDate)} ";
+            body += $"Ankietę możesz wypełnić od {GetDate(startDate)} ";
 
             if (expirationDate != null)
-                body += $"Możesz ją wypełnić, do {getDate(expirationDate)}. " +
+                body += $"Możesz ją wypełnić, do {GetDate(expirationDate)}. " +
                     $"Po tym czasie ankieta nie będzie aktywna. ";
 
             body += $"Wejdź na {_appOptions.ClientUrl} i wypełnij ankietę.";
@@ -56,7 +56,7 @@ namespace Surveys.Infrastructure.Services
             return body;
         }
 
-        private string getDate(DateTime? date)
+        private string GetDate(DateTime? date)
         {
             var day = date.Value.Day.ToString().PadLeft(2, '0');
             var month = date.Value.Month.ToString().PadLeft(2, '0');
@@ -66,6 +66,5 @@ namespace Surveys.Infrastructure.Services
 
             return day + "/" + month + "/" + year + " " + hour + ":" + minute;
         }
-
     }
 }

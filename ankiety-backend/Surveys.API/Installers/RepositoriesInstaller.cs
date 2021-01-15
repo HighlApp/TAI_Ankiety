@@ -13,6 +13,7 @@ namespace Surveys.API.Installers
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISurveysRepository, SurveysRepository>();
+            services.AddScoped<IAnswersRepository, AnswersRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IQuestionsRepository, QuestionsRepository>();
             services.AddScoped<IInvitationsRepository, InvitationsRepository>();
