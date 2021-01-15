@@ -42,5 +42,14 @@ namespace Surveys.Infrastructure.Repositories
             => await _context.Invitations
                 .Include(x => x.User)
                 .FirstOrDefaultAsync(x => x.Id == invitationId);
+
+        public async Task<Invitation> GetInvitationWithSurveyDetails(Guid invitationId)
+            => await _context.Invitations
+                .Include(x => x.Survey)
+                    .ThenInclude(x => x.Questions)
+                        .ThenInclude(x => x.Options)
+                .Where(x => x.Id == invitationId)
+                .SingleOrDefaultAsync();
+                
     }
 }

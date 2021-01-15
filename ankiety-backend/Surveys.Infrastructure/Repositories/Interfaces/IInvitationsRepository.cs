@@ -9,6 +9,8 @@ namespace Surveys.Infrastructure.Repositories.Interfaces
     {
         Task<Invitation> GetInvitationWithUser(Guid invitationId);
 
+        Task<Invitation> GetInvitationWithSurveyDetails(Guid invitation);
+
         Task<IEnumerable<Invitation>> GetInvitation();
 
         Task<IEnumerable<Invitation>> GetUserInvitations(Guid userId);

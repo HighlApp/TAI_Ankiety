@@ -10,16 +10,16 @@ namespace Surveys.Infrastructure.Services
 {
     public class EmailSender : IEmailSender
     {
-        private readonly EmailServiceOptions _emailOptions;
+        private readonly EmailServiceSettings _emailOptions;
         private readonly ApplicationSettings _appOptions;
 
-        public EmailSender(IOptions<EmailServiceOptions> emailOptions, IOptions<ApplicationSettings> appOptions)
+        public EmailSender(IOptions<EmailServiceSettings> emailOptions, IOptions<ApplicationSettings> appOptions)
         {
             _emailOptions = emailOptions.Value;
             _appOptions = appOptions.Value;
         }
 
-        public Task SendInvitationEmailAsync(string emailAddress, DateTime? startDate, DateTime? expirationDate)
+        public async Task SendInvitationEmailAsync(string emailAddress, DateTime? startDate, DateTime? expirationDate)
         {
             SendGridMessage message = new SendGridMessage()
             {
@@ -29,16 +29,18 @@ namespace Surveys.Infrastructure.Services
                 HtmlContent = GetMessageBody(startDate, expirationDate)
             };
 
-            return Execute(_emailOptions.ApiKey, message, emailAddress);
+            await SendMessage(_emailOptions.ApiKey, message, emailAddress);
         }
 
-        public Task Execute(string apiKey, SendGridMessage message, string email)
+        public async Task SendMessage(string apiKey, SendGridMessage message, 
+            string email)
         {
-            var client = new SendGridClient(apiKey);            
+            SendGridClient client = new SendGridClient(apiKey);     
+            
             message.AddTo(new EmailAddress(email));
             message.SetClickTracking(false, false);
 
-            return client.SendEmailAsync(message);
+            await client.SendEmailAsync(message);
         }
 
         private string GetMessageBody(DateTime? startDate, DateTime? expirationDate)

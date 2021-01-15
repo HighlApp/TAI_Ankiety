@@ -8,7 +8,7 @@ using Surveys.Infrastructure.Services.Interfaces;
 namespace Surveys.Infrastructure.Requests.Surveys.GetFilledSurvey
 {
     public class GetFilledSurveyRequestHandler :
-        IRequestHandler<GetFilledSurveyRequest, Response<FilledSurveyDTO>>
+        IRequestHandler<GetFilledSurveyRequest, Response<FilledSurveySummaryDTO>>
     {
         private readonly ISurveysService _surveysService;
 
@@ -17,7 +17,7 @@ namespace Surveys.Infrastructure.Requests.Surveys.GetFilledSurvey
             _surveysService = surveysService;
         }
 
-        public async Task<Response<FilledSurveyDTO>> Handle(
+        public async Task<Response<FilledSurveySummaryDTO>> Handle(
             GetFilledSurveyRequest request, CancellationToken cancellationToken)
             => await _surveysService.GetFilledSurvey(request.InvitationId);
     }

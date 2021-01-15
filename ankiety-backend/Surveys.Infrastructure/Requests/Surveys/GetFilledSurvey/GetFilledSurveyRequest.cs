@@ -5,7 +5,7 @@ using Surveys.Infrastructure.Common;
 
 namespace Surveys.Infrastructure.Requests.Surveys.GetFilledSurvey
 {
-    public class GetFilledSurveyRequest : IRequest<Response<FilledSurveyDTO>>
+    public class GetFilledSurveyRequest : IRequest<Response<FilledSurveySummaryDTO>>
     {
         public GetFilledSurveyRequest(Guid invitationId)
         {

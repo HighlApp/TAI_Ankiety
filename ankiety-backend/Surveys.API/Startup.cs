@@ -31,7 +31,7 @@ namespace Surveys.API
             //Add EmailSender
             services.AddTransient<IEmailSender, EmailSender>();
             //Inject EmailServiceOptions
-            services.Configure<EmailServiceOptions>(options =>
+            services.Configure<EmailServiceSettings>(options =>
             {
                 options.ApiKey = Configuration["ExternalProviders:SendGrid:ApiKey"];
                 options.SenderEmail = Configuration["ExternalProviders:SendGrid:SenderEmail"];

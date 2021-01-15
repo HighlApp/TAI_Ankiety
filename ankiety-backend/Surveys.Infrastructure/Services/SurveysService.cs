@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Surveys.Core.Enums;
 using Surveys.Core.Entities;
 using System.Threading.Tasks;
 using Surveys.Core.Exceptions;
@@ -74,8 +75,7 @@ namespace Surveys.Infrastructure.Services
                 Name = request.Name,
                 Description = request.Description,
                 SurveyType = request.SurveyType,
-                QuestionsOnPage = request.QuestionsOnPage ?? 1,
-                //Questions = MapToQuestion(request.Questions)
+                QuestionsOnPage = request.QuestionsOnPage ?? 1
             };
 
             await _surveysRepository.AddAsync(survey);
@@ -103,11 +103,84 @@ namespace Surveys.Infrastructure.Services
             return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
-        public Task<Response<FilledSurveyDTO>> GetFilledSurvey(Guid invitationId)
+        public async Task<Response<FilledSurveySummaryDTO>> GetFilledSurvey(Guid invitationId)
         {
-            throw new NotImplementedException();
+            double? userResult = 0;
+            double? maxResult = 0;
 
-            //TODO TODO TODO 
+            Invitation invitation = 
+                await _invitationsRepository.GetInvitationWithSurveyDetails(invitationId);
+
+            if (invitation == null)
+                return new Response<FilledSurveySummaryDTO>("Invitation does not exist");
+
+            IEnumerable<Answer> userAnswers = 
+                await _answersRepository.GetInvitationAnswers(invitationId);
+
+            User user = await _userRepository.FindByIdAsync(invitation.UserId);
+
+            FilledSurveySummaryDTO result = new FilledSurveySummaryDTO()
+            {
+                Name = invitation.Survey.Name,
+                Description = invitation.Survey.Description,
+                Type = invitation.Survey.SurveyType.ToString(), //TODO: Check
+                Questions = new List<FilledSurveyQuestionDTO>(),
+                User = new UserDTO { 
+                    Name = user.Name, 
+                    Surname = user.Surname 
+                }                
+            };
+
+            foreach (Question question in invitation.Survey.Questions)
+            {
+                FilledSurveyQuestionDTO filledSurveyQuestion = new FilledSurveyQuestionDTO()
+                {
+                    Text = question.Text,
+                    Type = question.QuestionType.ToString(), //TODO: Check
+                    Options = new List<FilledSurveyOptionDTO>(),
+                    AnswerText = userAnswers
+                        .Where(x => x.QuestionId == question.Id)
+                        .FirstOrDefault().AnswerText
+                };
+
+                foreach (var option in question.Options)
+                {
+                    bool isSelected = userAnswers
+                        .Where(x => x.OptionId == option.Id)
+                        .FirstOrDefault() != null;
+
+                    var filledSurveyOption = new FilledSurveyOptionDTO() { 
+                        Text = option.OptionText, 
+                        Value = option?.Value, 
+                        IsSelected = isSelected 
+                    };
+
+                    filledSurveyQuestion.Options.Add(filledSurveyOption);
+
+                    if (isSelected)
+                        userResult += option.Value;
+                }
+
+                result.Questions.Add(filledSurveyQuestion);
+
+                if(question.QuestionType == QuestionType.OneChoice)
+                {
+                    maxResult += question.Options.Select(x => x.Value).Max();
+                }
+                else if(question.QuestionType == QuestionType.MultipleChoice)
+                {
+                    question.Options.Where(x => x.Value > 0)
+                        .Select(x => x.Value).Sum();
+                }
+            }
+
+            if (result.Type == SurveyType.HiddenValues.ToString()) //TODO: Check
+            {
+                result.MaxValue = maxResult;
+                result.Value = userResult;
+            }
+
+            return new Response<FilledSurveySummaryDTO>(result);
         }
 
         public async Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey)
@@ -198,21 +271,5 @@ namespace Surveys.Infrastructure.Services
                 }).ToList()
             }); 
         }
-
-        //private static ICollection<Question> MapToQuestion(IEnumerable<QuestionDTO> question)
-        //{
-        //    return (ICollection<Question>)question.Select(x => new Question()
-        //    {
-        //        Text = x.Text,
-        //        Id = x.Id,
-        //        QuestionType = x.QuestionType,
-        //        Options = x.Options.Select(x => new Option()
-        //        {
-        //            Id = x.Id,
-        //            OptionText = x.OptionText,
-        //            Value = x.Value
-        //        }).ToList()
-        //    });
-        //}
     }
 }

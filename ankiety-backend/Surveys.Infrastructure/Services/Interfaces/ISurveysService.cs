@@ -22,7 +22,7 @@ namespace Surveys.Infrastructure.Services.Interfaces
 
         Task<Response<SurveyToFillDTO>> GetSurveyToFillAsync(Guid invitationId);
 
-        Task<Response<FilledSurveyDTO>> GetFilledSurvey(Guid invitationId);
+        Task<Response<FilledSurveySummaryDTO>> GetFilledSurvey(Guid invitationId);
 
         Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey);
     }
