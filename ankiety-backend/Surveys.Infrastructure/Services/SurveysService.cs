@@ -100,7 +100,7 @@ namespace Surveys.Infrastructure.Services
             return new Response<SurveyDTO>(MapToSurveyDTO(survey));
         }
 
-        public Task<Response<FilledSurveyDTO>> GetFilledSurvey(int invitationId)
+        public Task<Response<FilledSurveyDTO>> GetFilledSurvey(Guid invitationId)
         {
             throw new NotImplementedException();
 
