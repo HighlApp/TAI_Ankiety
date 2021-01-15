@@ -41,7 +41,8 @@ export class FillComponent implements OnInit, OnDestroy {
       this.surveyService
           .getSurveyToFill(this.invitationId)
           .subscribe((res: any) => {
-            this.initVariables(res);
+            console.log(res);
+            this.initVariables(res.data);
             this.initializeTimer(this.survey, this.toastr, this.router);
             this.initTimerText(this.survey.expirationDate);
             this.loading = false;
@@ -102,17 +103,19 @@ export class FillComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((finish: boolean) => {
       if (finish) {
         var result = {
-          invitationId: this.invitationId,
-          answers: []
+          filledSurvey: {
+            invitationId: this.invitationId,
+            answers: []
+          },
         };
 
         this.answers.forEach(element => {
           if (element instanceof TextAnswer) {
-            result.answers.push(element);
+            result.filledSurvey.answers.push(element);
           }
           else {
             for (let answer of element.selectedValue) {
-              result.answers.push({ questionId: element.questionId, optionId: answer.optionId });
+              result.filledSurvey.answers.push({ questionId: element.questionId, optionId: answer.id });
             }
           }
         });

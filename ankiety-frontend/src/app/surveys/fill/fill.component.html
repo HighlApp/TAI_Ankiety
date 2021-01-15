@@ -25,15 +25,18 @@
 
                 <p class="question">Pytanie {{question.id + 1}}: {{question.question.text}}</p>
 
-                <app-text *ngIf="question.question.questionType == 'Text'" [answers]="answers" [index]="question.id"
-                          [questionId]="question.question.questionId">
+                <!-- type 3 = text-->
+                <app-text *ngIf="question.question.questionType == 3" [answers]="answers" [index]="question.id"
+                          [questionId]="question.question.id">
                 </app-text>
 
-                <app-multiple *ngIf="question.question.questionType == 'MultipleChoice'" [question]="question.question"
+                <!-- type 2 = MultipleChoice-->
+                <app-multiple *ngIf="question.question.questionType == 2" [question]="question.question"
                               [answers]="answers" [index]="question.id">
                 </app-multiple>
 
-                <app-one *ngIf="question.question.questionType == 'OneChoice'" [question]="question.question"
+                <!-- type 1 = OneChoice-->
+                <app-one *ngIf="question.question.questionType == 1" [question]="question.question"
                          [answers]="answers" [index]="question.id">
                 </app-one>
             </div>

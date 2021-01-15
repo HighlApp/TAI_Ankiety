@@ -1,0 +1,6 @@
+<mat-radio-group [(ngModel)]="selectedValue" class="example-radio-group">
+    <mat-radio-button *ngFor="let option of question?.options" [value]="option" (change)="valueChanged($event)"
+                      class="options">
+        {{option.optionText}}
+    </mat-radio-button>
+</mat-radio-group>

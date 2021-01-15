@@ -1,3 +1,3 @@
 export class TextAnswer {
-    constructor(public questionId: number, public answerText: string) { }
+    constructor(public questionId: string, public answerText: string) { }
 }

@@ -1,0 +1,6 @@
+<form [formGroup]="optionsFormGroup">
+    <div *ngFor="let option of options; let i = index">
+        <mat-checkbox (change)="onChange($event)" [value]="option" [checked]="optionChecked(option)">{{option.optionText}}
+        </mat-checkbox>
+    </div>
+</form>
