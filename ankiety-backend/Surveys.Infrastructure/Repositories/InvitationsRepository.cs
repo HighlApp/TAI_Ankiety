@@ -26,6 +26,7 @@ namespace Surveys.Infrastructure.Repositories
 
         public async Task<IEnumerable<Invitation>> GetUserInvitations(Guid userId)
             => await _context.Invitations
+                .Include(x => x.Survey)
                 .Where(x => x.UserId == userId.ToString() && x.FilledDate == null 
                     && x.ExpirationDate == null || x.ExpirationDate < DateTime.Now)
                 .ToListAsync();
