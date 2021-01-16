@@ -32,7 +32,7 @@ export class InvitationService {
   }
 
   getUserInvitations() {
-    return this.http.get(this.BaseURI);
+    return this.http.get(this.BaseURI + "/my");
   }
 
   deleteInvitation(id: number) {
