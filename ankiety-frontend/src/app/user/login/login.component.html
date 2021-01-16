@@ -1,4 +1,4 @@
-<div class="wrapper">
+<!-- <div class="wrapper">
   <div class="wrapped-div">
     <div class="title text-center">
       <h2>System ankietowy</h2>
@@ -28,5 +28,32 @@
       </div>
     </div>
 
+  </div>
+</div> -->
+
+<div class="container" id="container">
+  <div class="form-container log-in-container">
+    <form autocomplete="off"
+          (submit)="onSubmit()">
+      <h1>Strona logowania</h1>
+      <input name="username"
+            [(ngModel)]="formModel.username"
+            placeholder="Email"
+            required>
+      <input name="password"
+            [(ngModel)]="formModel.password"
+            type="password"
+            placeholder="Hasło"
+            required>
+      <button type="submit">Zaloguj się</button>
+    </form>
+
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-right">
+        <h1>System ankietowy</h1>
+      </div>
+    </div>
   </div>
 </div>

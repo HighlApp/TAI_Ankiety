@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment';
+import { Login } from "../models/login";
 
 @Injectable({
   providedIn: "root"
@@ -52,12 +53,13 @@ export class UserService {
     return this.http.post(this.BaseURI + "/identity/sign-up", body);
   }
 
-  login(formData: any) {
-    const reqData = {
-      email: formData.UserName,
-      password: formData.Password
+  login(formData: Login) {
+    const requestData = {
+      email: formData.username,
+      password: formData.password
     }
-    return this.http.post(this.BaseURI + "/identity/sign-in", reqData);
+
+    return this.http.post(this.BaseURI + "/identity/sign-in", requestData);
   }
 
   changePassword(changePasswordModel: any) {

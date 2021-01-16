@@ -1,9 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Survey } from "src/app/models/survey";
-import { SurveyService } from 'src/app/shared/survey.service';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { ToastrService } from "ngx-toastr";
+import { Survey } from "src/app/models/survey";
+import { Component, OnInit, Inject } from '@angular/core';
+import { SurveyService } from 'src/app/shared/survey.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-new-survey',
@@ -19,16 +18,7 @@ export class NewSurveyComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.survey = {
-      name: '',
-      description: '',
-      type: '',
-      id: '',
-      sent: false,
-      questions: [],
-      filledInvitations: 0,
-      sentInvitations: 0
-    };
+    this.survey = new Survey();
   }
 
   onSubmit() {

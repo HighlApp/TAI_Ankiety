@@ -1,6 +1,11 @@
 import { Question } from "./question";
 
-export interface Survey {
+export class Survey {
+
+  constructor() {
+    this.questions = new Array<Question>();
+  }
+
   id: string;
   name: string;
   description: string;
