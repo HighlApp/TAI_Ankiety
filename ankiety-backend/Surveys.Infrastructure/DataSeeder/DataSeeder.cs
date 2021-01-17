@@ -91,7 +91,7 @@ namespace Surveys.Infrastructure.DataSeeder
 
         private void SeedUserRoles()
         {
-            IdentityRole userRole = _context.Roles.First(r => r.Name == UserRoles.Administrator);
+            IdentityRole userRole = _context.Roles.First(r => r.Name == UserRoles.User);
             IdentityRole administratorRole = _context.Roles.First(r => r.Name == UserRoles.Administrator);
 
             User user = _context.Users.First(u => u.Email == "user@gmail.com");
