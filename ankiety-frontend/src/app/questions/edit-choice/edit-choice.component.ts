@@ -97,7 +97,7 @@ export class EditChoiceComponent implements OnInit {
 
   deleteOption(index: any, element: any) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      height: "140px",
+      height: "160px",
       width: "500px",
       data: { "dialogText": "Czy na pewno chcesz usunąć tą opcję ?" }
     });

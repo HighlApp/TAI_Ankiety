@@ -95,7 +95,7 @@ export class FillComponent implements OnInit, OnDestroy {
 
   onSubmitClick() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      height: "140px",
+      height: "160px",
       width: "500px",
       data: { "dialogText": "Czy na pewno chcesz zakończyć ankietę ?" }
     });

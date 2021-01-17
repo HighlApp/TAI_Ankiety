@@ -28,9 +28,8 @@ export class NewSurveyComponent implements OnInit {
     this.survey.description = this.survey.description.trim().replace(/  +/g, ' ');
 
     this.surveyService.postSurvey(this.survey).subscribe(res => {
-      this.survey.id = res.id;
+      this.survey.id = res.data.id;
       this.data.surveys.push(this.survey);
-      console.log(this.survey);
       this.toastr.success("Pomyślnie dodano ankietę", "Dodano ankietę");
       this.dialogRef.close();
     }, (err) => {

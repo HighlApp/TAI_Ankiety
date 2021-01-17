@@ -82,7 +82,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   onDeleteSurveyClick() {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      height: "140px",
+      height: "160px",
       width: "400px",
       data: { "dialogText": "Czy na pewno chcesz usunąć tą ankietę ?" }
     });
@@ -114,7 +114,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   onDeleteQuestionClick(question: Question) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      height: "140px",
+      height: "160px",
       width: "400px",
       data: { "dialogText": "Czy na pewno chcesz usunąć to pytanie?" }
     });
