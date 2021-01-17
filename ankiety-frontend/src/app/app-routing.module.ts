@@ -12,6 +12,7 @@ import {AuthGuard} from "./auth/auth.guard";
 import {RoleGuard} from "./auth/role.guard";
 import {Role} from "./models/role";
 import { UsersListComponent } from './user/users-list/users-list.component';
+import {InvitationResultComponent} from "./invitations/invitation-result/invitation-result.component";
 
 const routes: Routes = [
   {
@@ -55,6 +56,10 @@ const routes: Routes = [
         path: "users",
         component: UsersListComponent,
       },
+      {
+        path: "result/:id",
+        component: InvitationResultComponent,
+      },
     ]
   },
   {
@@ -80,18 +85,6 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: "admin/survey/:id",
-  //   component: SurveyDetailsComponent
-  // },
-  // {
-  //   path: "admin/surveys",
-  //   component: SurveyListComponent
-  // },
-  // {
-  //   path: "registration",
-  //   component: RegistrationComponent,
-  // },
   {
     path: '**',
     redirectTo: "login"

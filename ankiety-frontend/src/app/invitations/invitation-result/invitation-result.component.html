@@ -1,0 +1,26 @@
+<div class="spinner" *ngIf="isLoading">
+    <mat-spinner>
+    </mat-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+    <div>
+        <p>Użytkownik : {{result.user.name}} {{result.user.surname}}</p>
+        <p>Ankieta: {{result.name}}</p>
+        <p>Opis ankiety: {{result.description}}</p>
+        <p *ngIf="result.type == 'HiddenValues'">Rezultat:
+            {{result.value}}/{{result.maxValue}} pkt</p>
+
+        <mat-card style="margin-top: 10px; ">
+            <div *ngFor="let question of result.questions; let i = index" style="margin-top: 10px;">
+                <app-text-question *ngIf="question?.type == 'Text'" [question]="question" [index]="i">
+                </app-text-question>
+                <app-one-choice-question *ngIf="question?.type == 'OneChoice'" [question]="question" [index]="i">
+                </app-one-choice-question>
+                <app-multiple-choice-question *ngIf="question?.type == 'MultipleChoice'" [question]="question"
+                                                 [index]="i">
+                </app-multiple-choice-question>
+            </div>
+        </mat-card>
+    </div>
+</div>

@@ -39,7 +39,7 @@ export class SurveyService {
   }
 
   getFilledSurvey(invitationId: number) {
-    return this.http.get(this.BaseURI + "filledsurveys/" + invitationId)
+    return this.http.get(this.BaseURI + "surveys/filled/" + invitationId)
   }
 
   updateSurveyDetails(details: any) {

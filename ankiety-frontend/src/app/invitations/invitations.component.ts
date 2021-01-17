@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { InvitationService } from "../shared/invitation.service";
+import {Router} from "@angular/router";
 
 @Component({
   providers: [DatePipe],
@@ -21,8 +22,11 @@ export class InvitationsComponent implements OnInit {
   pageSize = 5;
   pageSizeOptions: number[] = [1, 5, 10, 20];
 
-  constructor(private invitationService: InvitationService,
-    public datepipe: DatePipe) { }
+  constructor(
+      private invitationService: InvitationService,
+      private router: Router,
+      public datepipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
     this.invitationService
@@ -40,6 +44,13 @@ export class InvitationsComponent implements OnInit {
 
   filterData(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onInvitationClick(invitation: any) {
+    console.log(invitation);
+    if (invitation.filledSurvey) {
+      this.router.navigate(["admin/result", invitation.id]);
+    }
   }
 }
 
