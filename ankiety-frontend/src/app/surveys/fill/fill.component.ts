@@ -41,7 +41,6 @@ export class FillComponent implements OnInit, OnDestroy {
       this.surveyService
           .getSurveyToFill(this.invitationId)
           .subscribe((res: any) => {
-            console.log(res);
             this.initVariables(res.data);
             this.initializeTimer(this.survey, this.toastr, this.router);
             this.initTimerText(this.survey.expirationDate);
@@ -122,7 +121,6 @@ export class FillComponent implements OnInit, OnDestroy {
 
         this.surveyService.postFilledSurvey(result).subscribe(res => {
           this.toastr.success("Pomyślnie wysłano ankietę.", "Wysłano ankietę");
-          console.log("Pomyślnie wysłano ankietę.");
           this.router.navigateByUrl("user");
         });
       }

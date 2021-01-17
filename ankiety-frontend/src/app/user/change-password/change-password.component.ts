@@ -57,11 +57,9 @@ export class ChangePasswordComponent implements OnInit {
 
     this.userService.changePassword(changePasswordModel).subscribe((res) => {
           this.dialogRef.close();
-          console.log('Pomyślnie zmieniono hasło.')
           this.toastr.success("Pomyślnie zmieniono hasło.", "Zmiana hasła");
         },
         (err) => {
-          console.log('Wystąpił błąd podczas zmiany hasła. Spróbuj ponownie.')
           this.toastr.error("Wystąpił błąd podczas zmiany hasła. Spróbuj ponownie.", "Zmiana hasła");
         });
   }

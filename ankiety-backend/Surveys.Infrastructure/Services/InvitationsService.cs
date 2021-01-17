@@ -65,10 +65,8 @@ namespace Surveys.Infrastructure.Services
                 Invitation invitation = new Invitation
                 {
                     SurveyId = details.SurveyId,
-                    StartDate = details.StartDate != null && details.StartDate < DateTime.Now ? 
-                        details.StartDate : DateTime.Now,
-                    ExpirationDate = details.ExpirationDate != null && details.ExpirationDate < DateTime.Now ? 
-                        details.StartDate : null,
+                    StartDate = details.StartDate != null ? details.StartDate.Value.AddHours(1) : DateTime.Now,
+                    ExpirationDate = details.ExpirationDate.HasValue ? details.ExpirationDate.Value.AddHours(1) : null,
                     SendDate = DateTime.Now,
                     UserId = userId.ToString()
                 };

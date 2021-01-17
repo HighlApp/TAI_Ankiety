@@ -5,6 +5,6 @@ export class InvitationRequest {
         public sendDate: string,
         public startDate: string,
         public expirationDate: string,
-        public questionsOnPage: number,
+        public questionsOnPage: number
     ) { }
 }
