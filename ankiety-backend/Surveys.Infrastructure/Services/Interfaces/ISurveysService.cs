@@ -22,6 +22,8 @@ namespace Surveys.Infrastructure.Services.Interfaces
 
         Task<Response<SurveyToFillDTO>> GetSurveyToFillAsync(Guid invitationId);
 
+        Task<Response<SurveyNumbersDTO>> GetNumbersBySurveyIdAsync(Guid id);
+
         Task<Response<FilledSurveySummaryDTO>> GetFilledSurvey(Guid invitationId);
 
         Task<Response<StatusResponseDTO>> SaveFilledSurvey(FilledSurveyDTO filledSurvey);
