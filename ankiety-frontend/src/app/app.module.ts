@@ -33,7 +33,7 @@ import { SurveyToFillComponent } from './surveys/survey-to-fill/survey-to-fill.c
 import { InvitationComponent } from './surveys/survey-to-fill/invitation/invitation.component';
 import { FillComponent } from './surveys/fill/fill.component';
 import { SendInvitationsComponent } from './surveys/survey-details/send-invitations/send-invitations.component';
-import { InvitationService } from "./shared/invitation.service";
+import { CalendarModule } from 'primeng/calendar';
 import { MultipleComponent } from './surveys/fill/multiple/multiple.component';
 import { OneComponent } from './surveys/fill/one/one.component';
 import { TextComponent } from './surveys/fill/text/text.component';
@@ -79,6 +79,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
+    CalendarModule,
     MatRadioModule,
     ToastrModule.forRoot({
       progressBar: true
@@ -94,7 +95,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [   
+  entryComponents: [
   ]
 })
 export class AppModule { }
