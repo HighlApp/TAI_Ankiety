@@ -43,11 +43,11 @@
         </div>
 
         <div class="text-center">
-            <button *ngIf="actualPageNumber != 1" class="btn btn-blue" (click)="onPreviousClick()">Poprzednia
+            <button *ngIf="actualPageNumber != 1" class="custom-button" (click)="onPreviousClick()">Poprzednia
                 strona</button>
-            <button *ngIf="!(actualPageNumber == numberOfPages)" class="btn btn-blue" (click)="onNextClick()">Następna
+            <button *ngIf="!(actualPageNumber == numberOfPages)" class="custom-button" (click)="onNextClick()">Następna
                 strona</button>
-            <button *ngIf="actualPageNumber == numberOfPages" class="btn btn-green" [disabled]="!isValid()"
+            <button *ngIf="actualPageNumber == numberOfPages" class="confirm-button" [disabled]="!isValid()"
                     (click)="onSubmitClick()">Zakończ ankietę</button>
         </div>
     </div>
