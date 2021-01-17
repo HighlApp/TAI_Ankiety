@@ -1,11 +1,9 @@
 import { Component, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User } from "src/app/models/user";
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SelectionModel } from "@angular/cdk/collections";
 import { InvitationService } from "src/app/shared/invitation.service";
 import { ToastrService } from 'ngx-toastr';
 import { FormControl } from '@angular/forms';
-import { Invitation } from 'src/app/models/invitation';
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import {InvitationRequest} from "../../../models/invitationRequest";

@@ -37,6 +37,8 @@ import { InvitationService } from "./shared/invitation.service";
 import { MultipleComponent } from './surveys/fill/multiple/multiple.component';
 import { OneComponent } from './surveys/fill/one/one.component';
 import { TextComponent } from './surveys/fill/text/text.component';
+import { UsersListComponent } from './user/users-list/users-list.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { TextComponent } from './surveys/fill/text/text.component';
     MultipleComponent,
     OneComponent,
     TextComponent,
+    UsersListComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

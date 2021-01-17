@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Surveys.Infrastructure.DTO;
-using Surveys.Infrastructure.Common;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Surveys.Infrastructure.Common;
+using Surveys.Infrastructure.DTO;
+using Surveys.Infrastructure.Requests.Identity.ChangePassword;
+using Surveys.Infrastructure.Requests.Identity.RefreshToken;
 using Surveys.Infrastructure.Requests.Identity.SignIn;
 using Surveys.Infrastructure.Requests.Identity.SignUp;
-using Surveys.Infrastructure.Requests.Identity.RefreshToken;
-using Surveys.Infrastructure.Requests.Identity.ChangePassword;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Surveys.API.Controllers
 {

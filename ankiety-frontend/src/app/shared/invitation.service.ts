@@ -15,7 +15,7 @@ export class InvitationService {
   }
 
   getInvitations(): any {
-    return this.http.get(this.BaseURI + "/all");
+    return this.http.get(this.BaseURI);
   }
 
   getUsersForInvitation(surveyId: string): any {

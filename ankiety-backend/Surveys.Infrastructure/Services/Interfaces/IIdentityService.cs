@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Surveys.Infrastructure.DTO;
 using Surveys.Infrastructure.Common;
+using System.Collections.Generic;
 
 namespace Surveys.Infrastructure.Services.Interfaces
 {
@@ -14,5 +15,6 @@ namespace Surveys.Infrastructure.Services.Interfaces
 
         Task<Response<StatusResponseDTO>> ChangePasswordAsync(
             string password, string newPassword);
+
     }
 }

@@ -1,0 +1,56 @@
+<h1 class="text-center" mat-dialog-title>Użytkownicy</h1>
+
+<div *ngIf="dataSource?.data?.length != 0">
+
+  <div class="search-div">
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput placeholder="Szukaj użytkownika" autocomplete="off" (keyup)="filterData($event.target.value)">
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 table-margin" style="margin-top: 25px;">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="surveyName">
+      <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.surveyName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sentTo">
+      <mat-header-cell *matHeaderCellDef> Wysłane do </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sendDate">
+      <mat-header-cell *matHeaderCellDef> Wysłano </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sendDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <mat-header-cell *matHeaderCellDef> Rozpoczęcie </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.startDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="expirationDate">
+      <mat-header-cell *matHeaderCellDef> Wygaśnięcie </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.expirationDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="filledSurvey">
+      <mat-header-cell *matHeaderCellDef> Wypełniono </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="element.filledSurvey">
+            <mat-icon class="icon">check</mat-icon>
+        </div>
+        <div *ngIf="!element.filledSurvey">
+            <mat-icon class="icon">close</mat-icon>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" showFirstLastButtons></mat-paginator>
+</div>

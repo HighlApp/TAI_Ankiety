@@ -1,73 +1,46 @@
+import { SelectionModel } from "@angular/cdk/collections";
+import { DatePipe } from "@angular/common";
 import { Component, OnInit, ViewChild } from "@angular/core";
-//import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from "@angular/material";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 import { InvitationService } from "../shared/invitation.service";
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { ConfirmationDialogComponent } from '../shared/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
+  providers: [DatePipe],
   selector: "app-invitations",
   templateUrl: "./invitations.component.html",
   styleUrls: ["./invitations.component.css"]
 })
-export class InvitationsComponent {
-    name= 'Zaproszenia';
+export class InvitationsComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  selection = new SelectionModel<any>(true, []);
+  dataSource: any;
+  placeholder: string;
+  displayedColumns = ["surveyName","sentTo", "sendDate", "startDate", "expirationDate", "filledSurvey"];
+  pageSize = 5;  
+  pageSizeOptions: number[] = [1, 5, 10, 20];  
+
+  constructor(private invitationService: InvitationService,
+    public datepipe: DatePipe) { }
+
+  ngOnInit(): void {
+    this.invitationService
+      .getInvitations()
+      .subscribe((res: any) => {
+        console.log(res);
+        res.data.forEach(element => {
+          element.sendDate = this.datepipe.transform(element.sendDate, 'yyyy/MM/dd HH:mm');
+          element.startDate = this.datepipe.transform(element.startDate, 'yyyy/MM/dd HH:mm')
+          element.expirationDate = this.datepipe.transform(element.expirationDate, 'yyyy/MM/dd HH:mm')
+        });
+        this.dataSource = new MatTableDataSource(res.data);
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  filterData(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
-//export class InvitationsComponent implements OnInit {
-  //constructor(private invitationService: InvitationService, private router: Router, private toastr: ToastrService) { }
 
-  //actualDate: Date;
-  //invitationList: MatTableDataSource<any>;
-//   displayedColumns: string[] = [
-//     "name",
-//     "surname",
-//     "surveyName",
-//     "startDate",
-//     "expirationDate",
-//     "status",
-//     "actions"
-//   ];
-  //@ViewChild(MatSort) sort: MatSort;
-  //@ViewChild(MatPaginator) paginator: MatPaginator;
-
-  //ngOnInit() {
-    //this.invitationService.getInvitations().subscribe((res: any) => {
-      //this.invitationList = new MatTableDataSource(res);
-      //this.invitationList.sort = this.sort;
-      //this.invitationList.paginator = this.paginator;
-      //this.actualDate = new Date();
-    //});
-  //}
-
-//   filterData(filterValue: string) {
-//     this.invitationList.filter = filterValue.trim().toLowerCase();
-//   }
-
-//   onInvitationClick(invitation: any) {
-//     if (invitation.filledSurvey) {
-//       this.router.navigate(["admin/result", invitation.id]);
-//     }
-//   }
-
-//   onDeleteClick(invitation: any) {
-//     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-//       height: "140px",
-//       width: "400px",
-//       data: { "dialogText": "Czy na pewno chcesz usunąć zaproszenie ?" }
-//     });
-
-//     dialogRef.afterClosed().subscribe((deleteInvitation: boolean) => {
-//       if (deleteInvitation) {
-//         this.invitationService.deleteInvitation(invitation.id).subscribe((res) => {
-//           var index = this.invitationList.data.indexOf(invitation);
-//           this.invitationList.data.splice(index, 1);
-//           this.invitationList._updateChangeSubscription();
-//           this.toastr.success("Pomyślnie usunięto zaproszenie.", "Usunięto zaproszenie");
-//         },
-//           (err) => {
-//             this.toastr.error("Wystąpił błąd podczas usuwania zaproszenia. Spróbuj ponownie.", "Wystąpił błąd");
-//           });
-//       }
-//     });
-//   }
-//}

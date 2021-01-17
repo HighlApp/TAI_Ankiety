@@ -18,23 +18,23 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     this.service.register().subscribe(
-        (res: any) => {
-          console.log(res);
-          if (res.data.isSuccess) {
-            this.service.formModel.reset();
-            console.log("Zarejestrowano użytkownika pomyślnie.");
-            this.toastr.success(
-              "Zarejestrowano użytkownika pomyślnie.",
-              "Rejestracja użytkownika"
-            );
-          } else {
-            console.log(res.errorMessages);
-          }
-        },
-        err => {
-          console.log("Wystąpił błąd. Spróbuj ponownie.");
-          this.toastr.error("Wystąpił błąd. Spróbuj ponownie.", "Wystąpił błąd.");
+      (res: any) => {
+        console.log(res);
+        if (res.data.isSuccess) {
+          this.service.formModel.reset();
+          console.log("Zarejestrowano użytkownika pomyślnie.");
+          this.toastr.success(
+            "Zarejestrowano użytkownika pomyślnie.",
+            "Rejestracja użytkownika"
+          );
+        } else {
+          console.log(res.errorMessages);
         }
+      },
+      err => {
+        console.log("Wystąpił błąd. Spróbuj ponownie.");
+        this.toastr.error("Wystąpił błąd. Spróbuj ponownie.", "Wystąpił błąd.");
+      }
     );
   }
 

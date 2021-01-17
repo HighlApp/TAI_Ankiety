@@ -1,0 +1,46 @@
+<h1 class="text-center" mat-dialog-title>Użytkownicy</h1>
+
+<div *ngIf="dataSource?.data?.length != 0">
+
+  <div class="search-div">
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input matInput placeholder="Szukaj użytkownika" autocomplete="off" (keyup)="filterData($event.target.value)">
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 table-margin" style="margin-top: 25px;">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Imię </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="surname">
+      <mat-header-cell *matHeaderCellDef> Nazwisko </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div (click)="onDeleteClick(element)">
+            <mat-icon class="icon">delete</mat-icon>
+        </div>
+        <div (click)="onEditClick(element)">
+            <mat-icon class="icon">edit</mat-icon>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns:displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" showFirstLastButtons></mat-paginator>
+</div>

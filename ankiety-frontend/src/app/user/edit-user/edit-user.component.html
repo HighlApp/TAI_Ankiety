@@ -1,0 +1,29 @@
+<div>
+  <button class="close-button" (click)="onCloseClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+
+  <h1 class="text-center" mat-dialog-title>Edytuj dane użytkownika</h1>
+  <div>
+    <mat-form-field>
+      <textarea matInput placeholder="Imię" [(ngModel)]="name"></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <textarea matInput placeholder="Nazwisko" [(ngModel)]="surname"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <textarea matInput placeholder="Email" [(ngModel)]="email"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-success" (click)="onSubmit()"
+    [disabled]="!textChanged() || isSomeFieldEmpty()">
+      Edytuj pytanie</button>
+  </div>
+</div>

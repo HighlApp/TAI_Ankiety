@@ -25,6 +25,7 @@ namespace Surveys.API.Installers
             services.AddScoped<IJwtTokenService, JwtTokenService>();
             services.AddScoped<IQuestionsService, QuestionsService>();
             services.AddScoped<IInvitationsService, InvitationsService>();
+            services.AddScoped<IUsersService, UsersService>();
         }
     }
 }

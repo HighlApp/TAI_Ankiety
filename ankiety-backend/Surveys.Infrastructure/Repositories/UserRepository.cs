@@ -51,5 +51,11 @@ namespace Surveys.Infrastructure.Repositories
                 .Where(x => x.RoleId == roleId)
                 .Select(x => x.UserId)
                 .ToListAsync();
+
+        public async Task DeleteUser(User user)
+            => await _userManager.DeleteAsync(user);
+
+        public async Task UpdateUser(User user)
+            => await _userManager.UpdateAsync(user);
     }
 }

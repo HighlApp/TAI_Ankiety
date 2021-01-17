@@ -11,6 +11,7 @@ import {FillComponent} from "./surveys/fill/fill.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {RoleGuard} from "./auth/role.guard";
 import {Role} from "./models/role";
+import { UsersListComponent } from './user/users-list/users-list.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: "survey/:id",
         component: SurveyDetailsComponent,
+      },
+      {
+        path: "users",
+        component: UsersListComponent,
       },
     ]
   },
