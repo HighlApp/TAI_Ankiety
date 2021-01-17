@@ -113,9 +113,11 @@ namespace Surveys.Infrastructure.Services
         {
             Guid userId = new Guid(_httpContextAccessor.GetUserId()); 
 
-            IEnumerable<Invitation> invitations = await _invitationsRepository.GetUserInvitations(userId);
+            IEnumerable<Invitation> invitations = 
+                await _invitationsRepository.GetUserInvitations(userId);
 
-            IEnumerable<UserInvitationDTO> response = invitations.Select(x => new UserInvitationDTO()
+            IEnumerable<UserInvitationDTO> response = invitations.Select(x => 
+                new UserInvitationDTO()
             {
                 Id = x.Id,
                 SurveyId = x.SurveyId,
