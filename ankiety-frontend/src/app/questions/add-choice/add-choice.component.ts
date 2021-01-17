@@ -39,6 +39,7 @@ export class AddChoiceComponent {
 
   initForm() {
     this.mapToType(this.survey.type);
+    console.log(this.survey.type);
     this.questionForm = this.fb.group({
       text: new FormControl("", Validators.required),
       questionType: [this.questionType],
@@ -50,7 +51,7 @@ export class AddChoiceComponent {
     if (type == 1) {
       this.survey.type = "Normal"
     }
-    else {
+    else if(type == 2) {
       this.survey.type = "HiddenValues"
     }
   }

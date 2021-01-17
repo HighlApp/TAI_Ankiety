@@ -96,13 +96,7 @@ namespace Surveys.Infrastructure.Services
             {
                 Id = question.Id,
                 QuestionType = question.QuestionType,
-                Text = question.Text,
-                Options = question.Options.Select(x => new OptionDTO()
-                {
-                    Id = x.Id,
-                    OptionText = x.OptionText,
-                    Value = x.Value
-                }).ToList()
+                Text = question.Text
             };
         }
     }
