@@ -50,6 +50,10 @@ namespace Surveys.Infrastructure.Repositories
                         .ThenInclude(x => x.Options)
                 .Where(x => x.Id == invitationId)
                 .SingleOrDefaultAsync();
-                
+
+        public async Task<IEnumerable<Invitation>> GetBySurveyId(Guid id)
+            => await _context.Invitations
+                .Where(x => x.SurveyId == id)
+                .ToListAsync();
     }
 }

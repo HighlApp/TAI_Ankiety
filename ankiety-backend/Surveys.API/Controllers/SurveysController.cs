@@ -13,6 +13,7 @@ using Surveys.Infrastructure.Requests.Surveys.DeleteSurvey;
 using Surveys.Infrastructure.Requests.Surveys.GetSurveyToFill;
 using Surveys.Infrastructure.Requests.Surveys.GetFilledSurvey;
 using Surveys.Infrastructure.Requests.Surveys.PostFilledSurvey;
+using Surveys.Infrastructure.Requests.Surveys.GetNumbersForSurvey;
 
 namespace Surveys.API.Controllers
 {
@@ -61,5 +62,10 @@ namespace Surveys.API.Controllers
         [Route("fill")]
         public async Task<Response<StatusResponseDTO>> PostFilledSurvey(PostFilledSurveyRequest request)
             => await _mediator.Send(request);
+
+        [HttpGet]
+        [Route("numbers/{id}")]
+        public async Task<Response<SurveyNumbersDTO>> GetNumbersForSurvey(Guid id)
+            => await _mediator.Send(new GetNumbersForSurveyRequest(id));
     }
 }

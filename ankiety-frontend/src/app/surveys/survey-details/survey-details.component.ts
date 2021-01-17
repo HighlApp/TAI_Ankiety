@@ -33,14 +33,16 @@ export class SurveyDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private toastr: ToastrService,
-    private router: Router,
-    private http: HttpClient
-  ) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
       this.surveyId = params["id"];
       this.surveyService.getSurvey(this.surveyId).subscribe(res => {
+        this.surveyService.getNumbers(this.surveyId).subscribe(numbers => {
+          this.survey.sentInvitations = numbers.data.invitations;
+          this.survey.filledInvitations = numbers.data.filledSurveys;
+        });
         this.survey = res.data;
         this.survey.questions.forEach(x => x.questionType = this.mapTypes(x.questionType));
         this.loading = false;
