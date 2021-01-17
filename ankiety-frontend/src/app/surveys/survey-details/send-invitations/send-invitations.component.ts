@@ -30,7 +30,9 @@ export class SendInvitationsComponent implements OnInit {
   placeholder: string;
   minDate: Date;
   pl: any;
-
+  pageSize = 5;
+  pageSizeOptions: number[] = [1, 5, 10, 20];
+  
   constructor(
       private invitationService: InvitationService,
       public dialogRef: MatDialogRef<SendInvitationsComponent>,
