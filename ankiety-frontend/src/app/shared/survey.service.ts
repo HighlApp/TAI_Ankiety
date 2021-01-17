@@ -39,10 +39,14 @@ export class SurveyService {
   }
 
   getFilledSurvey(invitationId: number) {
-    return this.http.get(this.BaseURI + "filledsurveys/" + invitationId)
+    return this.http.get(this.BaseURI + "surveys/filled/" + invitationId)
   }
 
   updateSurveyDetails(details: any) {
     return this.http.put(this.BaseURI + "surveys/", details);
+  }
+
+  getNumbers(surveyId: number): Observable<any> {
+    return this.http.get(this.BaseURI + "surveys/" + "numbers/" + surveyId)
   }
 }

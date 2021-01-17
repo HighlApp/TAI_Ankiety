@@ -1,0 +1,8 @@
+<div style="font-weight: bold; font-size: 20px;">
+    Pytanie {{index+1}}: {{question?.text}}
+</div>
+<div *ngFor="let option of question.options" class="options">
+    <mat-checkbox [disabled]="true" [checked]="option.isSelected">{{option.text}}<span *ngIf="option.value != null">
+      ({{option.value}} pkt)</span>
+    </mat-checkbox>
+</div>

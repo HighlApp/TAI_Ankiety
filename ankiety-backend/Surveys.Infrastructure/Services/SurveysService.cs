@@ -271,5 +271,18 @@ namespace Surveys.Infrastructure.Services
                 }).ToList()
             }); 
         }
+
+        public async Task<Response<SurveyNumbersDTO>> GetNumbersBySurveyIdAsync(Guid id)
+        {
+            var invitations = await _invitationsRepository.GetBySurveyId(id);
+            SurveyNumbersDTO numbers = new SurveyNumbersDTO
+            {
+                Invitations = invitations.Count(),
+                FilledSurveys = invitations
+                    .Where(x => x.FilledDate != null)
+                    .Count()
+            };
+            return new Response<SurveyNumbersDTO>(numbers);
+        }
     }
 }

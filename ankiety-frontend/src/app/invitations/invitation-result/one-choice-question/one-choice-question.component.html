@@ -1,0 +1,8 @@
+<div style="font-weight: bold; font-size: 20px;">
+    Pytanie {{index+1}}: {{question?.text}}
+</div>
+<mat-radio-group class="radio-group" [value]="selected">
+    <mat-radio-button *ngFor="let option of question.options" [value]="option" [checked]="option.isSelected" [disabled]="true">
+        {{option.text}} <span *ngIf=" option.value !=null">({{option.value}} pkt)</span>
+    </mat-radio-button>
+</mat-radio-group>

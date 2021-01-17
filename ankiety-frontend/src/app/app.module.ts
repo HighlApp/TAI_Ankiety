@@ -39,6 +39,10 @@ import { OneComponent } from './surveys/fill/one/one.component';
 import { TextComponent } from './surveys/fill/text/text.component';
 import { UsersListComponent } from './user/users-list/users-list.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { InvitationResultComponent } from './invitations/invitation-result/invitation-result.component';
+import { MultipleChoiceQuestionComponent } from './invitations/invitation-result/multiple-choice-question/multiple-choice-question.component';
+import { OneChoiceQuestionComponent } from './invitations/invitation-result/one-choice-question/one-choice-question.component';
+import { TextQuestionComponent } from './invitations/invitation-result/text-question/text-question.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +74,10 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     TextComponent,
     UsersListComponent,
     EditUserComponent,
+    InvitationResultComponent,
+    MultipleChoiceQuestionComponent,
+    OneChoiceQuestionComponent,
+    TextQuestionComponent,
   ],
   imports: [
     BrowserModule,
