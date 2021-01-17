@@ -1,8 +1,6 @@
-<mat-card style="margin: 10px 0px;" (click)="onDetailsClick()">
-  <mat-card-header>
-    <mat-card-title>{{survey?.name}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    {{survey?.description}}
-  </mat-card-content>
-</mat-card>
+<div class="card border-info" style="width: 22rem; height: 9rem;" (click)="onDetailsClick()">
+  <div class="card-header">{{survey?.name}}</div>
+  <div class="card-body">
+    <p class="text-truncate">{{survey?.description}}</p>
+  </div>
+</div>

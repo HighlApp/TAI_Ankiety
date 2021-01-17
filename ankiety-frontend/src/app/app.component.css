@@ -1,0 +1,10 @@
+.image{
+    height: auto;
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(255,255,255,0.2) 100%), url('../app/shared/images/pexels-pixabay-373076.jpg');;
+    background-color: rgba(200,200,200,0.3);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}

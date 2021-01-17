@@ -1,13 +1,14 @@
-h1,
-h5,
-p {
-  color: black;
-}
-
-.col-sm {
-  color: black;
-}
-
-.mat-card:hover {
+.border-info:hover {
   background-color: #e8e8e8;
 }
+
+.border-info{
+  border-color: #4c8bb8d2 !important;
+} 
+
+
+.card-header{
+  font-size: 18px;
+  color: #4c8bb8d2 !important;
+}
+

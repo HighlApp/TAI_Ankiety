@@ -1,9 +1,22 @@
 .plus{
     position: relative;
-    top: 6px;
+    transform: scale(2.5);
+    color: azure;
 }
 
-.btn-add{
-    text-align: right;
-    padding-top: 10px;
+.plus:hover{
+    transform: scale(3);
+}
+
+.d-flex{
+    align-items: center;
+    justify-content: center;
+}
+
+.border-add{
+    background-color: #a8a8a8e1;
+    border-color:  #a8a8a89c;
+    min-width: 5rem;
+    max-width: 10rem;
+    border-radius: 25px !important;
 }
