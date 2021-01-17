@@ -44,6 +44,8 @@ export class SurveyDetailsComponent implements OnInit {
         this.survey = res.data;
         this.survey.questions.forEach(x => x.questionType = this.mapTypes(x.questionType));
         this.loading = false;
+        this.survey.sentInvitations = 0;
+        this.survey.filledInvitations = 0;
       });
     });
   }

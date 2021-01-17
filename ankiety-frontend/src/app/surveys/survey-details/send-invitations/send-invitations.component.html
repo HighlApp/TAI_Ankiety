@@ -38,29 +38,11 @@
                 <mat-header-cell *matHeaderCellDef> Nazwisko </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
             </ng-container>
-
-            <ng-container matColumnDef="no-data">
-                <mat-footer-cell *matFooterCellDef colspan="6">
-                    Brak użytkowników którym można wysłać zaproszenie.
-                </mat-footer-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="search-no-data">
-                <mat-footer-cell *matFooterCellDef colspan="6">
-                    Brak użytkowników spełniających filtr wyszukiwania.
-                </mat-footer-cell>
-            </ng-container>
-
+            
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns:displayedColumns;" (click)="selection.toggle(row)"></mat-row>
-            <mat-footer-row *matFooterRowDef="['no-data']"
-                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0 && selectedValue == 'list')}">
-            </mat-footer-row>
-            <mat-footer-row *matFooterRowDef="['search-no-data']"
-                            [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length!=0 && dataSource.filter!='' && dataSource.filteredData.length==0)}">
-            </mat-footer-row>
         </mat-table>
-        <mat-paginator [pageSizeOptions]="[5]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize" showFirstLastButtons></mat-paginator>
     </div>
 
 
@@ -105,8 +87,9 @@
 
         <div class="text-center">
             <button class="btn btn-success text-center" (click)="sendInvitation()"
-                    [disabled]="!(selection.selected.length > 0) || !isValueValid()" style="margin-top: 5px;">Wyślij
-                zaproszenie</button>
+                    [disabled]="!(selection.selected.length > 0) || !isValueValid()" 
+                    style="margin-top: 5px;">
+                    Wyślij zaproszenie</button>
         </div>
     </div>
 </div>

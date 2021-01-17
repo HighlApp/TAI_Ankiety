@@ -11,7 +11,7 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: './add-choice.component.html',
   styleUrls: ['./add-choice.component.css']
 })
-export class AddChoiceComponent{
+export class AddChoiceComponent {
   @ViewChild("autosize") autosize: CdkTextareaAutosize;
   @Input() questionType: string;
   @Input() survey: Survey;
@@ -38,11 +38,21 @@ export class AddChoiceComponent{
   }
 
   initForm() {
+    this.mapToType(this.survey.type);
     this.questionForm = this.fb.group({
       text: new FormControl("", Validators.required),
       questionType: [this.questionType],
       options: this.fb.array(this.initOptions())
     });
+  }
+
+  mapToType(type: any) {
+    if (type == 1) {
+      this.survey.type = "Normal"
+    }
+    else {
+      this.survey.type = "HiddenValues"
+    }
   }
 
   addOption() {
