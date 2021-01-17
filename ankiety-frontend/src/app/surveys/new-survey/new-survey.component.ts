@@ -19,6 +19,8 @@ export class NewSurveyComponent implements OnInit {
 
   ngOnInit() {
     this.survey = new Survey();
+    this.survey.name = "";
+    this.survey.description = "";
   }
 
   onSubmit() {

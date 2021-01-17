@@ -14,6 +14,7 @@ import { AuthService } from "./shared/auth.service";
 import { SurveyListComponent } from './surveys/survey-list/survey-list.component';
 import { SurveyComponent } from './surveys/survey/survey.component';
 import { NewSurveyComponent } from './surveys/new-survey/new-survey.component';
+import { InvitationsComponent } from "./invitations/invitations.component";
 import { MatRadioModule } from "@angular/material/radio";
 import { SurveyDetailsComponent } from './surveys/survey-details/survey-details.component';
 import { ConfirmationDialogComponent } from './shared/dialogs/confirmation-dialog/confirmation-dialog.component';
@@ -32,9 +33,12 @@ import { SurveyToFillComponent } from './surveys/survey-to-fill/survey-to-fill.c
 import { InvitationComponent } from './surveys/survey-to-fill/invitation/invitation.component';
 import { FillComponent } from './surveys/fill/fill.component';
 import { SendInvitationsComponent } from './surveys/survey-details/send-invitations/send-invitations.component';
+import { InvitationService } from "./shared/invitation.service";
 import { MultipleComponent } from './surveys/fill/multiple/multiple.component';
 import { OneComponent } from './surveys/fill/one/one.component';
 import { TextComponent } from './surveys/fill/text/text.component';
+import { UsersListComponent } from './user/users-list/users-list.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import { TextComponent } from './surveys/fill/text/text.component';
     SurveyListComponent,
     SurveyComponent,
     NewSurveyComponent,
+    InvitationsComponent,
     SurveyDetailsComponent,
     ConfirmationDialogComponent,
     NewQuestionComponent,
@@ -63,6 +68,8 @@ import { TextComponent } from './surveys/fill/text/text.component';
     MultipleComponent,
     OneComponent,
     TextComponent,
+    UsersListComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +94,7 @@ import { TextComponent } from './surveys/fill/text/text.component';
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
+  entryComponents: [   
   ]
 })
 export class AppModule { }

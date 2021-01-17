@@ -240,7 +240,7 @@ namespace Surveys.Infrastructure.Services
             return new Response<SurveyToFillDTO>(response);
         }
 
-        private static SurveyDTO MapToSurveyDTO(Survey survey)
+        private SurveyDTO MapToSurveyDTO(Survey survey)
         {
             return new SurveyDTO
             {
@@ -253,7 +253,7 @@ namespace Surveys.Infrastructure.Services
             };
         }
 
-        private static IEnumerable<QuestionDTO> MapToQuestionDTO(ICollection<Question> questions)
+        private IEnumerable<QuestionDTO> MapToQuestionDTO(ICollection<Question> questions)
         {
             if (questions == null)
                 return null;

@@ -45,15 +45,15 @@ namespace Surveys.Infrastructure.Services
 
         private string GetMessageBody(DateTime? startDate, DateTime? expirationDate)
         {
-            string body = "Zostałeś zaproszony do wypełnienia ankiety. ";
+            string body = "<span style=\"color: black\">Zostałeś zaproszony do wypełnienia ankiety.<br>";
 
-            body += $"Ankietę możesz wypełnić od {GetDate(startDate)} ";
+            body += $"Ankietę możesz wypełnić od <strong>{GetDate(startDate)}</strong>. ";
 
             if (expirationDate != null)
                 body += $"Możesz ją wypełnić, do {GetDate(expirationDate)}. " +
-                    $"Po tym czasie ankieta nie będzie aktywna. ";
-
-            body += $"Wejdź na {_appOptions.ClientUrl} i wypełnij ankietę.";
+                    $"Po tym czasie ankieta nie będzie aktywna.";
+            body += "<br>"; 
+            body += $"Wejdź na {_appOptions.ClientUrl} i wypełnij ankietę.</span>";
 
             return body;
         }

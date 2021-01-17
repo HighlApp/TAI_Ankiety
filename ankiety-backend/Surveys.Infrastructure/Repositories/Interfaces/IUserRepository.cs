@@ -24,5 +24,9 @@ namespace Surveys.Infrastructure.Repositories.Interfaces
         Task<IEnumerable<User>> GetAllUsers();
 
         Task<IEnumerable<string>> GetUserIdByRoleId(string role);
+
+        Task DeleteUser(User user);
+
+        Task UpdateUser(User user);
     }
 }

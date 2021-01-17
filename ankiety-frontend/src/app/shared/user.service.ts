@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { Login } from "../models/login";
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: "root"
@@ -54,7 +55,7 @@ export class UserService {
   }
 
   login(formData: Login) {
-    const requestData = {
+    var requestData = {
       email: formData.username,
       password: formData.password
     }
@@ -67,6 +68,14 @@ export class UserService {
   }
 
   getUsers() {
-    return this.http.get(this.BaseURI + "/UserProfile/Users");
+    return this.http.get(this.BaseURI + "/users");
+  }
+
+  removeUser(id: string) {
+    return this.http.delete(this.BaseURI + "/users/" + id)
+  }
+
+  updateUser(request: any) {
+    return this.http.put(this.BaseURI + "/users/", request);
   }
 }
