@@ -99,6 +99,8 @@ export class SendInvitationsComponent implements OnInit {
               this.questionsOnPageForm.value,
           );
           this.invitations.push(invitation);
+
+          console.log(this.invitations);
         });
 
     this.data.survey.sent = true;

@@ -18,8 +18,8 @@ export class InvitationsComponent implements OnInit {
   dataSource: any;
   placeholder: string;
   displayedColumns = ["surveyName","sentTo", "sendDate", "startDate", "expirationDate", "filledSurvey"];
-  pageSize = 5;  
-  pageSizeOptions: number[] = [1, 5, 10, 20];  
+  pageSize = 5;
+  pageSizeOptions: number[] = [1, 5, 10, 20];
 
   constructor(private invitationService: InvitationService,
     public datepipe: DatePipe) { }
@@ -28,7 +28,6 @@ export class InvitationsComponent implements OnInit {
     this.invitationService
       .getInvitations()
       .subscribe((res: any) => {
-        console.log(res);
         res.data.forEach(element => {
           element.sendDate = this.datepipe.transform(element.sendDate, 'yyyy/MM/dd HH:mm');
           element.startDate = this.datepipe.transform(element.startDate, 'yyyy/MM/dd HH:mm')

@@ -24,7 +24,6 @@ export class SurveyToFillComponent implements OnInit {
         this.invitationService
             .getUserInvitations()
             .subscribe((res: any) => {
-                console.log(res);
                 (this.invitations = res.data);
                 this.isLoading = false;
                 if (this.invitations.length > 0) {
