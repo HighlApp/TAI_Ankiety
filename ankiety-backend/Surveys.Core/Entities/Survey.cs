@@ -12,7 +12,7 @@ namespace Surveys.Core.Entities
 
         public string Description { get; set; }
 
-        public SurveyType SurveyType { get; set; }
+        public SurveyType Type { get; set; }
 
         public DateTime Created { get; set; }
 

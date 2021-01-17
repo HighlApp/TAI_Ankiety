@@ -74,7 +74,7 @@ namespace Surveys.Infrastructure.Services
             {
                 Name = request.Name,
                 Description = request.Description,
-                SurveyType = request.SurveyType,
+                Type = request.Type,
                 QuestionsOnPage = request.QuestionsOnPage ?? 1
             };
 
@@ -123,7 +123,7 @@ namespace Surveys.Infrastructure.Services
             {
                 Name = invitation.Survey.Name,
                 Description = invitation.Survey.Description,
-                Type = invitation.Survey.SurveyType.ToString(), //TODO: Check
+                Type = invitation.Survey.Type.ToString(), //TODO: Check
                 Questions = new List<FilledSurveyQuestionDTO>(),
                 User = new UserDTO { 
                     Name = user.Name, 
@@ -247,7 +247,7 @@ namespace Surveys.Infrastructure.Services
                 Id = survey.Id,
                 Description = survey.Description,
                 Name = survey.Name,
-                SurveyType = survey.SurveyType,
+                Type = survey.Type,
                 QuestionsOnPage = survey.QuestionsOnPage,
                 Questions = MapToQuestionDTO(survey.Questions)
             };

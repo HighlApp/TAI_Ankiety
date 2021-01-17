@@ -12,7 +12,7 @@ namespace Surveys.Infrastructure.DTO
 
         public string Description { get; set; }
 
-        public SurveyType SurveyType { get; set; }
+        public SurveyType Type { get; set; }
 
         public int? QuestionsOnPage { get; set; }
 

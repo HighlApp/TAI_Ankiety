@@ -17,7 +17,7 @@ namespace Surveys.Infrastructure.EntitiesConfiguration
             builder.Property(x => x.Created)
                 .HasDefaultValueSql("getdate()");
 
-            builder.Property(x => x.SurveyType)
+            builder.Property(x => x.Type)
                 .IsRequired();
         }
     }
