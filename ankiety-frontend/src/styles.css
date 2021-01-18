@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html{ height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card {
     color: #000 !important;
@@ -16,7 +16,15 @@ mat-card:hover {
 
 
 .mat-form-field input{
-    border-radius: 1%;
-    border-right: rgb(112, 112, 112) 1px solid;
-    border-bottom: rgb(112, 112, 112) 1px solid;
+    background-color: rgba(255, 255, 255, 0.756);
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+.dashbord{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

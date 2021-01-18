@@ -1,50 +1,37 @@
-<div style="margin: 25px;">
+<div class="container">
     <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
-
-        <div class="row">
-            <div class="col-sm">
-                <p>Email *:</p>
-                <mat-form-field appearance="outline">
-                    <input matInput formControlName="Email" autocomplete="off">
+        <div class="row col-sm">
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="Email" autocomplete="off">
                 </mat-form-field>
+                <label class="text"
+                       *ngIf="service.formModel.get('Email').touched && service.formModel.get('Name').errors?.required">Pole
+                    jest wymagane.</label>
                 <label class="text"
                        *ngIf="service.formModel.get('Email').touched && service.formModel.get('Email').errors?.pattern">
                        Niepoprawny adres email.</label>
-            </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-sm">
-                <p>Imię *:</p>
-                <mat-form-field appearance="outline">
-                    <input matInput formControlName="Name" autocomplete="off" (keydown)="onDataInput($event)">
+        <div class="row col-sm">
+                <mat-form-field>
+                    <input matInput placeholder="Imię" formControlName="Name" autocomplete="off" (keydown)="onDataInput($event)">
                 </mat-form-field>
                 <label class="text"
                        *ngIf="service.formModel.get('Name').touched && service.formModel.get('Name').errors?.required">Pole
                     jest wymagane.</label>
-            </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-sm">
-                <p>Nazwisko *:</p>
-                <mat-form-field appearance="outline">
-                    <input matInput formControlName="Surname" autocomplete="off" (keydown)="onDataInput($event)">
+        <div class="row col-sm">
+                <mat-form-field>
+                    <input matInput placeholder="Nazwisko" formControlName="Surname" autocomplete="off" (keydown)="onDataInput($event)">
                 </mat-form-field>
                 <label class="text"
                        *ngIf="service.formModel.get('Surname').touched && service.formModel.get('Surname').errors?.required">Pole
                     jest wymagane.</label>
-            </div>
         </div>
 
         <div formGroupName="Passwords">
-            <div class="row">
-                <div class="col-sm">
-                    <p>Hasło *:</p>
-                    <mat-form-field appearance="outline">
-                        <input matInput type="password" formControlName="Password" (keydown)="onDataInput($event)"
+            <div class="row col-sm">
+                    <mat-form-field>
+                        <input matInput placeholder="Hasło" type="password" formControlName="Password" (keydown)="onDataInput($event)"
                                maxlength="20">
                         <mat-hint align="end">
                             {{service.formModel.get('Passwords.Password').value?.length == null ? 0 : service.formModel.get('Passwords.Password').value.length}}/20
@@ -56,13 +43,10 @@
                     <label class="text"
                            *ngIf="service.formModel.get('Passwords.Password').touched && service.formModel.get('Passwords.Password').errors?.minlength">Hasło
                         musi mieć co najmniej 8 znaków.</label>
-                </div>
             </div>
-            <div class="row">
-                <div class="col-sm">
-                    <p>Potwierdź hasło *:</p>
-                    <mat-form-field appearance="outline">
-                        <input matInput type="password" formControlName="ConfirmPassword" (keydown)="onDataInput($event)"
+            <div class="row col-sm">
+                    <mat-form-field>
+                        <input matInput placeholder="Potwierdź hasło" type="password" formControlName="ConfirmPassword" (keydown)="onDataInput($event)"
                                maxlength="20">
                         <mat-hint align="end">
                             {{service.formModel.get('Passwords.ConfirmPassword').value?.length == null ? 0 : service.formModel.get('Passwords.ConfirmPassword').value.length}}/20
@@ -77,15 +61,14 @@
                     <label class="text"
                            *ngIf="service.formModel.get('Passwords.ConfirmPassword').touched && service.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">Wprowadzone
                         hasła muszą być takie same.</label>
-                </div>
             </div>
         </div>
 
-        <div class="form-row" style="margin-top: 20px;">
+        <div class="row" style="margin-top: 20px;">
             <div class="form-group col-md-8 offset-md-2">
-                <button class="btn btn-lg btn-block btn-success" 
+                <button class="btn border-add" 
                 [disabled]="!service.formModel.valid">
-                    Dodaj użytkownika
+                    <div class="text-white">Dodaj użytkownika</div>
                 </button>
             </div>
         </div>
