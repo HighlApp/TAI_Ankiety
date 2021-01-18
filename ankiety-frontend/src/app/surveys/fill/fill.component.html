@@ -1,54 +1,59 @@
 <app-navbar></app-navbar>
 
-<div class="spinner" *ngIf="loading">
+
+<div class="spinner text-center" *ngIf="loading">
     <mat-spinner>
     </mat-spinner>
 </div>
 
-<div *ngIf="!loading">
-    <button mat-icon-button (click)="onBackClick()" style="margin-top: 65px; margin-left: 10px;" class="delete_btn">
-        <mat-icon>keyboard_backspace</mat-icon>
-    </button>
-
-    <div class="text-center">
-        <span id="timer" style="font-style: oblique;">{{timerText}}</span>
-    </div>
-
-    <div class="container">
-        <div class="progress" style="height: 40px;">
-            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progressBarWidth }">
-                Strona {{actualPageNumber}}/{{numberOfPages}}</div>
-        </div>
-
-        <div *ngFor="let question of actualPageQuestions">
-            <div class="container" style="margin-top: 25px;">
-
-                <p class="question">Pytanie {{question.id + 1}}: {{question.question.text}}</p>
-
-                <!-- type 3 = text-->
-                <app-text *ngIf="question.question.questionType == 3" [answers]="answers" [index]="question.id"
-                          [questionId]="question.question.id">
-                </app-text>
-
-                <!-- type 2 = MultipleChoice-->
-                <app-multiple *ngIf="question.question.questionType == 2" [question]="question.question"
-                              [answers]="answers" [index]="question.id">
-                </app-multiple>
-
-                <!-- type 1 = OneChoice-->
-                <app-one *ngIf="question.question.questionType == 1" [question]="question.question"
-                         [answers]="answers" [index]="question.id">
-                </app-one>
-            </div>
-        </div>
-
+<div class="pt-3">
+    <div *ngIf="!loading" class="container">
+        <button mat-icon-button (click)="onBackClick()" style="margin-top: 40px; margin-left: -5px;" class="delete_btn">
+            <mat-icon>keyboard_backspace</mat-icon>
+        </button>
+    
         <div class="text-center">
-            <button *ngIf="actualPageNumber != 1" class="custom-button" (click)="onPreviousClick()">Poprzednia
-                strona</button>
-            <button *ngIf="!(actualPageNumber == numberOfPages)" class="custom-button" (click)="onNextClick()">Następna
-                strona</button>
-            <button *ngIf="actualPageNumber == numberOfPages" class="confirm-button" [disabled]="!isValid()"
-                    (click)="onSubmitClick()">Zakończ ankietę</button>
+            <span id="timer" style="font-style: oblique;">{{timerText}}</span>
+        </div>
+    
+        <div class="custom-container">
+            <div class="progress" style="height: 40px;">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': progressBarWidth }">
+                    Strona {{actualPageNumber}}/{{numberOfPages}}</div>
+            </div>
+    
+            <div *ngFor="let question of actualPageQuestions">
+                <div class="custom-container" style="margin-top: 25px;">
+    
+                    <p class="question">Pytanie {{question.id + 1}}: {{question.question.text}}</p>
+    
+                    <!-- type 3 = text-->
+                    <app-text *ngIf="question.question.questionType == 3" [answers]="answers" [index]="question.id"
+                              [questionId]="question.question.id">
+                    </app-text>
+    
+                    <!-- type 2 = MultipleChoice-->
+                    <app-multiple *ngIf="question.question.questionType == 2" [question]="question.question"
+                                  [answers]="answers" [index]="question.id">
+                    </app-multiple>
+    
+                    <!-- type 1 = OneChoice-->
+                    <app-one *ngIf="question.question.questionType == 1" [question]="question.question"
+                             [answers]="answers" [index]="question.id">
+                    </app-one>
+                </div>
+            </div>
+    
+            <div class="text-center">
+                <button *ngIf="actualPageNumber != 1" class="custom-button" (click)="onPreviousClick()">Poprzednia
+                    strona</button>
+                <button *ngIf="!(actualPageNumber == numberOfPages)" class="custom-button" (click)="onNextClick()">Następna
+                    strona</button>
+                <button *ngIf="actualPageNumber == numberOfPages" class="btn border-add" [disabled]="!isValid()"
+                        (click)="onSubmitClick()"><div class="text-white">Zakończ ankietę</div></button>
+            </div>
         </div>
     </div>
 </div>
+
+

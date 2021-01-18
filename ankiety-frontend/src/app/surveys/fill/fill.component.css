@@ -34,6 +34,10 @@
 	transition: transform 80ms ease-in;
 }
 
+.custom-button:hover {
+	background-color:#72a0e0;
+}
+
 .confirm-button {
 	border-radius: 20px;
 	border: 1px solid #008000;
@@ -49,4 +53,12 @@
 
 button {
   margin: 20px;
+}
+
+.container{
+    background-color: #e8e8e8c7;
+}
+
+.form{
+	width: 100% px !important;
 }

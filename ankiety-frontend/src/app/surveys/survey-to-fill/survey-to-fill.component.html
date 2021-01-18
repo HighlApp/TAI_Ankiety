@@ -1,12 +1,18 @@
 <app-navbar></app-navbar>
-<div *ngIf="!isLoading">
-    <div *ngIf="invitations?.length == 0" class="text-center" style="margin-top: 35vh">
-        <h1 class="text-center">Nie masz ankiet do wypełnienia.</h1>
-    </div>
-    <div *ngIf="invitations?.length> 0">
-        <h1 class="text-center" style="margin-top: 75px;">Dostępne ankiety:</h1>
-        <div *ngFor="let invitation of invitations" class="custom-container">
-            <app-invitation [invitation]="invitation"></app-invitation>
+<div class="pt-3">
+    <div *ngIf="!isLoading" class="container">
+        <mat-card *ngIf="invitations?.length == 0" class="question-card">
+            <mat-card-content class="text-center">
+              Nie masz ankiet do wypełnienia.
+            </mat-card-content>
+          </mat-card>
+        <div *ngIf="invitations?.length> 0">
+            <h1>Dostępne ankiety</h1>
+            <hr>
+            <div *ngFor="let invitation of invitations" class="custom-container">
+                <app-invitation [invitation]="invitation"></app-invitation>
+            </div>
         </div>
     </div>
 </div>
+

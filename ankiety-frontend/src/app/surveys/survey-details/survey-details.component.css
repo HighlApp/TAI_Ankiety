@@ -29,35 +29,6 @@ mat-card-title{
     border-color:  #a8a8a89c !important;   
 }
 
-.border-add{  
-    background-color: #a8a8a8e1;
-    border-color:  #a8a8a8de !important;
-    width: 9rem;
-    height: 2.8rem;
-    border-radius: 25px !important;
-    margin-bottom: 5px;
-    margin-right: 2px;
-}
-
-.border-send:hover{
-    background-color:#628fcece;
-    border-color:   #5796eec0 !important;   
-}
-
-.border-send{  
-    background-color:#63a4ffce;
-    border-color:  #5796eec0 !important; 
-    width: 12rem;
-    height: 2.8rem;
-    border-radius: 25px !important;
-    margin-bottom: 5px;
-}
-
-.text-white{
-    color: azure !important;
-    font-size: 17px;
-}
-
 .mat_btn{
     margin-top: -2px !important;
     margin-bottom: 0px;

@@ -1,7 +1,10 @@
-h1 {
-    margin: 15px;
-}
 
 .custom-container {
     margin: 25px;
+}
+
+.container{
+    padding-top: 20px;
+    background-color: #e8e8e8c7;
+    padding-bottom: 10px;
 }

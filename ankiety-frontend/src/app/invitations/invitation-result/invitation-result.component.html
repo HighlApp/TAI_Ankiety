@@ -1,13 +1,13 @@
-<div class="spinner" *ngIf="isLoading">
+<div class="spinner text-center" *ngIf="isLoading">
     <mat-spinner>
     </mat-spinner>
 </div>
 
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading" class="container">
     <div>
-        <p>Użytkownik : {{result.user.name}} {{result.user.surname}}</p>
-        <p>Ankieta: {{result.name}}</p>
-        <p>Opis ankiety: {{result.description}}</p>
+        <p>Użytkownik <strong> {{result.user.name}} {{result.user.surname}}</strong></p>
+        <p>Ankieta <strong>{{result.name}}</strong></p>
+        <p>Opis ankiety<br>{{result.description}}</p>
         <p *ngIf="result.type == 'HiddenValues'">Rezultat:
             {{result.value}}/{{result.maxValue}} pkt</p>
 

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html{ height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card {
     color: #000 !important;
     background-color: rgba(255, 255, 255, 0.6) !important;
@@ -27,4 +27,52 @@ mat-card:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.border-add:hover{
+    background-color: #9c9898e1;
+    border-color:  #a8a8a89c !important;   
+}
+
+.border-add{  
+    background-color: #a8a8a8e1;
+    border-color:  #a8a8a8de !important;
+    max-width: 14rem;
+    height: 2.5rem;
+    border-radius: 25px !important;
+    margin-bottom: 5px;
+    margin-right: 2px;
+    font-size: 12px;
+	font-weight: bold;
+	padding: 5px 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.border-send:hover{
+    background-color:#628fcece;
+    border-color:   #5796eec0 !important;   
+}
+
+.border-send{  
+    background-color:#63a4ffce;
+    border-color:  #5796eec0 !important; 
+    max-width: 15.5rem;
+    height: 2.5rem;
+    border-radius: 25px !important;
+    margin-bottom: 5px;
+    font-size: 12px;
+	font-weight: bold;
+	padding: 5px 15px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.text-white{
+    color: azure !important;
+}
+
+
+mat-form-field{
+    width: 100% !important;
 }

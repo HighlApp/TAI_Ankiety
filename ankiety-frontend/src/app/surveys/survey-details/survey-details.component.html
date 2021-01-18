@@ -15,9 +15,8 @@
   <hr>
   <p>{{survey?.description}}</p>
   <p>Liczba wysłanych zaproszeń <strong>{{survey?.sentInvitations}}</strong></p>
-  <hr>
   <p *ngIf="survey?.sentInvitations != 0">Liczba wypełnionych ankiet <strong>{{survey?.filledInvitations}}</strong></p>
-
+  <hr>
   <div class="row">
     <div class="col">
       <button *ngIf="!survey?.sent" class="btn border-add text-white" type="submit" (click)="openAddQuestionDialog()">Dodaj

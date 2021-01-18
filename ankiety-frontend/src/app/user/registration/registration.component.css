@@ -23,8 +23,8 @@
     width: 100vh !important;
 }
 
-.mat-input-element {
-    caret-color: #673ab7;
+mat-input-element {
+    caret-color: #5299b6 !important;
 }
 
 .text {
@@ -33,20 +33,6 @@
     margin-left: 5px;
 }
 
-.border-add:hover{
-    background-color: #9c9898e1;
-    border-color:  #a8a8a89c !important;   
-}
-
-.border-add{  
-    background-color: #a8a8a8e1;
-    border-color:  #a8a8a8de !important;
-    width: 11rem;
-    height: 2.8rem;
-    border-radius: 25px !important;
-    margin-bottom: 5px;
-    margin-right: 2px;
-}
 
 mat-form-field{
     width: 100% !important;
@@ -56,10 +42,6 @@ form{
     width: 50vh !important;
 }
 
-.text-white{
-    color: azure !important;
-    font-size: 17px;
-}
 
 .row{
     padding-left: 0px !important;
