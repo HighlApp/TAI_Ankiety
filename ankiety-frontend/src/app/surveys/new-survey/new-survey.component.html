@@ -1,19 +1,21 @@
 <div style="position: relative;">
-  <button class="close-button" (click)="onCloseClick()">
+  <div mat-dialog-title><h2><strong>Dodaj ankietę</strong></h2>
+    <button class="d-flex" (click)="onCloseClick()">
     <mat-icon class="close-icon">close</mat-icon>
-  </button>
-
-  <h1 class="text-center" mat-dialog-title>Dodaj ankietę</h1>
+    </button>
+  </div>
+ 
   <div mat-dialog-content>
-
-    <p>Tytuł:</p>
-    <mat-form-field appearance="outline">
-      <input matInput [(ngModel)]="survey.name" maxlength="50" autocomplete="off"
-        (keydown)="onKeyPress($event, survey.name)">
-      <mat-hint align="end">{{survey.name.length}} / 50</mat-hint>
-    </mat-form-field>
-
-    <p>Opis:</p>
+    <div class="flex">
+      <p>Tytuł</p>
+      <mat-form-field appearance="outline">
+        <input matInput [(ngModel)]="survey.name" maxlength="50" autocomplete="off"
+          (keydown)="onKeyPress($event, survey.name)">
+        <mat-hint align="end">{{survey.name.length}} / 50</mat-hint>
+      </mat-form-field>
+    </div>   
+   
+    <p>Opis</p>
     <mat-form-field appearance="outline">
       <textarea matInput [(ngModel)]="survey.description" maxlength="150" autocomplete="off"
         (keydown)="onKeyPress($event, survey.description)"></textarea>

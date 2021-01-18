@@ -1,25 +1,28 @@
 <div *ngIf="!loading" class="container">
 
-  <div class="row" style="margin: 5px;">
-    <h1 style="margin-right: 10px;"> {{survey?.name}} </h1>
-    <button style="margin: 5px 10px;" mat-icon-button class="delete_btn" (click)="onEditSurveyClick()">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button *ngIf="!survey?.sent" style="margin: 5px 10px;" mat-icon-button class="delete_btn"
-      (click)="onDeleteSurveyClick()">
-      <mat-icon>delete_outline</mat-icon>
-    </button>
+  <div class="row survey_det" style="margin: 0px;">
+    <h1 style="margin-top: 5px;"> {{survey?.name}} </h1>
+    <div class="btn-group">
+      <button style="margin: 5px 2px;" title="Edytuj" mat-icon-button class="delete_btn" (click)="onEditSurveyClick()">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="!survey?.sent" style="margin: 5px 2px;" title="Usuń" mat-icon-button class="delete_btn"
+        (click)="onDeleteSurveyClick()">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </div>
   </div>
-
+  <hr>
   <p>{{survey?.description}}</p>
-  <p>Liczba wysłanych zaproszeń: {{survey?.sentInvitations}}</p>
-  <p *ngIf="survey?.sentInvitations != 0">Liczba wypełnionych ankiet: {{survey?.filledInvitations}}</p>
+  <p>Liczba wysłanych zaproszeń <strong>{{survey?.sentInvitations}}</strong></p>
+  <hr>
+  <p *ngIf="survey?.sentInvitations != 0">Liczba wypełnionych ankiet <strong>{{survey?.filledInvitations}}</strong></p>
 
   <div class="row">
     <div class="col">
-      <button *ngIf="!survey?.sent" class="btn btn-success" type="submit" (click)="openAddQuestionDialog()">Dodaj
+      <button *ngIf="!survey?.sent" class="btn border-add text-white" type="submit" (click)="openAddQuestionDialog()">Dodaj
         pytanie</button>
-      <button class="btn btn-primary" *ngIf="survey?.questions.length != 0" (click)="openInvitationDialog()">Wyślij
+      <button class="btn border-send text-white" *ngIf="survey?.questions.length != 0" (click)="openInvitationDialog()">Wyślij
         zaproszenie</button>
     </div>
   </div>
@@ -32,15 +35,15 @@
 
   <mat-card *ngFor="let question of survey?.questions" class="question-card">
     <mat-card-header>
-      <mat-card-title>
-        {{question?.text}}
+      <mat-card-title class="title">
+        <div class="text">{{question?.text}}</div> 
         <div *ngIf="!survey?.sent" class="buttons">
-          <button mat-icon-button class="delete_btn" (click)="onDeleteQuestionClick(question)">
-            <mat-icon>delete_outline</mat-icon>
-          </button>
-          <button mat-icon-button class="delete_btn" (click)="onEditQuestionClick(question)">
+          <button mat-icon-button class="mat_btn" title="Edytuj" (click)="onEditQuestionClick(question)">
             <mat-icon>edit</mat-icon>
           </button>
+          <button mat-icon-button class="mat_btn" title="Usuń" (click)="onDeleteQuestionClick(question)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>          
         </div>
       </mat-card-title>
       <mat-card-subtitle>{{question?.questionType}}</mat-card-subtitle>

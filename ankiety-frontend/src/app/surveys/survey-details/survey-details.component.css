@@ -1,3 +1,69 @@
 mat-card-subtitle{
     color: rgba(0, 0, 0, 0.767);
 }
+
+mat-card-title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px !important;
+}
+
+.container{
+    width: 100%;
+    height:100%;
+    background-color: #e8e8e8c7;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mat-icon-button{
+    width: 30px !important;
+    transform: scale(1.3);
+}
+
+.border-add:hover{
+    background-color: #9c9898e1;
+    border-color:  #a8a8a89c !important;   
+}
+
+.border-add{  
+    background-color: #a8a8a8e1;
+    border-color:  #a8a8a8de !important;
+    width: 9rem;
+    height: 2.8rem;
+    border-radius: 25px !important;
+    margin-bottom: 5px;
+    margin-right: 2px;
+}
+
+.border-send:hover{
+    background-color:#628fcece;
+    border-color:   #5796eec0 !important;   
+}
+
+.border-send{  
+    background-color:#63a4ffce;
+    border-color:  #5796eec0 !important; 
+    width: 12rem;
+    height: 2.8rem;
+    border-radius: 25px !important;
+    margin-bottom: 5px;
+}
+
+.text-white{
+    color: azure !important;
+    font-size: 17px;
+}
+
+.mat_btn{
+    margin-top: -2px !important;
+    margin-bottom: 0px;
+    transform: scale(1);
+}
+
+.buttons{
+    margin: -5px 10px;
+}
