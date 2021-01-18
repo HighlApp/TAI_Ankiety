@@ -8,9 +8,8 @@
         <p>Użytkownik <strong> {{result.user.name}} {{result.user.surname}}</strong></p>
         <p>Ankieta <strong>{{result.name}}</strong></p>
         <p>Opis ankiety<br>{{result.description}}</p>
-        <p *ngIf="result.type == 'HiddenValues'">Rezultat:
-            {{result.value}}/{{result.maxValue}} pkt</p>
-        <hr>
+        <p *ngIf="result.type == 'HiddenValues'" >Rezultat
+            <strong class="text-result">{{result.value}}/{{result.maxValue}} pkt</strong></p>
 
         <mat-card style="margin-top: 10px; ">
             <div *ngFor="let question of result.questions; let i = index" style="margin-top: 10px;">
