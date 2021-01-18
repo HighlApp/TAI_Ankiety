@@ -163,13 +163,13 @@ namespace Surveys.Infrastructure.Services
 
                 result.Questions.Add(filledSurveyQuestion);
 
-                if(question.QuestionType == QuestionType.OneChoice)
+                if(question.QuestionType.ToString() == "OneChoice")
                 {
                     maxResult += question.Options.Select(x => x.Value).Max();
                 }
-                else if(question.QuestionType == QuestionType.MultipleChoice)
+                else if(question.QuestionType.ToString() == "MultipleChoice")
                 {
-                    question.Options.Where(x => x.Value > 0)
+                    maxResult += question.Options.Where(x => x.Value > 0)
                         .Select(x => x.Value).Sum();
                 }
             }
