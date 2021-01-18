@@ -29,6 +29,25 @@ mat-card:hover {
     justify-content: center;
 }
 
+.close-button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* position: absolute;
+    top: 0px;
+    right: 0px; */
+}
+
+.close-icon {
+    color: #e0e0e0;
+}
+
 .border-add:hover{
     background-color: #9c9898e1;
     border-color:  #a8a8a89c !important;   
@@ -55,7 +74,7 @@ mat-card:hover {
 }
 
 .border-send{  
-    background-color:#63a4ffce;
+    background-color: #63A4FF;
     border-color:  #5796eec0 !important; 
     max-width: 15.5rem;
     height: 2.5rem;
@@ -72,7 +91,17 @@ mat-card:hover {
     color: azure !important;
 }
 
+.text-btn{
+    color: #686363 !important;
+}
+
 
 mat-form-field{
     width: 100% !important;
+}
+
+.text {
+    color: #9e9e9e !important;
+    font-size: 16px;
+    margin-left: 5px;
 }

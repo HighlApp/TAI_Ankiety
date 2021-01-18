@@ -1,10 +1,10 @@
 <div style="position: relative;">
-  <div mat-dialog-title><h2><strong>Dodaj ankietę</strong></h2>
-    <button class="d-flex" (click)="onCloseClick()">
+  <button class="close-button" (click)="onCloseClick()">
     <mat-icon class="close-icon">close</mat-icon>
-    </button>
-  </div>
- 
+  </button>
+
+  <h1 class="text-center" mat-dialog-title>Dodaj ankietę</h1>
+  <hr>
   <div mat-dialog-content>
     <div class="flex">
       <p>Tytuł</p>
@@ -21,7 +21,7 @@
         (keydown)="onKeyPress($event, survey.description)"></textarea>
       <mat-hint align="end">{{survey.description.length}} / 150</mat-hint>
     </mat-form-field>
-
+    <hr>
     <p>Ankieta z ukrytymi wartościami:</p>
     <div class="text-center">
       <mat-radio-group [(ngModel)]="survey.type">
@@ -32,7 +32,7 @@
   </div>
 
   <div mat-dialog-actions align="center">
-    <button class="btn btn-success" type="submit" (click)="onSubmit()"
+    <button class="btn border-add text-btn" type="submit" (click)="onSubmit()"
       [disabled]="survey.name == '' || survey.type == ''">Dodaj ankietę</button>
   </div>
 </div>

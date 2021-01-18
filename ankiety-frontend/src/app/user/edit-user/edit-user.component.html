@@ -1,28 +1,28 @@
-<div>
+<div style="position: relative;">
   <button class="close-button" (click)="onCloseClick()">
     <mat-icon class="close-icon">close</mat-icon>
   </button>
-
   <h1 class="text-center" mat-dialog-title>Edytuj dane użytkownika</h1>
+
   <div>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <textarea matInput placeholder="Imię" [(ngModel)]="name"></textarea>
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <textarea matInput placeholder="Nazwisko" [(ngModel)]="surname"></textarea>
     </mat-form-field>
   </div>
 
   <div>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <textarea matInput placeholder="Email" [(ngModel)]="email"></textarea>
     </mat-form-field>
   </div>
 
   <div class="text-center">
-    <button class="btn btn-success" (click)="onSubmit()"
+    <button class="btn border-add" (click)="onSubmit()"
     [disabled]="!textChanged() || isSomeFieldEmpty()">
       Edytuj</button>
   </div>

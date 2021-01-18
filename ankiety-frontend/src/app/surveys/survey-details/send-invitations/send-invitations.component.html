@@ -7,7 +7,7 @@
 
     <div *ngIf="dataSource?.data?.length != 0">
         <div class="search-div">
-            <mat-form-field class="search-form-field" floatLabel="never">
+            <mat-form-field appearance="outline">
                 <input matInput placeholder="Szukaj użytkownika" autocomplete="off" (keyup)="filterData($event.target.value)">
             </mat-form-field>
         </div>
@@ -86,7 +86,7 @@
             ankieta będzie dostępna bezterminowo. Minimalny czas trwania ankiety wynosi 10 minut.</p>
 
         <div class="text-center">
-            <button class="btn btn-success text-center" (click)="sendInvitation()"
+            <button class="btn border-send text-btn" (click)="sendInvitation()"
                     [disabled]="!(selection.selected.length > 0) || !isValueValid()" 
                     style="margin-top: 5px;">
                     Wyślij zaproszenie</button>

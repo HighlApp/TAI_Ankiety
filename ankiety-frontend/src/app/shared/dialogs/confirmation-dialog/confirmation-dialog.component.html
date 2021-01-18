@@ -3,12 +3,12 @@
     <mat-icon class="close-icon">close</mat-icon>
   </button>
 
-  <div class="text-center">
+  <div class="text-center" style="margin-bottom: 30px;">
     {{data.dialogText}}
   </div>
 
   <div class="text-center">
-    <button class="btn btn-success" (click)="onClick(true)">Tak</button>
-    <button class="btn btn-danger" (click)="onClick(false)">Nie</button>
+    <button class="btn border-send text-btn" style="margin-right: 1px;" (click)="onClick(true)">Tak</button>
+    <button class="btn border-add" (click)="onClick(false)">Nie</button>
   </div>
 </div>
