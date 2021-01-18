@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
             height: "160px",
             width: "500px",
-            data: {"dialogText": "Czy na pewno chcesz się wylogować ?"}
+            data: {"dialogText": "Czy na pewno chcesz się wylogować?"}
         });
 
         dialogRef.afterClosed().subscribe((logout: boolean) => {

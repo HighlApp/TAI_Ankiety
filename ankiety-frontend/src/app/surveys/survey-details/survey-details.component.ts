@@ -86,7 +86,7 @@ export class SurveyDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       height: "160px",
       width: "400px",
-      data: { "dialogText": "Czy na pewno chcesz usunąć tą ankietę ?" }
+      data: { "dialogText": "Czy na pewno chcesz usunąć tą ankietę?" }
     });
 
     dialogRef.afterClosed().subscribe((deleteSurvey: boolean) => {
